@@ -11,7 +11,7 @@ package view;
 public class menuDashboard extends javax.swing.JPanel {
 
     /**
-     * Creates new form menuDashboard
+     * Creates new form menuDashboard1
      */
     public menuDashboard() {
         initComponents();
