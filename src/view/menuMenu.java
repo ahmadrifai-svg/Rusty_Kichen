@@ -133,6 +133,11 @@ public class menuMenu extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
+        tbl_data.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_dataMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_data);
 
         txtPencaarian.setForeground(new java.awt.Color(255, 255, 255));
@@ -378,6 +383,10 @@ public class menuMenu extends javax.swing.JPanel {
     }
 
     }//GEN-LAST:event_btnSimpanActionPerformed
+
+    private void tbl_dataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_dataMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbl_dataMouseClicked
 
     
 

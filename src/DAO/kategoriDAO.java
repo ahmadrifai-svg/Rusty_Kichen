@@ -25,7 +25,7 @@ public class kategoriDAO implements serviceKategori {
 
     @Override
     public void tambahData(modelKategori kategori) {
-            if (kategori == null || kategori.getnamaKategori() == null || kategori.getjenis() == null) {
+           if (kategori == null || kategori.getnamaKategori() == null || kategori.getjenis() == null) {
             throw new IllegalArgumentException("Data kategori tidak valid");
         }
 
@@ -45,11 +45,32 @@ public class kategoriDAO implements serviceKategori {
 
     @Override
     public void updateData(modelKategori kategori) {
+            String sql = "UPDATE kategori "
+               + "SET Nama_Kategori = ?, Jenis = ? "
+               + "WHERE Id_Kategori = ?";
+    try (PreparedStatement st = conn.prepareStatement(sql)) {
+        st.setString(1, kategori.getnamaKategori());
+        st.setString(2, kategori.getjenis());
+        st.setInt(3, kategori.getIdKategori());
+        st.executeUpdate();   
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
     }
 
     @Override
     public void hapusData(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        PreparedStatement st = null;
+        String sql = "DELETE FROM kategori WHERE Id_Kategori=?";
+        try {
+            st = conn.prepareStatement(sql);
+            st.setInt(1, id); // langsung pakai parameter dari method
+            st.executeUpdate(); // ✅ Ganti ini
+            System.out.println("Data berhasil dihapus");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
