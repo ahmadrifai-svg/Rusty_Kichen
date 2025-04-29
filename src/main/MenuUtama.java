@@ -21,6 +21,7 @@ import javax.swing.WindowConstants;
 import view.menuDashboard;
 import view.menuKategori;
 import view.menuMenu;
+import view.menuPemesanan;
 import view.menuUser;
 
 /**
@@ -663,6 +664,9 @@ public class MenuUtama extends javax.swing.JFrame {
         //btnuser
         pn_btnManajemen.setBackground(new Color(242,242,242));;
         btn_manajemen.setForeground(Color.BLACK);
+        //btnTransaksi
+        pn_btnPemesanan.setBackground(new Color(242,242,242));;
+        btn_pemesanan.setForeground(Color.BLACK);
     }
 
     
@@ -733,7 +737,13 @@ public class MenuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_manajemenMouseExited
 
     private void btn_pemesananMouseClicked(MouseEvent evt) {//GEN-FIRST:event_btn_pemesananMouseClicked
-        // TODO add your handling code here:
+        pn_utama.removeAll();
+        pn_utama.repaint();
+        pn_utama.revalidate();
+        matiintombol();
+        pn_btnPemesanan.setBackground(new Color (105, 33, 58));
+        btn_pemesanan.setForeground(Color.white);
+        pn_utama.add(new menuPemesanan());
     }//GEN-LAST:event_btn_pemesananMouseClicked
 
     private void btn_pemesananMouseEntered(MouseEvent evt) {//GEN-FIRST:event_btn_pemesananMouseEntered

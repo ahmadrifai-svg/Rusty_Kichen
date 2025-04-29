@@ -14,7 +14,7 @@ import model.modelKategori;
  */
 public class tableModelKategori extends AbstractTableModel{
     private List<modelKategori> data;
-    private String[] columnNames = {"ID", "Nama Kategori","jenis"};
+    private String[] columnNames = {"ID", "Nama Kategori","Sub Kategori"};
     
     public tableModelKategori() {
         data = new ArrayList<>();

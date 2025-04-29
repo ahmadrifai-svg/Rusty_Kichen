@@ -1,20 +1,7 @@
 package model;
 
-public class ModelMenu {
-    private int idMenu;
-    private String namaMenu;
-    private Double harga;
-    private String namaKategori; 
+public class ModelMenu{
 
-    // Konstruktor
-    public ModelMenu(int idMenu, String namaMenu, double harga, String namaKategori) {
-        this.idMenu = idMenu;
-        this.namaMenu = namaMenu;
-        this.harga = harga;
-        this.namaKategori = namaKategori;
-    }
-
-    // Getter dan Setter
     public int getIdMenu() {
         return idMenu;
     }
@@ -31,19 +18,23 @@ public class ModelMenu {
         this.namaMenu = namaMenu;
     }
 
-    public double getHarga() {
+    public long getHarga() {
         return harga;
     }
 
-    public void setHarga(double harga) {
+    public void setHarga(long harga) {
         this.harga = harga;
     }
 
-    public String getNamaKategori() {
-        return namaKategori;
+    public int getIdKategori() {
+        return idKategori;
     }
 
-    public void setNamaKategori(String namaKategori) {
-        this.namaKategori = namaKategori;
+    public void setIdKategori(int idKategori) {
+        this.idKategori = idKategori;
     }
+    private int idMenu;
+    private String namaMenu;
+    private long harga;
+    private int idKategori;
 }
