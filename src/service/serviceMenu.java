@@ -6,7 +6,9 @@ import model.ModelMenu;
 public interface serviceMenu {
     void tambahData(ModelMenu menu);
     void updateData(ModelMenu menu);
-    void hapusData(int id);
+    void hapusData(ModelMenu menu);
+    
+    
     List<ModelMenu> tampilData();
-    List<ModelMenu> pencarianData(String keyword);
+    List<ModelMenu> pencarianData(String Id);
 }

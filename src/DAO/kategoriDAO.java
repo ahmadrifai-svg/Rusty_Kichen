@@ -1,4 +1,4 @@
-/*
+   /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -102,6 +102,50 @@ public class kategoriDAO implements serviceKategori {
     @Override
     public List<modelKategori> pencarianData(String keyword) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<modelKategori> ambilKategori() {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        List list = new ArrayList();
+        String sql = "SELECT Id_Kategori, Nama_Kategori FROM kategori";
+        
+        try {
+            st = conn.prepareStatement(sql);
+            rs = st.executeQuery();
+            while (rs.next()) {
+                modelKategori kategori = new modelKategori();
+                kategori.setIdKategori(rs.getInt("Id_Kategori"));
+                kategori.setnamaKategori(rs.getString("Nama_Kategori"));
+                
+                list.add(kategori);  
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public String ambilKategoriId(int id) {
+        String namaKategori = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        String sql = "SELECT Nama_Kategori FROM kategori WHERE Id_Kategori";
+        
+        try {
+            st = conn.prepareStatement(sql);
+            st.setInt(1, id);
+            rs = st.executeQuery();
+            
+            if(rs.next()){
+                namaKategori = rs.getString("Nama_Kategori");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return namaKategori;
     }
     
 }

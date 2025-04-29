@@ -15,6 +15,10 @@ public interface serviceKategori {
     void tambahData(modelKategori kategori);
     void updateData(modelKategori kategori);
     void hapusData(int id);
+    
     List<modelKategori> tampilData();
     List<modelKategori> pencarianData(String keyword);
+    
+    List<modelKategori> ambilKategori();
+    String ambilKategoriId(int id);
 }
