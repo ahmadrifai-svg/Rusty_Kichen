@@ -62,7 +62,7 @@ public class menuUser extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Kategori");
+        jLabel2.setText("Kategoris");
 
         btn_update.setText("Update");
         btn_update.setFillOriginal(new java.awt.Color(105, 33, 58));
@@ -323,4 +323,8 @@ public class menuUser extends javax.swing.JPanel {
     private Palette.JTextfieldRounded txtHarga;
     private Palette.JTextfieldRounded txtNama;
     // End of variables declaration//GEN-END:variables
+
+
+
+
 }
