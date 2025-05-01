@@ -131,7 +131,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Kategori"/>
+                <Property name="text" type="java.lang.String" value="Kategoris"/>
               </Properties>
             </Component>
             <Component class="Palette.Custom_ButtonRounded" name="btn_update">

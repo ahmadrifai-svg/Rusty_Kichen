@@ -24,7 +24,7 @@ public class menuDAO implements serviceMenu {
             
             st.setString    (1, model.getNamaMenu());
             st.setLong      (2, model.getHarga());
-            st.setInt    (3, model.getIdKategori());
+            st.setInt       (3, model.getIdKategori());
             
             st.executeUpdate();
             st.close();
