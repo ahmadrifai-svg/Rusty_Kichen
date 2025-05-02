@@ -25,6 +25,9 @@ import java.util.*;
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.math.BigInteger;
 import main.MenuKasir;
 import main.MenuUtama;
 
@@ -180,6 +183,23 @@ public class formlogin extends javax.swing.JFrame {
     private Palette.JTextfieldRounded t_username;
     // End of variables declaration//GEN-END:variables
 
+    public String getMd5java(String message){
+        String digest = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] hash = md.digest(message.getBytes("UTF-8"));
+            
+            StringBuilder sb = new StringBuilder(2 * hash.length);
+            for(byte b : hash){
+                sb.append(String.format("%02X", b & 0xff));
+            }
+            digest = sb.toString();
+        } catch (Exception e) {
+            Logger.getLogger(formlogin.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return digest(message);
+    }
+    
     //validasi input
     private boolean validasiInput() {
         boolean valid = false;
@@ -231,5 +251,28 @@ public class formlogin extends javax.swing.JFrame {
             }
         }
     }
+
+    public static String digest(String input) {
+    try {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] messageDigest = md.digest(input.getBytes());
+        
+        // Convert byte array into signum representation
+        BigInteger no = new BigInteger(1, messageDigest);
+        
+        // Convert message digest into hex value
+        String hashText = no.toString(16);
+        
+        // Pad with leading zeros to make it 32 digits
+        while (hashText.length() < 32) {
+            hashText = "0" + hashText;
+        }
+        
+        return hashText;
+    } catch (NoSuchAlgorithmException e) {
+        throw new RuntimeException(e);
+    }
+}
+
 
 }

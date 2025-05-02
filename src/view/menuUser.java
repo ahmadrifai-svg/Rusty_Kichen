@@ -4,17 +4,34 @@
  */
 package view;
 
+import config.koneksi;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author MyBook Hype AMD
  */
 public class menuUser extends javax.swing.JPanel {
 
-    /**
-     * Creates new form menuMenu
-     */
+    private final Connection conn;
+    private formlogin formlogin;
+
     public menuUser() {
         initComponents();
+
+        conn = koneksi.getConnection();
+        formlogin = new formlogin();
+        setTableModel();
+        loadData();
     }
 
     /**
@@ -30,24 +47,28 @@ public class menuUser extends javax.swing.JPanel {
         pn_view = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        btn_update = new Palette.Custom_ButtonRounded();
         btn_delete = new Palette.Custom_ButtonRounded();
-        btn_tambah = new Palette.Custom_ButtonRounded();
+        btnTambah = new Palette.Custom_ButtonRounded();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable_Custom1 = new Palette.JTable_Custom();
-        jTextfieldRounded2 = new Palette.JTextfieldRounded();
+        tblData = new Palette.JTable_Custom();
+        txtPencarian = new Palette.JTextfieldRounded();
+        btn_batal = new Palette.Custom_ButtonRounded();
         pn_add = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        custom_ButtonRounded4 = new Palette.Custom_ButtonRounded();
-        custom_ButtonRounded6 = new Palette.Custom_ButtonRounded();
+        Judul = new javax.swing.JLabel();
+        btn_batal2 = new Palette.Custom_ButtonRounded();
+        btnSave = new Palette.Custom_ButtonRounded();
         jSeparator3 = new javax.swing.JSeparator();
-        txtNama = new Palette.JTextfieldRounded();
+        txtID = new Palette.JTextfieldRounded();
         jLabel1 = new javax.swing.JLabel();
-        txtHarga = new Palette.JTextfieldRounded();
+        txtUsername = new Palette.JTextfieldRounded();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txtPassword = new Palette.Custom_JPasswordFieldRounded();
+        jLabel9 = new javax.swing.JLabel();
+        cbxRole = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.CardLayout());
@@ -62,18 +83,7 @@ public class menuUser extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Kategoris");
-
-        btn_update.setText("Update");
-        btn_update.setFillOriginal(new java.awt.Color(105, 33, 58));
-        btn_update.setFillOver(new java.awt.Color(105, 33, 58));
-        btn_update.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        btn_update.setPreferredSize(new java.awt.Dimension(120, 19));
-        btn_update.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_updateActionPerformed(evt);
-            }
-        });
+        jLabel2.setText("Manejemen User");
 
         btn_delete.setBackground(new java.awt.Color(105, 33, 58));
         btn_delete.setText("Delete");
@@ -81,62 +91,80 @@ public class menuUser extends javax.swing.JPanel {
         btn_delete.setFillOver(new java.awt.Color(105, 33, 58));
         btn_delete.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         btn_delete.setPreferredSize(new java.awt.Dimension(120, 19));
-
-        btn_tambah.setBackground(new java.awt.Color(102, 153, 255));
-        btn_tambah.setText("Tambah");
-        btn_tambah.setFillOriginal(new java.awt.Color(105, 33, 58));
-        btn_tambah.setFillOver(new java.awt.Color(105, 33, 58));
-        btn_tambah.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        btn_tambah.setPreferredSize(new java.awt.Dimension(120, 19));
-        btn_tambah.addActionListener(new java.awt.event.ActionListener() {
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_tambahActionPerformed(evt);
+                btn_deleteActionPerformed(evt);
             }
         });
 
-        jTable_Custom1.setModel(new javax.swing.table.DefaultTableModel(
+        btnTambah.setBackground(new java.awt.Color(102, 153, 255));
+        btnTambah.setText("Tambah");
+        btnTambah.setFillOriginal(new java.awt.Color(105, 33, 58));
+        btnTambah.setFillOver(new java.awt.Color(105, 33, 58));
+        btnTambah.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        btnTambah.setPreferredSize(new java.awt.Dimension(120, 19));
+        btnTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTambahActionPerformed(evt);
+            }
+        });
+
+        tblData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "ID", "Kategori"
+
             }
         ));
-        jScrollPane1.setViewportView(jTable_Custom1);
+        tblData.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDataMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblData);
 
-        jTextfieldRounded2.setForeground(new java.awt.Color(255, 255, 255));
+        txtPencarian.setForeground(new java.awt.Color(255, 255, 255));
+        txtPencarian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPencarianActionPerformed(evt);
+            }
+        });
+
+        btn_batal.setBackground(new java.awt.Color(105, 33, 58));
+        btn_batal.setText("Batal");
+        btn_batal.setFillOriginal(new java.awt.Color(105, 33, 58));
+        btn_batal.setFillOver(new java.awt.Color(105, 33, 58));
+        btn_batal.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        btn_batal.setPreferredSize(new java.awt.Dimension(120, 19));
+        btn_batal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_batalActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pn_viewLayout = new javax.swing.GroupLayout(pn_view);
         pn_view.setLayout(pn_viewLayout);
         pn_viewLayout.setHorizontalGroup(
             pn_viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_viewLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pn_viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pn_viewLayout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_viewLayout.createSequentialGroup()
                 .addGap(93, 93, 93)
                 .addGroup(pn_viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -144,14 +172,23 @@ public class menuUser extends javax.swing.JPanel {
                         .addComponent(jScrollPane1)
                         .addGap(70, 70, 70))
                     .addGroup(pn_viewLayout.createSequentialGroup()
-                        .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 667, Short.MAX_VALUE)
-                        .addComponent(jTextfieldRounded2, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPencarian, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(80, 80, 80))))
+            .addGroup(pn_viewLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pn_viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jSeparator2)
+                    .addGroup(pn_viewLayout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn_viewLayout.setVerticalGroup(
             pn_viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,18 +197,18 @@ public class menuUser extends javax.swing.JPanel {
                 .addGroup(pn_viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(pn_viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pn_viewLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(55, 55, 55)
                         .addGroup(pn_viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pn_viewLayout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(jTextfieldRounded2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(89, 89, 89)
+                        .addComponent(txtPencarian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(220, Short.MAX_VALUE))
@@ -184,69 +221,102 @@ public class menuUser extends javax.swing.JPanel {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/home-removebg-preview 1 (1).png"))); // NOI18N
         jLabel6.setText("jLabel5");
 
-        jLabel3.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Tambah Menu");
+        Judul.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        Judul.setForeground(new java.awt.Color(255, 255, 255));
+        Judul.setText("Tambah Data User");
 
-        custom_ButtonRounded4.setText("Batal");
-        custom_ButtonRounded4.setFillOriginal(new java.awt.Color(105, 33, 58));
-        custom_ButtonRounded4.setFillOver(new java.awt.Color(105, 33, 58));
-        custom_ButtonRounded4.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        custom_ButtonRounded4.setPreferredSize(new java.awt.Dimension(120, 19));
-        custom_ButtonRounded4.addActionListener(new java.awt.event.ActionListener() {
+        btn_batal2.setText("Batal");
+        btn_batal2.setFillOriginal(new java.awt.Color(105, 33, 58));
+        btn_batal2.setFillOver(new java.awt.Color(105, 33, 58));
+        btn_batal2.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        btn_batal2.setPreferredSize(new java.awt.Dimension(120, 19));
+        btn_batal2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                custom_ButtonRounded4ActionPerformed(evt);
+                btn_batal2ActionPerformed(evt);
             }
         });
 
-        custom_ButtonRounded6.setBackground(new java.awt.Color(102, 153, 255));
-        custom_ButtonRounded6.setText("Simpan");
-        custom_ButtonRounded6.setFillOriginal(new java.awt.Color(105, 33, 58));
-        custom_ButtonRounded6.setFillOver(new java.awt.Color(105, 33, 58));
-        custom_ButtonRounded6.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        custom_ButtonRounded6.setPreferredSize(new java.awt.Dimension(120, 19));
+        btnSave.setBackground(new java.awt.Color(102, 153, 255));
+        btnSave.setText("Simpan");
+        btnSave.setFillOriginal(new java.awt.Color(105, 33, 58));
+        btnSave.setFillOver(new java.awt.Color(105, 33, 58));
+        btnSave.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        btnSave.setPreferredSize(new java.awt.Dimension(120, 19));
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
-        txtNama.setForeground(new java.awt.Color(255, 255, 255));
+        txtID.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ID");
 
-        txtHarga.setForeground(new java.awt.Color(255, 255, 255));
+        txtUsername.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel4.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Kategori");
+        jLabel4.setText("Username");
 
         jLabel7.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel8.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Password");
+
+        txtPassword.setForeground(new java.awt.Color(255, 255, 255));
+        txtPassword.setText("12345678");
+
+        jLabel9.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Role");
+
+        cbxRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih Role", "Admin", "Karyawan" }));
+        cbxRole.setMinimumSize(new java.awt.Dimension(21, 36));
 
         javax.swing.GroupLayout pn_addLayout = new javax.swing.GroupLayout(pn_add);
         pn_add.setLayout(pn_addLayout);
         pn_addLayout.setHorizontalGroup(
             pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_addLayout.createSequentialGroup()
-                .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pn_addLayout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtID, javax.swing.GroupLayout.DEFAULT_SIZE, 1095, Short.MAX_VALUE)
+                            .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 1095, Short.MAX_VALUE)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(pn_addLayout.createSequentialGroup()
+                                .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pn_addLayout.createSequentialGroup()
+                                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btn_batal2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel4)
+                                    .addGroup(pn_addLayout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel9))
+                                    .addGroup(pn_addLayout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jLabel8)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(pn_addLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbxRole, javax.swing.GroupLayout.PREFERRED_SIZE, 1050, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pn_addLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pn_addLayout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3))))
-                    .addGroup(pn_addLayout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, 1095, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pn_addLayout.createSequentialGroup()
-                                .addComponent(custom_ButtonRounded6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(custom_ButtonRounded4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1)
-                            .addComponent(txtHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 1095, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel7))))
+                                .addComponent(Judul)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(80, 369, Short.MAX_VALUE))
         );
         pn_addLayout.setVerticalGroup(
@@ -254,25 +324,33 @@ public class menuUser extends javax.swing.JPanel {
             .addGroup(pn_addLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
+                    .addComponent(Judul)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55)
                 .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(custom_ButtonRounded6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(custom_ButtonRounded4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_batal2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtHarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
-                .addContainerGap(588, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbxRole, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(444, Short.MAX_VALUE))
         );
 
         pn_main.add(pn_add, "card2");
@@ -280,51 +358,293 @@ public class menuUser extends javax.swing.JPanel {
         add(pn_main, "card2");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambahActionPerformed
-    pn_main.removeAll();
-    pn_main.add(pn_add);
-    pn_main.repaint();
-    pn_main.revalidate();
-    }//GEN-LAST:event_btn_tambahActionPerformed
+    private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
+        pn_main.removeAll();
+        pn_main.add(pn_add);
+        pn_main.repaint();
+        pn_main.revalidate();
 
-    private void custom_ButtonRounded4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custom_ButtonRounded4ActionPerformed
-    pn_main.removeAll();
-    pn_main.add(pn_view);
-    pn_main.repaint();
-    pn_main.revalidate();
-    }//GEN-LAST:event_custom_ButtonRounded4ActionPerformed
+        txtID.setText(setIdUser());
+        if(btnTambah.getText().equals("Perbarui")){
+            dataTabel();
+            btnSave.setText("Perbarui");
+        }
+    }//GEN-LAST:event_btnTambahActionPerformed
 
-    private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_updateActionPerformed
+    private void btn_batal2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_batal2ActionPerformed
+        showPanel();
+    }//GEN-LAST:event_btn_batal2ActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        if (btnSave.getText().equals("Tambah")) {
+            btnSave.setText("Simpan");
+        } else if (btnSave.getText().equals("Simpan")) {
+            insertData();
+        } else if (btnSave.getText().equals("Perbarui")) {
+            updateData();
+        }
+
+
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void tblDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMouseClicked
+       if(btnTambah.getText().equals("Tambah")){
+           btnTambah.setText("Perbarui");
+           btn_delete.setVisible(true);
+           btn_batal.setVisible(true);
+       }
+    }//GEN-LAST:event_tblDataMouseClicked
+
+    private void btn_batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_batalActionPerformed
+        showPanel();
+        loadData();
+    }//GEN-LAST:event_btn_batalActionPerformed
+
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
+       deleteData();
+    }//GEN-LAST:event_btn_deleteActionPerformed
+
+    private void txtPencarianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPencarianActionPerformed
+        searchData();
+    }//GEN-LAST:event_txtPencarianActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Judul;
+    private Palette.Custom_ButtonRounded btnSave;
+    private Palette.Custom_ButtonRounded btnTambah;
+    private Palette.Custom_ButtonRounded btn_batal;
+    private Palette.Custom_ButtonRounded btn_batal2;
     private Palette.Custom_ButtonRounded btn_delete;
-    private Palette.Custom_ButtonRounded btn_tambah;
-    private Palette.Custom_ButtonRounded btn_update;
-    private Palette.Custom_ButtonRounded custom_ButtonRounded4;
-    private Palette.Custom_ButtonRounded custom_ButtonRounded6;
+    private javax.swing.JComboBox<String> cbxRole;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private Palette.JTable_Custom jTable_Custom1;
-    private Palette.JTextfieldRounded jTextfieldRounded2;
     private javax.swing.JPanel pn_add;
     private javax.swing.JPanel pn_main;
     private javax.swing.JPanel pn_view;
-    private Palette.JTextfieldRounded txtHarga;
-    private Palette.JTextfieldRounded txtNama;
+    private Palette.JTable_Custom tblData;
+    private Palette.JTextfieldRounded txtID;
+    private Palette.Custom_JPasswordFieldRounded txtPassword;
+    private Palette.JTextfieldRounded txtPencarian;
+    private Palette.JTextfieldRounded txtUsername;
     // End of variables declaration//GEN-END:variables
 
+    private void loadData() {
+        getData((DefaultTableModel) tblData.getModel());
+        btn_batal.setVisible(false);
+        btn_delete.setVisible(false);
+    }
+    
+    private void showPanel(){
+        pn_main.removeAll();
+        pn_main.add(new menuUser());
+        pn_main.repaint();
+        pn_main.revalidate();
+    }
+    
+     private void resetForm() {
+         txtID.setText("");
+         txtUsername.setText("");
+         txtPassword.setText("");
+         cbxRole.setSelectedItem("Pilih Role");
+    }
 
 
+    private void setTableModel() {
+        DefaultTableModel model = (DefaultTableModel) tblData.getModel();
+        model.addColumn("ID");
+        model.addColumn("Username");
+        model.addColumn("Role");
+    }
 
+    private void getData(DefaultTableModel model) {
+        model.setRowCount(0);
+
+        try {
+            String sql = "SELECT * FROM user";
+            try (PreparedStatement st = conn.prepareStatement(sql)) {
+                ResultSet rs = st.executeQuery();
+
+                while (rs.next()) {
+                    String idUser = rs.getString("Id_User");
+                    String username = rs.getString("Username");
+                    String role = rs.getString("Role");
+
+                    Object[] rowData = {idUser, username, role};
+                    model.addRow(rowData);
+                }
+            }
+        } catch (Exception e) {
+            Logger.getLogger(menuUser.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
+    private String setIdUser() {
+        String Urutan = null;
+        Date now = new Date();
+        SimpleDateFormat noFormat = new SimpleDateFormat("MMYY");
+        String no = noFormat.format(now);
+
+        String sql = "SELECT RIGHT(Id_User, 3) AS Nomor "
+                + "FROM user "
+                + "WHERE Id_User LIKE 'USR" + no + "%' "
+                + "ORDER BY Id_User DESC "
+                + "LIMIT 1";
+
+        try (PreparedStatement st = conn.prepareStatement(sql)) {
+            ResultSet rs = st.executeQuery();
+
+            if (rs.next()) {
+                int nomor = Integer.parseInt(rs.getString("Nomor")) + 1;
+                Urutan = "USR" + no + String.format("%03d", nomor);
+            } else {
+                Urutan = "USR" + no + "001";
+            }
+        } catch (Exception e) {
+            java.util.logging.Logger.getLogger(menuUser.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return Urutan;
+
+    }
+
+    private void insertData() {
+        String idUser = txtID.getText();
+        String username = txtUsername.getText();
+        String password = formlogin.getMd5java(txtPassword.getText()); 
+        String role = (String) cbxRole.getSelectedItem();
+
+
+        if (idUser.isEmpty() || username.isEmpty() || password.isEmpty() || cbxRole.getSelectedItem().toString().equals("Pilih Role")) {
+            JOptionPane.showMessageDialog(this, "Semua Kolom Harus Diisi!", "Validasi", JOptionPane.ERROR_MESSAGE);
+            return; // penting agar proses tidak lanjut
+        }
+        try {
+            String sql = "INSERT INTO user (Id_User, Username, Password, Role) VALUE (?,?,?,?)";
+            try (PreparedStatement st = conn.prepareStatement(sql)){
+                st.setString(1, idUser);
+                st.setString(2, username);
+                st.setString(3, password);
+                st.setString(4, role);
+                
+                int rowInserted = st.executeUpdate();
+                if(rowInserted > 0){
+                    JOptionPane.showMessageDialog(this, "Data Berhasil DiTambahkan");
+                    resetForm();
+                    loadData();
+                    showPanel();
+                }
+            }
+        } catch (SQLException e) {
+            java.util.logging.Logger.getLogger(menuUser.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+    
+    private void dataTabel() {
+        pn_view.setVisible(false);
+        pn_add.setVisible(true);
+        
+        int row = tblData.getSelectedRow();
+        Judul.setText("Perbaru Data User");
+        
+        txtID.setEnabled(false);
+        
+        txtID.setText(tblData.getValueAt(row, 0).toString());
+        txtUsername.setText(tblData.getValueAt(row, 1).toString());
+        //txtPassword.setText(tblData.getValueAt(row, 2).toString());
+        cbxRole.setSelectedItem(tblData.getValueAt(row, 2).toString());
+    }
+    
+    private void updateData(){
+        String idUser = txtID.getText();
+        String username = txtUsername.getText();
+        String role =  cbxRole.getSelectedItem().toString();
+        
+        if (idUser.isEmpty() || username.isEmpty() || cbxRole.getSelectedItem().toString().equals("Pilih Role")) {
+            JOptionPane.showMessageDialog(this, "Semua Kolom Harus Diisi!", "Validasi", JOptionPane.ERROR_MESSAGE);
+            return; // penting agar proses tidak lanjut
+        }
+        try {
+            String sql = "UPDATE user SET Username=?, role=? WHERE Id_User=?";
+            try (PreparedStatement st = conn.prepareStatement(sql)){
+                st.setString(1, username);
+                //st.setString(3, password);
+                st.setString(2, role);
+                st.setString(3, idUser);
+                
+                int rowUpdate = st.executeUpdate();
+                if(rowUpdate > 0){
+                    JOptionPane.showMessageDialog(this, "Data Berhasil DiPerbarui");
+                    resetForm();
+                    loadData();
+                    showPanel();
+                }
+            }
+        } catch (SQLException e) {
+            java.util.logging.Logger.getLogger(menuUser.class.getName()).log(Level.SEVERE, null, e);
+        }
+        }
+    
+    
+    private void deleteData(){
+        int selectedRow = tblData.getSelectedRow();
+        int confirm = JOptionPane.showConfirmDialog(this, "Apakah Kamu Yakin Ingin Menghapus Data Ini?", "Konfirmasi Hapus Data", JOptionPane.YES_NO_OPTION);
+        
+        if(confirm ==  JOptionPane.YES_OPTION){
+            String Id = tblData.getValueAt(selectedRow, 0).toString();
+            try {
+                String sql = "DELETE FROM user Where Id_User=?";
+                try(PreparedStatement st = conn.prepareStatement(sql)) {
+                    st.setString(1, Id);
+                    
+                    int rowDeleted = st.executeUpdate();
+                    if(rowDeleted > 0) {
+                        JOptionPane.showMessageDialog(this, "Data Berhasil Dihapus");
+                    }else {
+                        JOptionPane.showMessageDialog(this, "Data Gagal Dihapus");
+                    }
+                }
+            } catch (SQLException e) {
+                java.util.logging.Logger.getLogger(menuUser.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+        resetForm();
+        loadData();
+        showPanel();
+    }
+
+    private void searchData(){
+        String kataKunci = txtPencarian.getText();
+        
+        DefaultTableModel model = (DefaultTableModel) tblData.getModel();
+        model.setRowCount(0);
+        
+        try {
+             String sql = "SELECT * FROM user WHERE Username LIKE ? OR Role LIKE ?";
+            try (PreparedStatement st = conn.prepareStatement(sql)) {
+            st.setString(1, "%" + kataKunci + "%");
+            st.setString(2, "%" + kataKunci + "%");
+            ResultSet rs = st.executeQuery();
+                
+                while (rs.next()) {                    
+                    String idUser = rs.getString("Id_User");
+                    String username = rs.getString("Username");
+                    String role = rs.getString("Role");
+                    
+                    Object[] rowData = {idUser, username, role};
+                    model.addRow(rowData);
+                }
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(menuUser.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
 }

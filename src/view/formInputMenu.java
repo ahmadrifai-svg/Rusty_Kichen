@@ -207,7 +207,7 @@ public class formInputMenu extends JDialog {
     private void btn_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpanActionPerformed
      if(btn_simpan.getText().equals("Simpan")){
          SimpanData();
-     }else  if(btn_simpan.getText().equals("Perbarui")){
+     }else  if(btn_simpan.getText().equals("perbarui")){
          perbaruiData();
      }
     }//GEN-LAST:event_btn_simpanActionPerformed
@@ -326,7 +326,7 @@ public class formInputMenu extends JDialog {
     }
 
     private void dataTable() {
-        btn_simpan.setText("Update");
+        btn_simpan.setText("Perbarui");
         idMenu = menu.getIdMenu();
         txtNama.setText(menu.getNamaMenu());
         txtHarga.setText(String.valueOf(menu.getHarga()));
