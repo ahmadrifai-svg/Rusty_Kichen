@@ -132,6 +132,11 @@ public class menuKategori extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tbl_data);
 
         txt_pencarian.setForeground(new java.awt.Color(255, 255, 255));
+        txt_pencarian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_pencarianActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pn_viewLayout = new javax.swing.GroupLayout(pn_view);
         pn_view.setLayout(pn_viewLayout);
@@ -539,6 +544,10 @@ public class menuKategori extends javax.swing.JPanel {
         pn_main.repaint();
         pn_main.revalidate();
     }//GEN-LAST:event_btn_batalUActionPerformed
+
+    private void txt_pencarianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_pencarianActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_pencarianActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

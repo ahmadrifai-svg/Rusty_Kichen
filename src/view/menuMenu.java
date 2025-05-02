@@ -120,6 +120,11 @@ public class menuMenu extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblData);
 
         txtPencarian.setForeground(new java.awt.Color(255, 255, 255));
+        txtPencarian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPencarianActionPerformed(evt);
+            }
+        });
         txtPencarian.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPencarianKeyReleased(evt);
@@ -197,6 +202,10 @@ public class menuMenu extends javax.swing.JPanel {
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
         hapusData();
     }//GEN-LAST:event_btn_deleteActionPerformed
+
+    private void txtPencarianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPencarianActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPencarianActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
