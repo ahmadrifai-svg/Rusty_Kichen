@@ -18,11 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
-import view.menuDashboard;
-import view.menuKategori;
-import view.menuMenu;
-import view.menuPemesanan;
-import view.menuUser;
+import view.*;
 
 /**
  *
@@ -62,12 +58,12 @@ public class MenuUtama extends javax.swing.JFrame {
         pn_btnKategori = new Palette.Panelcustom();
         jLabel7 = new javax.swing.JLabel();
         btn_kategori = new javax.swing.JLabel();
+        pn_btnMeja = new Palette.Panelcustom();
+        jLabel9 = new javax.swing.JLabel();
+        btn_meja = new javax.swing.JLabel();
         pn_btnUser = new Palette.Panelcustom();
         jLabel8 = new javax.swing.JLabel();
         btn_user = new javax.swing.JLabel();
-        pn_btnManajemen = new Palette.Panelcustom();
-        jLabel14 = new javax.swing.JLabel();
-        btn_manajemen = new javax.swing.JLabel();
         Transaksi = new javax.swing.JLabel();
         pn_btnPemesanan = new Palette.Panelcustom();
         jLabel10 = new javax.swing.JLabel();
@@ -292,6 +288,53 @@ public class MenuUtama extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        pn_btnMeja.setRoundBottomRight(30);
+        pn_btnMeja.setRoundBottomleft(30);
+        pn_btnMeja.setRoundTopLeft(30);
+        pn_btnMeja.setRoundTopRight(30);
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Table.png"))); // NOI18N
+        jLabel9.setText("\n");
+        jLabel9.setMaximumSize(new java.awt.Dimension(26, 30));
+        jLabel9.setMinimumSize(new java.awt.Dimension(26, 30));
+        jLabel9.setPreferredSize(new java.awt.Dimension(26, 30));
+
+        btn_meja.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        btn_meja.setText("Meja");
+        btn_meja.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_mejaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_mejaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_mejaMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pn_btnMejaLayout = new javax.swing.GroupLayout(pn_btnMeja);
+        pn_btnMeja.setLayout(pn_btnMejaLayout);
+        pn_btnMejaLayout.setHorizontalGroup(
+            pn_btnMejaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_btnMejaLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_meja, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        pn_btnMejaLayout.setVerticalGroup(
+            pn_btnMejaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_btnMejaLayout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addGroup(pn_btnMejaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_meja))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         pn_btnUser.setRoundBottomRight(30);
         pn_btnUser.setRoundBottomleft(30);
         pn_btnUser.setRoundTopLeft(30);
@@ -336,53 +379,6 @@ public class MenuUtama extends javax.swing.JFrame {
                 .addGroup(pn_btnUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_user))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        pn_btnManajemen.setRoundBottomRight(30);
-        pn_btnManajemen.setRoundBottomleft(30);
-        pn_btnManajemen.setRoundTopLeft(30);
-        pn_btnManajemen.setRoundTopRight(30);
-
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/PeopleUser.png"))); // NOI18N
-        jLabel14.setText("\n");
-        jLabel14.setMaximumSize(new java.awt.Dimension(26, 30));
-        jLabel14.setMinimumSize(new java.awt.Dimension(26, 30));
-        jLabel14.setPreferredSize(new java.awt.Dimension(26, 30));
-
-        btn_manajemen.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        btn_manajemen.setText("Manajemen User");
-        btn_manajemen.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_manajemenMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_manajemenMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btn_manajemenMouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pn_btnManajemenLayout = new javax.swing.GroupLayout(pn_btnManajemen);
-        pn_btnManajemen.setLayout(pn_btnManajemenLayout);
-        pn_btnManajemenLayout.setHorizontalGroup(
-            pn_btnManajemenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_btnManajemenLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_manajemen, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        pn_btnManajemenLayout.setVerticalGroup(
-            pn_btnManajemenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_btnManajemenLayout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addGroup(pn_btnManajemenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_manajemen))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -588,36 +584,37 @@ public class MenuUtama extends javax.swing.JFrame {
             panelcustom1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelcustom1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(panelcustom1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pn_btnLpPengeluaran, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Laporan)
-                    .addComponent(pn_btnLpPemasukkan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pn_btnPengeluaran, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Transaksi)
-                    .addComponent(pn_btnPemesanan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelcustom1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Master_Data)
-                    .addComponent(pn_btnKategori, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pn_btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pn_btnDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pn_btnUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pn_btnManajemen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelcustom1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(pn_btnLpPengeluaran, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Laporan)
+                        .addComponent(pn_btnLpPemasukkan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pn_btnPengeluaran, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Transaksi)
+                        .addComponent(pn_btnPemesanan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pn_btnKategori, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pn_btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pn_btnDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pn_btnUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pn_btnMeja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         panelcustom1Layout.setVerticalGroup(
             panelcustom1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelcustom1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(Master_Data)
                 .addGap(18, 18, 18)
                 .addComponent(pn_btnDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Master_Data)
+                .addGap(18, 18, 18)
                 .addComponent(pn_btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pn_btnKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pn_btnMeja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pn_btnUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(pn_btnManajemen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Transaksi)
                 .addGap(18, 18, 18)
@@ -714,6 +711,9 @@ public class MenuUtama extends javax.swing.JFrame {
         //btnkategori
         pn_btnKategori.setBackground(new Color(242,242,242));;
         btn_kategori.setForeground(Color.BLACK);
+        //btnMeja
+        pn_btnMeja.setBackground(new Color(242,242,242));;
+        btn_meja.setForeground(Color.BLACK);
         //btnuser
         pn_btnUser.setBackground(new Color(242,242,242));;
         btn_user.setForeground(Color.BLACK);
@@ -851,17 +851,23 @@ public class MenuUtama extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formMouseDragged
 
-    private void btn_manajemenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_manajemenMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_manajemenMouseClicked
+    private void btn_mejaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_mejaMouseClicked
+        pn_utama.removeAll();
+        pn_utama.repaint();
+        pn_utama.revalidate();
+        matiintombol();
+        pn_btnMeja.setBackground(new Color (105, 33, 58));
+        btn_meja.setForeground(Color.white);
+        pn_utama.add(new menuMeja());
+    }//GEN-LAST:event_btn_mejaMouseClicked
 
-    private void btn_manajemenMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_manajemenMouseEntered
+    private void btn_mejaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_mejaMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_manajemenMouseEntered
+    }//GEN-LAST:event_btn_mejaMouseEntered
 
-    private void btn_manajemenMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_manajemenMouseExited
+    private void btn_mejaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_mejaMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_manajemenMouseExited
+    }//GEN-LAST:event_btn_mejaMouseExited
 
     /**
      * @param args the command line arguments
@@ -906,7 +912,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JLabel btn_kategori;
     private javax.swing.JLabel btn_lpPemasukan;
     private javax.swing.JLabel btn_lpPengeluaran;
-    private javax.swing.JLabel btn_manajemen;
+    private javax.swing.JLabel btn_meja;
     private javax.swing.JLabel btn_menu;
     private javax.swing.JLabel btn_pemesanan;
     private javax.swing.JLabel btn_pengeluaran;
@@ -916,20 +922,20 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private Palette.Panelcustom panelcustom1;
     private javax.swing.JPanel pn_atas;
     private Palette.Panelcustom pn_btnDashboard;
     private Palette.Panelcustom pn_btnKategori;
     private Palette.Panelcustom pn_btnLpPemasukkan;
     private Palette.Panelcustom pn_btnLpPengeluaran;
-    private Palette.Panelcustom pn_btnManajemen;
+    private Palette.Panelcustom pn_btnMeja;
     private Palette.Panelcustom pn_btnMenu;
     private Palette.Panelcustom pn_btnPemesanan;
     private Palette.Panelcustom pn_btnPengeluaran;

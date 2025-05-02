@@ -25,7 +25,7 @@ public class JTable_Custom extends JTable {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 TablezHeader header = new TablezHeader(value.toString());
-                header.setHorizontalAlignment(JLabel.CENTER);
+                header.setHorizontalAlignment(JLabel.LEFT);
                 return header;
             }
         });
