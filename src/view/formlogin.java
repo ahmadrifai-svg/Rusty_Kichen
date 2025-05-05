@@ -5,14 +5,10 @@
 package view;
 
 import config.koneksi;
-import com.mysql.cj.protocol.Message;
-import java.awt.Color;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.security.MessageDigest;
@@ -21,13 +17,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
-import javax.swing.KeyStroke;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.math.BigInteger;
+import javax.swing.UIManager;
 import main.MenuKasir;
 import main.MenuUtama;
 
@@ -104,6 +97,7 @@ public class formlogin extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        UIManager.put("Component.arc", 15);
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -237,7 +231,8 @@ public class formlogin extends javax.swing.JFrame {
         if (validasiInput()) {
             String Username = t_username.getText();
             String Password = new String(t_password.getPassword());
-            String Role = checkLogin(Username, Password); // Ambil role
+            String hashedPassword = digest(Password); // Enkripsi password
+            String Role = checkLogin(Username, hashedPassword); // Kirim hash ke fungsi cek login
 
             if (Role != null) {
                 if (Role.equals("Admin")) {
