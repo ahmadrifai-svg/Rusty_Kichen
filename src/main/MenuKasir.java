@@ -4,18 +4,51 @@
  */
 package main;
 
+import Palette.Panelcustom;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.LayoutStyle;
+import javax.swing.WindowConstants;
+import model.modelUser;
+import view.*;
+
 /**
  *
  * @author MyBook Hype AMD
  */
 public class MenuKasir extends javax.swing.JFrame {
+    private String userID;
+    private String username;
+    private String role;
+    private String userLogin;
 
-    /**
-     * Creates new form MenuKasir
-     */
-    public MenuKasir() {
+    public MenuKasir(String userID, String username, String role) {
+        this.userID = userID;
+        this.username = username;
+        this.role = role;
+        this.userLogin = userID; 
         initComponents();
+        updateUserGreeting();
     }
+    
+    private void updateUserGreeting() {
+        if (lbUsername != null) {
+            lbUsername.setText("Hallo, " + username); // Ganti teks dengan username
+        } else {
+            System.out.println("lblUserGreeting belum diinisialisasi!");
+        }
+    }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,57 +59,587 @@ public class MenuKasir extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        pn_atas = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        lbUsername = new javax.swing.JLabel();
+        pn_kiri = new javax.swing.JPanel();
+        panelcustom1 = new Palette.Panelcustom();
+        pn_btnDashboard = new Palette.Panelcustom();
+        jLabel5 = new javax.swing.JLabel();
+        btn_dashboard = new javax.swing.JLabel();
+        Transaksi = new javax.swing.JLabel();
+        pn_btnPemesanan = new Palette.Panelcustom();
+        jLabel10 = new javax.swing.JLabel();
+        btn_pemesanan = new javax.swing.JLabel();
+        pn_btnPengeluaran = new Palette.Panelcustom();
+        jLabel11 = new javax.swing.JLabel();
+        btn_pengeluaran = new javax.swing.JLabel();
+        Laporan = new javax.swing.JLabel();
+        pn_btnLpPemasukkan = new Palette.Panelcustom();
+        jLabel12 = new javax.swing.JLabel();
+        btn_lpPemasukan = new javax.swing.JLabel();
+        pn_btnLpPengeluaran = new Palette.Panelcustom();
+        jLabel13 = new javax.swing.JLabel();
+        btn_lpPengeluaran = new javax.swing.JLabel();
+        pn_kanan = new javax.swing.JPanel();
+        pn_dasar = new javax.swing.JPanel();
+        pn_utama = new javax.swing.JPanel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
+        });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
+            }
+        });
+
+        pn_atas.setBackground(new java.awt.Color(105, 33, 58));
+
+        jLabel1.setFont(new java.awt.Font("Segoe Script", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Rusty Kichen");
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/user2.png"))); // NOI18N
+
+        lbUsername.setForeground(new java.awt.Color(255, 255, 255));
+        lbUsername.setText("Hallo, Admin");
+
+        javax.swing.GroupLayout pn_atasLayout = new javax.swing.GroupLayout(pn_atas);
+        pn_atas.setLayout(pn_atasLayout);
+        pn_atasLayout.setHorizontalGroup(
+            pn_atasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_atasLayout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1466, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbUsername)
+                .addGap(70, 70, 70))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        pn_atasLayout.setVerticalGroup(
+            pn_atasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_atasLayout.createSequentialGroup()
+                .addGroup(pn_atasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pn_atasLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel1))
+                    .addGroup(pn_atasLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel2))
+                    .addGroup(pn_atasLayout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(lbUsername)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
+
+        getContentPane().add(pn_atas, java.awt.BorderLayout.PAGE_START);
+
+        pn_kiri.setBackground(new java.awt.Color(73, 14, 18));
+
+        panelcustom1.setRoundBottomRight(50);
+        panelcustom1.setRoundBottomleft(50);
+        panelcustom1.setRoundTopLeft(50);
+        panelcustom1.setRoundTopRight(50);
+
+        pn_btnDashboard.setRoundBottomRight(30);
+        pn_btnDashboard.setRoundBottomleft(30);
+        pn_btnDashboard.setRoundTopLeft(30);
+        pn_btnDashboard.setRoundTopRight(30);
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/home-removebg-preview 1 (1).png"))); // NOI18N
+        jLabel5.setText("\n");
+        jLabel5.setMaximumSize(new java.awt.Dimension(26, 30));
+        jLabel5.setMinimumSize(new java.awt.Dimension(26, 30));
+        jLabel5.setPreferredSize(new java.awt.Dimension(26, 30));
+
+        btn_dashboard.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        btn_dashboard.setText("Dashboard");
+        btn_dashboard.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_dashboardMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_dashboardMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_dashboardMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pn_btnDashboardLayout = new javax.swing.GroupLayout(pn_btnDashboard);
+        pn_btnDashboard.setLayout(pn_btnDashboardLayout);
+        pn_btnDashboardLayout.setHorizontalGroup(
+            pn_btnDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_btnDashboardLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_dashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        pn_btnDashboardLayout.setVerticalGroup(
+            pn_btnDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_btnDashboardLayout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addGroup(pn_btnDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_dashboard))
+                .addContainerGap())
+        );
+
+        Transaksi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Transaksi.setForeground(new java.awt.Color(153, 153, 153));
+        Transaksi.setText("TRANSAKSI");
+
+        pn_btnPemesanan.setRoundBottomRight(30);
+        pn_btnPemesanan.setRoundBottomleft(30);
+        pn_btnPemesanan.setRoundTopLeft(30);
+        pn_btnPemesanan.setRoundTopRight(30);
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Purchase Order.png"))); // NOI18N
+        jLabel10.setText("\n");
+        jLabel10.setMaximumSize(new java.awt.Dimension(26, 30));
+        jLabel10.setMinimumSize(new java.awt.Dimension(26, 30));
+        jLabel10.setPreferredSize(new java.awt.Dimension(26, 30));
+
+        btn_pemesanan.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        btn_pemesanan.setText("Pemesanan");
+        btn_pemesanan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_pemesananMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_pemesananMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_pemesananMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pn_btnPemesananLayout = new javax.swing.GroupLayout(pn_btnPemesanan);
+        pn_btnPemesanan.setLayout(pn_btnPemesananLayout);
+        pn_btnPemesananLayout.setHorizontalGroup(
+            pn_btnPemesananLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_btnPemesananLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_pemesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 58, Short.MAX_VALUE))
+        );
+        pn_btnPemesananLayout.setVerticalGroup(
+            pn_btnPemesananLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_btnPemesananLayout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addGroup(pn_btnPemesananLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_pemesanan))
+                .addContainerGap())
+        );
+
+        pn_btnPengeluaran.setRoundBottomRight(30);
+        pn_btnPengeluaran.setRoundBottomleft(30);
+        pn_btnPengeluaran.setRoundTopLeft(30);
+        pn_btnPengeluaran.setRoundTopRight(30);
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/home-removebg-preview 1 (1).png"))); // NOI18N
+        jLabel11.setText("\n");
+        jLabel11.setMaximumSize(new java.awt.Dimension(26, 30));
+        jLabel11.setMinimumSize(new java.awt.Dimension(26, 30));
+        jLabel11.setPreferredSize(new java.awt.Dimension(26, 30));
+
+        btn_pengeluaran.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        btn_pengeluaran.setText("Pengeluaran");
+        btn_pengeluaran.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_pengeluaranMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_pengeluaranMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_pengeluaranMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pn_btnPengeluaranLayout = new javax.swing.GroupLayout(pn_btnPengeluaran);
+        pn_btnPengeluaran.setLayout(pn_btnPengeluaranLayout);
+        pn_btnPengeluaranLayout.setHorizontalGroup(
+            pn_btnPengeluaranLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_btnPengeluaranLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_pengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 58, Short.MAX_VALUE))
+        );
+        pn_btnPengeluaranLayout.setVerticalGroup(
+            pn_btnPengeluaranLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_btnPengeluaranLayout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addGroup(pn_btnPengeluaranLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_pengeluaran))
+                .addContainerGap())
+        );
+
+        Laporan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Laporan.setForeground(new java.awt.Color(153, 153, 153));
+        Laporan.setText("LAPORAN");
+
+        pn_btnLpPemasukkan.setRoundBottomRight(30);
+        pn_btnLpPemasukkan.setRoundBottomleft(30);
+        pn_btnLpPemasukkan.setRoundTopLeft(30);
+        pn_btnLpPemasukkan.setRoundTopRight(30);
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/home-removebg-preview 1 (1).png"))); // NOI18N
+        jLabel12.setText("\n");
+        jLabel12.setMaximumSize(new java.awt.Dimension(26, 30));
+        jLabel12.setMinimumSize(new java.awt.Dimension(26, 30));
+        jLabel12.setPreferredSize(new java.awt.Dimension(26, 30));
+
+        btn_lpPemasukan.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        btn_lpPemasukan.setText("Laporan Pemasukan");
+        btn_lpPemasukan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_lpPemasukanMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_lpPemasukanMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_lpPemasukanMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pn_btnLpPemasukkanLayout = new javax.swing.GroupLayout(pn_btnLpPemasukkan);
+        pn_btnLpPemasukkan.setLayout(pn_btnLpPemasukkanLayout);
+        pn_btnLpPemasukkanLayout.setHorizontalGroup(
+            pn_btnLpPemasukkanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_btnLpPemasukkanLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_lpPemasukan, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 58, Short.MAX_VALUE))
+        );
+        pn_btnLpPemasukkanLayout.setVerticalGroup(
+            pn_btnLpPemasukkanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_btnLpPemasukkanLayout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addGroup(pn_btnLpPemasukkanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_lpPemasukan))
+                .addContainerGap())
+        );
+
+        pn_btnLpPengeluaran.setRoundBottomRight(30);
+        pn_btnLpPengeluaran.setRoundBottomleft(30);
+        pn_btnLpPengeluaran.setRoundTopLeft(30);
+        pn_btnLpPengeluaran.setRoundTopRight(30);
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/home-removebg-preview 1 (1).png"))); // NOI18N
+        jLabel13.setText("\n");
+        jLabel13.setMaximumSize(new java.awt.Dimension(26, 30));
+        jLabel13.setMinimumSize(new java.awt.Dimension(26, 30));
+        jLabel13.setPreferredSize(new java.awt.Dimension(26, 30));
+
+        btn_lpPengeluaran.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        btn_lpPengeluaran.setText("Laporan Pengeluaran");
+        btn_lpPengeluaran.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_lpPengeluaranMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_lpPengeluaranMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_lpPengeluaranMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pn_btnLpPengeluaranLayout = new javax.swing.GroupLayout(pn_btnLpPengeluaran);
+        pn_btnLpPengeluaran.setLayout(pn_btnLpPengeluaranLayout);
+        pn_btnLpPengeluaranLayout.setHorizontalGroup(
+            pn_btnLpPengeluaranLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_btnLpPengeluaranLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_lpPengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 58, Short.MAX_VALUE))
+        );
+        pn_btnLpPengeluaranLayout.setVerticalGroup(
+            pn_btnLpPengeluaranLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_btnLpPengeluaranLayout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addGroup(pn_btnLpPengeluaranLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_lpPengeluaran))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout panelcustom1Layout = new javax.swing.GroupLayout(panelcustom1);
+        panelcustom1.setLayout(panelcustom1Layout);
+        panelcustom1Layout.setHorizontalGroup(
+            panelcustom1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelcustom1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(panelcustom1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pn_btnLpPengeluaran, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Laporan)
+                    .addComponent(pn_btnLpPemasukkan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pn_btnPengeluaran, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Transaksi)
+                    .addComponent(pn_btnPemesanan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pn_btnDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+        panelcustom1Layout.setVerticalGroup(
+            panelcustom1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelcustom1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(pn_btnDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Transaksi)
+                .addGap(18, 18, 18)
+                .addComponent(pn_btnPemesanan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pn_btnPengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Laporan)
+                .addGap(18, 18, 18)
+                .addComponent(pn_btnLpPemasukkan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pn_btnLpPengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(477, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout pn_kiriLayout = new javax.swing.GroupLayout(pn_kiri);
+        pn_kiri.setLayout(pn_kiriLayout);
+        pn_kiriLayout.setHorizontalGroup(
+            pn_kiriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_kiriLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(panelcustom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
+        );
+        pn_kiriLayout.setVerticalGroup(
+            pn_kiriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_kiriLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(panelcustom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(61, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(pn_kiri, java.awt.BorderLayout.LINE_START);
+
+        pn_kanan.setBackground(new java.awt.Color(35, 12, 20));
+        pn_kanan.setLayout(new java.awt.BorderLayout());
+
+        pn_dasar.setBackground(new java.awt.Color(35, 12, 20));
+
+        pn_utama.setBackground(new java.awt.Color(35, 12, 20));
+        pn_utama.setLayout(new java.awt.BorderLayout());
+
+        javax.swing.GroupLayout pn_dasarLayout = new javax.swing.GroupLayout(pn_dasar);
+        pn_dasar.setLayout(pn_dasarLayout);
+        pn_dasarLayout.setHorizontalGroup(
+            pn_dasarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_dasarLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(pn_utama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20))
+        );
+        pn_dasarLayout.setVerticalGroup(
+            pn_dasarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_dasarLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(pn_utama, javax.swing.GroupLayout.DEFAULT_SIZE, 876, Short.MAX_VALUE)
+                .addGap(28, 28, 28))
+        );
+
+        pn_kanan.add(pn_dasar, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(pn_kanan, java.awt.BorderLayout.CENTER);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_dashboardMouseEntered(MouseEvent evt) {//GEN-FIRST:event_btn_dashboardMouseEntered
+//        pn_btnDashboard.setBackground(new Color (105,33,58));
+        
+    }//GEN-LAST:event_btn_dashboardMouseEntered
+
+    private void btn_dashboardMouseExited(MouseEvent evt) {//GEN-FIRST:event_btn_dashboardMouseExited
+//        pn_btnDashboard.setBackground(new Color (242,242,242));
+        
+    }//GEN-LAST:event_btn_dashboardMouseExited
+
+    private void setActiveButton(JPanel activeButton) {
+    // Reset semua tombol ke warna default
+    pn_btnDashboard.setBackground(new Color(242, 242, 242)); 
+    
+
+    // Set warna tombol yang aktif
+    activeButton.setBackground(new Color(105, 33, 58));;
+}
+    
+    
+    private void matiintombol(){
+        pn_btnDashboard.setBackground(new Color(242,242,242));;
+        btn_dashboard.setForeground(Color.BLACK);
+        //brnmenu
+        
+        pn_btnPemesanan.setBackground(new Color(242,242,242));;
+        btn_pemesanan.setForeground(Color.BLACK);
+    }
+
+    
+    private void btn_dashboardMouseClicked(MouseEvent evt) {//GEN-FIRST:event_btn_dashboardMouseClicked
+        pn_utama.removeAll();
+        pn_utama.repaint();
+        pn_utama.revalidate();
+        matiintombol();
+        pn_btnDashboard.setBackground(new Color (105, 33, 58));
+        btn_dashboard.setForeground(Color.white);
+        pn_utama.add(new menuDashboard());
+
+    }//GEN-LAST:event_btn_dashboardMouseClicked
+
+    private void btn_pemesananMouseClicked(MouseEvent evt) {//GEN-FIRST:event_btn_pemesananMouseClicked
+        pn_utama.removeAll();
+        pn_utama.repaint();
+        pn_utama.revalidate();
+        matiintombol();
+        pn_btnPemesanan.setBackground(new Color(105, 33, 58));
+        btn_pemesanan.setForeground(Color.white);
+        pn_utama.add(new menuPemesanan(userLogin));  // ✅ userLogin sekarang valid
+        pn_utama.repaint();
+        pn_utama.revalidate();
+
+    }//GEN-LAST:event_btn_pemesananMouseClicked
+
+    private void btn_pemesananMouseEntered(MouseEvent evt) {//GEN-FIRST:event_btn_pemesananMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_pemesananMouseEntered
+
+    private void btn_pemesananMouseExited(MouseEvent evt) {//GEN-FIRST:event_btn_pemesananMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_pemesananMouseExited
+
+    private void btn_pengeluaranMouseClicked(MouseEvent evt) {//GEN-FIRST:event_btn_pengeluaranMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_pengeluaranMouseClicked
+
+    private void btn_pengeluaranMouseEntered(MouseEvent evt) {//GEN-FIRST:event_btn_pengeluaranMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_pengeluaranMouseEntered
+
+    private void btn_pengeluaranMouseExited(MouseEvent evt) {//GEN-FIRST:event_btn_pengeluaranMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_pengeluaranMouseExited
+
+    private void btn_lpPemasukanMouseClicked(MouseEvent evt) {//GEN-FIRST:event_btn_lpPemasukanMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_lpPemasukanMouseClicked
+
+    private void btn_lpPemasukanMouseEntered(MouseEvent evt) {//GEN-FIRST:event_btn_lpPemasukanMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_lpPemasukanMouseEntered
+
+    private void btn_lpPemasukanMouseExited(MouseEvent evt) {//GEN-FIRST:event_btn_lpPemasukanMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_lpPemasukanMouseExited
+
+    private void btn_lpPengeluaranMouseClicked(MouseEvent evt) {//GEN-FIRST:event_btn_lpPengeluaranMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_lpPengeluaranMouseClicked
+
+    private void btn_lpPengeluaranMouseEntered(MouseEvent evt) {//GEN-FIRST:event_btn_lpPengeluaranMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_lpPengeluaranMouseEntered
+
+    private void btn_lpPengeluaranMouseExited(MouseEvent evt) {//GEN-FIRST:event_btn_lpPengeluaranMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_lpPengeluaranMouseExited
+
+    private void formMousePressed(MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+      
+    }//GEN-LAST:event_formMousePressed
+
+    private void formMouseDragged(MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+
+    }//GEN-LAST:event_formMouseDragged
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+        public static void main(String args[]) {
+    /* Set the Nimbus look and feel */
+    try {
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                break;
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuKasir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuKasir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuKasir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuKasir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MenuKasir().setVisible(true);
-            }
-        });
+    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+        java.util.logging.Logger.getLogger(MenuKasir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
 
+    /* Create and display the form */
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            // Gunakan data dummy
+            String dummyID = "1";
+            String dummyUsername = "admin";
+            String dummyRole = "Admin";
+
+            new MenuKasir(dummyID, dummyUsername, dummyRole).setVisible(true);
+        }
+    });
+}
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Laporan;
+    private javax.swing.JLabel Transaksi;
+    private javax.swing.JLabel btn_dashboard;
+    private javax.swing.JLabel btn_lpPemasukan;
+    private javax.swing.JLabel btn_lpPengeluaran;
+    private javax.swing.JLabel btn_pemesanan;
+    private javax.swing.JLabel btn_pengeluaran;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel lbUsername;
+    private Palette.Panelcustom panelcustom1;
+    private javax.swing.JPanel pn_atas;
+    private Palette.Panelcustom pn_btnDashboard;
+    private Palette.Panelcustom pn_btnLpPemasukkan;
+    private Palette.Panelcustom pn_btnLpPengeluaran;
+    private Palette.Panelcustom pn_btnPemesanan;
+    private Palette.Panelcustom pn_btnPengeluaran;
+    private javax.swing.JPanel pn_dasar;
+    private javax.swing.JPanel pn_kanan;
+    private javax.swing.JPanel pn_kiri;
+    private javax.swing.JPanel pn_utama;
     // End of variables declaration//GEN-END:variables
 }

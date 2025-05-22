@@ -41,7 +41,7 @@ public class tableModelMenu extends AbstractTableModel {
         JOptionPane.showMessageDialog(null, "Data Berhasil DiHapus ");
     }
             
-    private String[] columnNames = {"ID", "Nama Menu", "Harga", "id Kategori"};
+    private String[] columnNames = {"ID", "Nama Menu", "Harga", "Barcode", "id Kategori"};
     
 
     @Override
@@ -62,7 +62,8 @@ public class tableModelMenu extends AbstractTableModel {
             case 1: return menu.getNamaMenu();
             case 2: long hargaBulatan = Math.round(menu.getHarga());
                     return String.valueOf(hargaBulatan);
-            case 3: return menu.getIdKategori(); // Menggunakan getNamaKategori() jika ini sesuai dengan ModelMenu
+            case 3: return menu.getBarcode();
+            case 4: return menu.getIdKategori(); // Menggunakan getNamaKategori() jika ini sesuai dengan ModelMenu
            
             default: 
                 return null;

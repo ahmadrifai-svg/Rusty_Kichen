@@ -69,6 +69,8 @@ public class menuUser extends javax.swing.JPanel {
         txtPassword = new Palette.Custom_JPasswordFieldRounded();
         jLabel9 = new javax.swing.JLabel();
         cbxRole = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        txtRfid = new Palette.JTextfieldRounded();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.CardLayout());
@@ -277,44 +279,61 @@ public class menuUser extends javax.swing.JPanel {
         cbxRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih Role", "Admin", "Karyawan" }));
         cbxRole.setMinimumSize(new java.awt.Dimension(21, 36));
 
+        jLabel10.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("RfId");
+
+        txtRfid.setForeground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout pn_addLayout = new javax.swing.GroupLayout(pn_add);
         pn_add.setLayout(pn_addLayout);
         pn_addLayout.setHorizontalGroup(
             pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_addLayout.createSequentialGroup()
-                .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pn_addLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pn_addLayout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Judul)))
+                .addGap(0, 1294, Short.MAX_VALUE))
+            .addGroup(pn_addLayout.createSequentialGroup()
+                .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pn_addLayout.createSequentialGroup()
                         .addGap(93, 93, 93)
                         .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtID, javax.swing.GroupLayout.DEFAULT_SIZE, 1095, Short.MAX_VALUE)
-                            .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 1095, Short.MAX_VALUE)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(pn_addLayout.createSequentialGroup()
-                                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_batal2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4)
-                            .addGroup(pn_addLayout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel9))
-                            .addGroup(pn_addLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel8))))
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel9)
+                            .addComponent(cbxRole, javax.swing.GroupLayout.PREFERRED_SIZE, 1050, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 1078, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_addLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(txtRfid, javax.swing.GroupLayout.PREFERRED_SIZE, 1078, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addComponent(jLabel7)
+                .addGap(369, 369, 369))
+            .addGroup(pn_addLayout.createSequentialGroup()
+                .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pn_addLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cbxRole, javax.swing.GroupLayout.PREFERRED_SIZE, 1050, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pn_addLayout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(93, 93, 93)
                         .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(pn_addLayout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Judul)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(80, 369, Short.MAX_VALUE))
+                                .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pn_addLayout.createSequentialGroup()
+                                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btn_batal2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel4)
+                                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 1078, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(pn_addLayout.createSequentialGroup()
+                        .addGap(99, 99, 99)
+                        .addComponent(jLabel8)))
+                .addGap(381, 381, 381))
         );
         pn_addLayout.setVerticalGroup(
             pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,19 +354,24 @@ public class menuUser extends javax.swing.JPanel {
                 .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel9)
+                .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pn_addLayout.createSequentialGroup()
+                        .addComponent(txtRfid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel9))
+                    .addComponent(jLabel7))
+                .addGap(18, 18, 18)
                 .addComponent(cbxRole, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(445, Short.MAX_VALUE))
+                .addContainerGap(255, Short.MAX_VALUE))
         );
 
         pn_main.add(pn_add, "card2");
@@ -415,6 +439,7 @@ public class menuUser extends javax.swing.JPanel {
     private Palette.Custom_ButtonRounded btn_delete;
     private javax.swing.JComboBox<String> cbxRole;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -432,6 +457,7 @@ public class menuUser extends javax.swing.JPanel {
     private Palette.JTextfieldRounded txtID;
     private Palette.Custom_JPasswordFieldRounded txtPassword;
     private Palette.JTextfieldRounded txtPencarian;
+    private Palette.JTextfieldRounded txtRfid;
     private Palette.JTextfieldRounded txtUsername;
     // End of variables declaration//GEN-END:variables
 
@@ -452,6 +478,7 @@ public class menuUser extends javax.swing.JPanel {
          txtID.setText("");
          txtUsername.setText("");
          txtPassword.setText("");
+         txtRfid.setText("");
          cbxRole.setSelectedItem("Pilih Role");
     }
 
@@ -461,6 +488,7 @@ public class menuUser extends javax.swing.JPanel {
         model.addColumn("ID");
         model.addColumn("Username");
         model.addColumn("Role");
+        model.addColumn("RFID");
     }
 
     private void getData(DefaultTableModel model) {
@@ -475,8 +503,9 @@ public class menuUser extends javax.swing.JPanel {
                     String idUser = rs.getString("Id_User");
                     String username = rs.getString("Username");
                     String role = rs.getString("Role");
+                    String rfid = rs.getString("RFID");
 
-                    Object[] rowData = {idUser, username, role};
+                    Object[] rowData = {idUser, username, role, rfid};
                     model.addRow(rowData);
                 }
             }
@@ -517,6 +546,7 @@ public class menuUser extends javax.swing.JPanel {
         String idUser = txtID.getText();
         String username = txtUsername.getText();
         String password = formlogin.getMd5java(txtPassword.getText()); 
+        String rfid = txtRfid.getText();
         String role = (String) cbxRole.getSelectedItem();
 
 
@@ -525,12 +555,13 @@ public class menuUser extends javax.swing.JPanel {
             return; // penting agar proses tidak lanjut
         }
         try {
-            String sql = "INSERT INTO user (Id_User, Username, Password, Role) VALUE (?,?,?,?)";
+            String sql = "INSERT INTO user (Id_User, Username, Password, RFID, Role) VALUE (?,?,?,?,?)";
             try (PreparedStatement st = conn.prepareStatement(sql)){
                 st.setString(1, idUser);
                 st.setString(2, username);
                 st.setString(3, password);
-                st.setString(4, role);
+                st.setString(4, rfid);
+                st.setString(5, role);
                 
                 int rowInserted = st.executeUpdate();
                 if(rowInserted > 0){
@@ -556,26 +587,32 @@ public class menuUser extends javax.swing.JPanel {
         
         txtID.setText(tblData.getValueAt(row, 0).toString());
         txtUsername.setText(tblData.getValueAt(row, 1).toString());
-        //txtPassword.setText(tblData.getValueAt(row, 2).toString());
+        txtPassword.setText("");            
+        txtPassword.setEnabled(false);
         cbxRole.setSelectedItem(tblData.getValueAt(row, 2).toString());
+        txtRfid.setText(tblData.getValueAt(row, 3).toString());
     }
     
     private void updateData(){
+        
         String idUser = txtID.getText();
         String username = txtUsername.getText();
+//        String password = txtPassword.getText();
+        String rfid = txtRfid.getText();
         String role =  cbxRole.getSelectedItem().toString();
         
-        if (idUser.isEmpty() || username.isEmpty() || cbxRole.getSelectedItem().toString().equals("Pilih Role")) {
+        if (idUser.isEmpty() || username.isEmpty() || rfid.isEmpty() || cbxRole.getSelectedItem().toString().equals("Pilih Role")) {
             JOptionPane.showMessageDialog(this, "Semua Kolom Harus Diisi!", "Validasi", JOptionPane.ERROR_MESSAGE);
             return; // penting agar proses tidak lanjut
         }
         try {
-            String sql = "UPDATE user SET Username=?, role=? WHERE Id_User=?";
+            String sql = "UPDATE user SET Username=?, RFID=?, role=? WHERE Id_User=?";
             try (PreparedStatement st = conn.prepareStatement(sql)){
                 st.setString(1, username);
-                //st.setString(3, password);
-                st.setString(2, role);
-                st.setString(3, idUser);
+                st.setString(2, rfid);
+//                st.setString(3, password);
+                st.setString(3, role);
+                st.setString(4, idUser);
                 
                 int rowUpdate = st.executeUpdate();
                 if(rowUpdate > 0){

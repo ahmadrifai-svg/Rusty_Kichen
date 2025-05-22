@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,9 +24,11 @@ import javax.swing.table.DefaultTableModel;
 public class menuStok extends javax.swing.JPanel {
 
     private final Connection conn;
+    private String idKategori;
 
     public menuStok() {
         initComponents();
+        
 
         conn = koneksi.getConnection();
         setTableModel();
@@ -60,15 +63,15 @@ public class menuStok extends javax.swing.JPanel {
         jSeparator3 = new javax.swing.JSeparator();
         txtID = new Palette.JTextfieldRounded();
         jLabel1 = new javax.swing.JLabel();
-        txtMeja = new Palette.JTextfieldRounded();
+        txtNama = new Palette.JTextfieldRounded();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtMeja1 = new Palette.JTextfieldRounded();
+        txtSatuan = new Palette.JTextfieldRounded();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        txtMeja2 = new Palette.JTextfieldRounded();
+        txtStok = new Palette.JTextfieldRounded();
         jLabel10 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbxKategori = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.CardLayout());
@@ -254,7 +257,7 @@ public class menuStok extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ID");
 
-        txtMeja.setForeground(new java.awt.Color(255, 255, 255));
+        txtNama.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel4.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -263,7 +266,7 @@ public class menuStok extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
 
-        txtMeja1.setForeground(new java.awt.Color(255, 255, 255));
+        txtSatuan.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel8.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -273,14 +276,14 @@ public class menuStok extends javax.swing.JPanel {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Stok");
 
-        txtMeja2.setForeground(new java.awt.Color(255, 255, 255));
+        txtStok.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel10.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Kategori");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(72, 36));
+        cbxKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxKategori.setPreferredSize(new java.awt.Dimension(72, 36));
 
         javax.swing.GroupLayout pn_addLayout = new javax.swing.GroupLayout(pn_add);
         pn_add.setLayout(pn_addLayout);
@@ -292,7 +295,7 @@ public class menuStok extends javax.swing.JPanel {
                         .addGap(93, 93, 93)
                         .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtID, javax.swing.GroupLayout.DEFAULT_SIZE, 1095, Short.MAX_VALUE)
-                            .addComponent(txtMeja, javax.swing.GroupLayout.DEFAULT_SIZE, 1095, Short.MAX_VALUE)
+                            .addComponent(txtNama, javax.swing.GroupLayout.DEFAULT_SIZE, 1095, Short.MAX_VALUE)
                             .addGroup(pn_addLayout.createSequentialGroup()
                                 .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pn_addLayout.createSequentialGroup()
@@ -306,8 +309,8 @@ public class menuStok extends javax.swing.JPanel {
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel10))
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(txtMeja1, javax.swing.GroupLayout.DEFAULT_SIZE, 1095, Short.MAX_VALUE)
-                            .addComponent(txtMeja2, javax.swing.GroupLayout.DEFAULT_SIZE, 1095, Short.MAX_VALUE)))
+                            .addComponent(txtSatuan, javax.swing.GroupLayout.DEFAULT_SIZE, 1095, Short.MAX_VALUE)
+                            .addComponent(txtStok, javax.swing.GroupLayout.DEFAULT_SIZE, 1095, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pn_addLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,7 +322,7 @@ public class menuStok extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pn_addLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 996, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbxKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 996, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(369, 369, 369))
         );
         pn_addLayout.setVerticalGroup(
@@ -342,19 +345,19 @@ public class menuStok extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtMeja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtMeja1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSatuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtMeja2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtStok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbxKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(134, 134, 134)
                 .addComponent(jLabel7)
                 .addContainerGap(239, Short.MAX_VALUE))
@@ -371,7 +374,7 @@ public class menuStok extends javax.swing.JPanel {
         pn_main.repaint();
         pn_main.revalidate();
 
-        txtID.setText(setIdMeja());
+        txtID.setText(setIdBahan());
         if(btnTambah.getText().equals("Perbarui")){
             dataTabel();
             btnSave.setText("Perbarui");
@@ -423,7 +426,7 @@ public class menuStok extends javax.swing.JPanel {
     private Palette.Custom_ButtonRounded btn_batal;
     private Palette.Custom_ButtonRounded btn_batal2;
     private Palette.Custom_ButtonRounded btn_delete;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbxKategori;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -441,13 +444,14 @@ public class menuStok extends javax.swing.JPanel {
     private javax.swing.JPanel pn_view;
     private Palette.JTable_Custom tblData;
     private Palette.JTextfieldRounded txtID;
-    private Palette.JTextfieldRounded txtMeja;
-    private Palette.JTextfieldRounded txtMeja1;
-    private Palette.JTextfieldRounded txtMeja2;
+    private Palette.JTextfieldRounded txtNama;
     private Palette.JTextfieldRounded txtPencarian;
+    private Palette.JTextfieldRounded txtSatuan;
+    private Palette.JTextfieldRounded txtStok;
     // End of variables declaration//GEN-END:variables
 
     private void loadData() {
+        getKategori();
         getData((DefaultTableModel) tblData.getModel());
         btn_batal.setVisible(false);
         btn_delete.setVisible(false);
@@ -462,7 +466,7 @@ public class menuStok extends javax.swing.JPanel {
     
      private void resetForm() {
          txtID.setText("");
-         txtMeja.setText("");
+         txtNama.setText("");
          
     }
 
@@ -473,6 +477,8 @@ public class menuStok extends javax.swing.JPanel {
         model.addColumn("Nama Bahan");
         model.addColumn("Satuan");
         model.addColumn("Stok");
+        model.addColumn("Id Kategori");
+        model.addColumn("Nama Kategori");
        // model.addColumn("Nama Bahan");
     }
 
@@ -480,18 +486,20 @@ public class menuStok extends javax.swing.JPanel {
         model.setRowCount(0);
 
         try {
-            String sql = "SELECT * FROM bahan";
+            String sql = "SELECT bhn.Id_Bahan, bhn.Nama, bhn.Satuan, bhn.Stok, ktg.Id_Kategori, ktg.Nama_Kategori FROM bahan bhn INNER JOIN kategori ktg ON ktg.Id_Kategori =  bhn.Id_Kategori";
             try (PreparedStatement st = conn.prepareStatement(sql)) {
                 ResultSet rs = st.executeQuery();
 
                 while (rs.next()) {
                     String idBahan = rs.getString("Id_Bahan");
-                    String namaBahan = rs.getString("Nama_Bahan");
+                    String namaBahan = rs.getString("Nama");
                     String satuan = rs.getString("Satuan");
                     String stok = rs.getString("Stok");
+                    String kategori = rs.getString("Id_Kategori");
+                    String namaKategori = rs.getString("Nama_Kategori");
                     //String kate = rs.getString("Stok");
 
-                    Object[] rowData = {idBahan, namaBahan, satuan, stok };
+                    Object[] rowData = {idBahan, namaBahan, satuan, stok, kategori, namaKategori };
                     model.addRow(rowData);
                 }
             }
@@ -500,14 +508,14 @@ public class menuStok extends javax.swing.JPanel {
         }
     }
 
-    private String setIdMeja() {
+    private String setIdBahan() {
         String Urutan = null;
-        String prefix = "MJ_";
+        String prefix = "BHN_";
 
-        String sql = "SELECT RIGHT(Id_Meja, 3) AS Nomor "
-            + "FROM meja "  // Pastikan ada spasi setelah nama tabel
-            + "WHERE Id_Meja LIKE 'MJ_%' "
-            + "ORDER BY Id_Meja DESC "
+        String sql = "SELECT RIGHT(Id_Bahan, 3) AS Nomor "
+            + "FROM bahan "  // Pastikan ada spasi setelah nama tabel
+            + "WHERE Id_Bahan LIKE 'BHN_%' "
+            + "ORDER BY Id_Bahan DESC "
             + "LIMIT 1";
 
         try (PreparedStatement st = conn.prepareStatement(sql)) {
@@ -527,21 +535,63 @@ public class menuStok extends javax.swing.JPanel {
         return Urutan;
 
     }
+    
+    private void getKategori() {
+        try {
+            DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+            model.addElement("Pilih Kategori");
+            String sql = "SELECT Id_Kategori, Nama_Kategori FROM kategori";
+            PreparedStatement st = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet  rs = st.executeQuery();
+            
+            while(rs.next()){
+                String namaKategori = rs.getString("Nama_Kategori");
+                model.addElement(namaKategori);
+            }
+            cbxKategori.setModel(model);
+            
+            cbxKategori.addActionListener(e -> {
+                int selectIndex = cbxKategori.getSelectedIndex();
+                
+                if(selectIndex > 0){
+                    try {
+                        rs.absolute(selectIndex);
+                        idKategori = rs.getString("Id_Kategori");
+                    } catch (SQLException ex) {
+                        ex.printStackTrace(); 
+                    }
+                }
+            
+            });
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    
     private void insertData() {
-        String idMeja = txtID.getText();
-        String  nomorMeja = txtMeja.getText();
+        String idBahan = txtID.getText();
+        String  namaBahan = txtNama.getText();
+        String  satuan = txtSatuan.getText();
+        String  stok = txtStok.getText();
 
 
-        if (idMeja.isEmpty() || nomorMeja.isEmpty()) {
+        if (idBahan.isEmpty() || namaBahan.isEmpty()|| stok.isEmpty()|| stok.isEmpty() || cbxKategori.getSelectedItem().toString().equals("Pilih Kategori") ) {
             JOptionPane.showMessageDialog(this, "Semua Kolom Harus Diisi!", "Validasi", JOptionPane.ERROR_MESSAGE);
             return; // penting agar proses tidak lanjut
         }
         try {
-             String sql = "INSERT INTO meja (Id_Meja, Nomor) VALUES (?, ?)";
+             String sql = "INSERT INTO bahan (Id_Bahan, Nama, Satuan, Stok, Id_Kategori) VALUES (?, ?, ?, ?, ?)";
             try (PreparedStatement st = conn.prepareStatement(sql)){
-                st.setString(1, idMeja);
-                st.setString(2, nomorMeja);
+                st.setString(1, idBahan);
+                st.setString(2, namaBahan);
+                st.setString(3, satuan);
+                st.setString(4, stok);
+                st.setString(5, idKategori);
+                
+                txtID.setEnabled(false);
                 
                 int rowInserted = st.executeUpdate();
                 if(rowInserted > 0){
@@ -566,22 +616,26 @@ public class menuStok extends javax.swing.JPanel {
         txtID.setEnabled(false);
         
         txtID.setText(tblData.getValueAt(row, 0).toString());
-        txtMeja.setText(tblData.getValueAt(row, 1).toString());
+        txtNama.setText(tblData.getValueAt(row, 1).toString());
     }
     
     private void updateData(){
-        String idMeja = txtID.getText();
-        String nomorMeja = txtMeja.getText();
+        String idMenu = txtID.getText();
+        String namaMenu = txtNama.getText();
+        String harga = txtSatuan.getText();
         
-        if (idMeja.isEmpty() || nomorMeja.isEmpty()) {
+        
+        if (idMenu.isEmpty() || namaMenu.isEmpty() || harga.isEmpty() || cbxKategori.getSelectedItem().toString().equals("Pilih Kategori")) {
             JOptionPane.showMessageDialog(this, "Semua Kolom Harus Diisi!", "Validasi", JOptionPane.ERROR_MESSAGE);
             return; // penting agar proses tidak lanjut
         }
         try {
-            String sql = "UPDATE meja SET Nomor=? WHERE Id_Meja=?";
+            String sql = "UPDATE menu SET Nama_Menu=?, Harga=?, Id_Kategori=? WHERE Id_Menu=?";
             try (PreparedStatement st = conn.prepareStatement(sql)){
-                st.setString(1, nomorMeja);
-                st.setString(2, idMeja);
+                st.setString(1, namaMenu);
+                st.setString(2, harga);
+                st.setString(3, idKategori);
+                st.setString(4, idMenu);
                 
                 int rowUpdate = st.executeUpdate();
                 if(rowUpdate > 0){
@@ -592,7 +646,7 @@ public class menuStok extends javax.swing.JPanel {
                 }
             }
         } catch (SQLException e) {
-            java.util.logging.Logger.getLogger(menuStok.class.getName()).log(Level.SEVERE, null, e);
+            java.util.logging.Logger.getLogger(menuMenu.class.getName()).log(Level.SEVERE, null, e);
         }
         }
     
@@ -604,7 +658,7 @@ public class menuStok extends javax.swing.JPanel {
         if(confirm ==  JOptionPane.YES_OPTION){
             String Id = tblData.getValueAt(selectedRow, 0).toString();
             try {
-                String sql = "DELETE FROM meja Where Id_Meja=?";
+                String sql = "DELETE FROM bahan Where Id_Bahan=?";
                 try(PreparedStatement st = conn.prepareStatement(sql)) {
                     st.setString(1, Id);
                     

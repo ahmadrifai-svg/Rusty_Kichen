@@ -1,12 +1,17 @@
 package model;
 
 public class ModelMenu{
+    private String idMenu;
+    private String namaMenu;
+    private long harga;
+    private String idKategori;
+    private String Barcode;
 
-    public int getIdMenu() {
+    public String getIdMenu() {
         return idMenu;
     }
 
-    public void setIdMenu(int idMenu) {
+    public void setIdMenu(String idMenu) {
         this.idMenu = idMenu;
     }
 
@@ -26,15 +31,19 @@ public class ModelMenu{
         this.harga = harga;
     }
 
-    public int getIdKategori() {
+    public String getIdKategori() {
         return idKategori;
     }
 
-    public void setIdKategori(int idKategori) {
+    public void setIdKategori(String idKategori) {
         this.idKategori = idKategori;
     }
-    private int idMenu;
-    private String namaMenu;
-    private long harga;
-    private int idKategori;
+
+    public String getBarcode() {
+        return Barcode;
+    }
+
+    public void setBarcode(String Barcode) {
+        this.Barcode = Barcode;
+    }
 }

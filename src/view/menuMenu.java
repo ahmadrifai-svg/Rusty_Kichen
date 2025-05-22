@@ -69,6 +69,8 @@ public class menuMenu extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         cbxKategori = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        txtBarcode = new Palette.JTextfieldRounded();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.CardLayout());
@@ -276,6 +278,12 @@ public class menuMenu extends javax.swing.JPanel {
         cbxKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbxKategori.setPreferredSize(new java.awt.Dimension(72, 36));
 
+        jLabel9.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Barcode");
+
+        txtBarcode.setForeground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout pn_addLayout = new javax.swing.GroupLayout(pn_add);
         pn_add.setLayout(pn_addLayout);
         pn_addLayout.setHorizontalGroup(
@@ -285,8 +293,13 @@ public class menuMenu extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pn_addLayout.createSequentialGroup()
                         .addGap(93, 93, 93)
                         .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtID, javax.swing.GroupLayout.DEFAULT_SIZE, 1095, Short.MAX_VALUE)
-                            .addComponent(txtMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 1095, Short.MAX_VALUE)
+                            .addComponent(txtID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtHarga, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_addLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbxKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 996, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtBarcode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(pn_addLayout.createSequentialGroup()
                                 .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pn_addLayout.createSequentialGroup()
@@ -297,9 +310,9 @@ public class menuMenu extends javax.swing.JPanel {
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel8)
-                                    .addComponent(jLabel10))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(txtHarga, javax.swing.GroupLayout.DEFAULT_SIZE, 1095, Short.MAX_VALUE)))
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel9))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pn_addLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,10 +321,7 @@ public class menuMenu extends javax.swing.JPanel {
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Judul)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pn_addLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cbxKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 996, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(369, 369, 369))
         );
         pn_addLayout.setVerticalGroup(
@@ -340,10 +350,14 @@ public class menuMenu extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtHarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbxKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(134, 134, 134)
+                .addGap(47, 47, 47)
                 .addComponent(jLabel7)
                 .addContainerGap(317, Short.MAX_VALUE))
         );
@@ -420,6 +434,7 @@ public class menuMenu extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -427,6 +442,7 @@ public class menuMenu extends javax.swing.JPanel {
     private javax.swing.JPanel pn_main;
     private javax.swing.JPanel pn_view;
     private Palette.JTable_Custom tblData;
+    private Palette.JTextfieldRounded txtBarcode;
     private Palette.JTextfieldRounded txtHarga;
     private Palette.JTextfieldRounded txtID;
     private Palette.JTextfieldRounded txtMenu;
@@ -459,6 +475,7 @@ public class menuMenu extends javax.swing.JPanel {
         model.addColumn("ID");
         model.addColumn("Nama Menu");
         model.addColumn("Harga");
+        model.addColumn("Barcode");
         model.addColumn("Id Kategori");
         model.addColumn("Nama Kategori");
         
@@ -469,7 +486,7 @@ public class menuMenu extends javax.swing.JPanel {
         model.setRowCount(0);
 
         try {
-            String sql = "SELECT mn.Id_Menu, mn.Nama_Menu, mn.Harga, ktg.Id_Kategori, ktg.Nama_Kategori FROM menu mn INNER JOIN kategori ktg ON ktg.Id_Kategori =  mn.Id_Kategori";
+            String sql = "SELECT mn.Id_Menu, mn.Nama_Menu, mn.Harga,mn.barcode, ktg.Id_Kategori, ktg.Nama_Kategori FROM menu mn INNER JOIN kategori ktg ON ktg.Id_Kategori =  mn.Id_Kategori";
             try (PreparedStatement st = conn.prepareStatement(sql)) {
                 ResultSet rs = st.executeQuery();
 
@@ -477,11 +494,12 @@ public class menuMenu extends javax.swing.JPanel {
                     String idMenu = rs.getString("Id_Menu");
                     String namaMenu = rs.getString("Nama_Menu");
                     String harga = rs.getString("Harga");
+                    String barcode = rs.getString("barcode");
                     String kategori = rs.getString("Id_Kategori");
                     String namaKategori = rs.getString("Nama_Kategori");
                     
 
-                    Object[] rowData = {idMenu, namaMenu, harga, kategori, namaKategori };
+                    Object[] rowData = {idMenu, namaMenu, harga, barcode, kategori, namaKategori };
                     model.addRow(rowData);
                 }
             }
@@ -553,35 +571,44 @@ public class menuMenu extends javax.swing.JPanel {
     }
 
     private void insertData() {
-        String idMenu = txtID.getText();
-        String  namaMenu = txtMenu.getText();
-        String  harga = txtHarga.getText();
-        
+        String idMenu = txtID.getText().trim();
+    String namaMenu = txtMenu.getText().trim();
+    String harga = txtHarga.getText().trim();
+    String barcode = txtBarcode.getText().trim();
+    String kategoriDipilih = cbxKategori.getSelectedItem().toString();
 
+    if (idMenu.isEmpty() || namaMenu.isEmpty() || harga.isEmpty() || kategoriDipilih.equals("Pilih Kategori")) {
+        JOptionPane.showMessageDialog(this, "Semua Kolom Wajib Diisi (kecuali Barcode)!", "Validasi", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
 
-        if (idMenu.isEmpty() || namaMenu.isEmpty() || namaMenu.isEmpty() || cbxKategori.getSelectedItem().toString().equals("Pilih Kategori")) {
-            JOptionPane.showMessageDialog(this, "Semua Kolom Harus Diisi!", "Validasi", JOptionPane.ERROR_MESSAGE);
-            return; // penting agar proses tidak lanjut
-        }
-        try {
-             String sql = "INSERT INTO menu (Id_Menu, Nama_Menu, Harga, Id_Kategori) VALUES (?, ?, ?, ?)";
-            try (PreparedStatement st = conn.prepareStatement(sql)){
-                st.setString(1, idMenu);
-                st.setString(2, namaMenu);
-                st.setString(3, harga);
-                st.setString(4, idKategori);
-                
-                int rowInserted = st.executeUpdate();
-                if(rowInserted > 0){
-                    JOptionPane.showMessageDialog(this, "Data Berhasil DiTambahkan");
-                    resetForm();
-                    loadData();
-                    showPanel();
-                }
+    try {
+        String sql = "INSERT INTO menu (Id_Menu, Nama_Menu, Harga, barcode, Id_Kategori) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement st = conn.prepareStatement(sql)) {
+            st.setString(1, idMenu);
+            st.setString(2, namaMenu);
+            st.setString(3, harga);
+
+            // Barcode bisa NULL
+            if (barcode.isEmpty()) {
+                st.setNull(4, java.sql.Types.VARCHAR);
+            } else {
+                st.setString(4, barcode);
             }
-        } catch (SQLException e) {
-            java.util.logging.Logger.getLogger(menuMenu.class.getName()).log(Level.SEVERE, null, e);
+
+            st.setString(5, idKategori); // pastikan `idKategori` sudah didefinisikan sebelumnya
+
+            int rowInserted = st.executeUpdate();
+            if (rowInserted > 0) {
+                JOptionPane.showMessageDialog(this, "Data Berhasil Ditambahkan");
+                resetForm();
+                loadData();
+                showPanel();
+            }
         }
+    } catch (SQLException e) {
+        java.util.logging.Logger.getLogger(menuMenu.class.getName()).log(Level.SEVERE, null, e);
+    }
     }
     
     private void dataTabel() {
@@ -596,16 +623,18 @@ public class menuMenu extends javax.swing.JPanel {
         txtID.setText(tblData.getValueAt(row, 0).toString());
         txtMenu.setText(tblData.getValueAt(row, 1).toString());
         txtHarga.setText(tblData.getValueAt(row, 2).toString());
-        cbxKategori.setSelectedItem(tblData.getValueAt(row, 4));
+        txtBarcode.setText(tblData.getValueAt(row, 3).toString());
+        cbxKategori.setSelectedItem(tblData.getValueAt(row, 5));
     }
     
     private void updateData(){
         String idMenu = txtID.getText();
         String namaMenu = txtMenu.getText();
         String harga = txtHarga.getText();
+        String barcode = txtBarcode.getText();
         
         
-        if (idMenu.isEmpty() || namaMenu.isEmpty() || harga.isEmpty() || cbxKategori.getSelectedItem().toString().equals("Pilih Kategori")) {
+        if (idMenu.isEmpty() || namaMenu.isEmpty() || harga.isEmpty() || harga.isEmpty() || cbxKategori.getSelectedItem().toString().equals("Pilih Kategori")) {
             JOptionPane.showMessageDialog(this, "Semua Kolom Harus Diisi!", "Validasi", JOptionPane.ERROR_MESSAGE);
             return; // penting agar proses tidak lanjut
         }
@@ -614,8 +643,9 @@ public class menuMenu extends javax.swing.JPanel {
             try (PreparedStatement st = conn.prepareStatement(sql)){
                 st.setString(1, namaMenu);
                 st.setString(2, harga);
-                st.setString(3, idKategori);
-                st.setString(4, idMenu);
+                st.setString(3, barcode);
+                st.setString(4, idKategori);
+                st.setString(5, idMenu);
                 
                 int rowUpdate = st.executeUpdate();
                 if(rowUpdate > 0){
