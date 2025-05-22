@@ -60,13 +60,13 @@ public class menuPelanggan extends javax.swing.JPanel {
         jSeparator3 = new javax.swing.JSeparator();
         txtID = new Palette.JTextfieldRounded();
         jLabel1 = new javax.swing.JLabel();
-        txtMeja = new Palette.JTextfieldRounded();
+        txtNama = new Palette.JTextfieldRounded();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtMeja1 = new Palette.JTextfieldRounded();
+        txtAlamat = new Palette.JTextfieldRounded();
         jLabel9 = new javax.swing.JLabel();
-        txtMeja2 = new Palette.JTextfieldRounded();
+        txtTelp = new Palette.JTextfieldRounded();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.CardLayout());
@@ -252,7 +252,7 @@ public class menuPelanggan extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ID");
 
-        txtMeja.setForeground(new java.awt.Color(255, 255, 255));
+        txtNama.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel4.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -265,13 +265,13 @@ public class menuPelanggan extends javax.swing.JPanel {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Alamat");
 
-        txtMeja1.setForeground(new java.awt.Color(255, 255, 255));
+        txtAlamat.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel9.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("No.Telp");
 
-        txtMeja2.setForeground(new java.awt.Color(255, 255, 255));
+        txtTelp.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout pn_addLayout = new javax.swing.GroupLayout(pn_add);
         pn_add.setLayout(pn_addLayout);
@@ -283,7 +283,7 @@ public class menuPelanggan extends javax.swing.JPanel {
                         .addGap(93, 93, 93)
                         .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtID, javax.swing.GroupLayout.DEFAULT_SIZE, 1095, Short.MAX_VALUE)
-                            .addComponent(txtMeja, javax.swing.GroupLayout.DEFAULT_SIZE, 1095, Short.MAX_VALUE)
+                            .addComponent(txtNama, javax.swing.GroupLayout.DEFAULT_SIZE, 1095, Short.MAX_VALUE)
                             .addGroup(pn_addLayout.createSequentialGroup()
                                 .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pn_addLayout.createSequentialGroup()
@@ -296,8 +296,8 @@ public class menuPelanggan extends javax.swing.JPanel {
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel9))
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(txtMeja1, javax.swing.GroupLayout.DEFAULT_SIZE, 1095, Short.MAX_VALUE)
-                            .addComponent(txtMeja2, javax.swing.GroupLayout.DEFAULT_SIZE, 1095, Short.MAX_VALUE)))
+                            .addComponent(txtAlamat, javax.swing.GroupLayout.DEFAULT_SIZE, 1095, Short.MAX_VALUE)
+                            .addComponent(txtTelp, javax.swing.GroupLayout.DEFAULT_SIZE, 1095, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pn_addLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,15 +329,15 @@ public class menuPelanggan extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtMeja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtMeja1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtMeja2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(120, 120, 120)
                 .addComponent(jLabel7)
                 .addContainerGap(331, Short.MAX_VALUE))
@@ -354,7 +354,7 @@ public class menuPelanggan extends javax.swing.JPanel {
         pn_main.repaint();
         pn_main.revalidate();
 
-        txtID.setText(setIdMeja());
+        txtID.setText(setidPelanggan());
         if(btnTambah.getText().equals("Perbarui")){
             dataTabel();
             btnSave.setText("Perbarui");
@@ -421,11 +421,11 @@ public class menuPelanggan extends javax.swing.JPanel {
     private javax.swing.JPanel pn_main;
     private javax.swing.JPanel pn_view;
     private Palette.JTable_Custom tblData;
+    private Palette.JTextfieldRounded txtAlamat;
     private Palette.JTextfieldRounded txtID;
-    private Palette.JTextfieldRounded txtMeja;
-    private Palette.JTextfieldRounded txtMeja1;
-    private Palette.JTextfieldRounded txtMeja2;
+    private Palette.JTextfieldRounded txtNama;
     private Palette.JTextfieldRounded txtPencarian;
+    private Palette.JTextfieldRounded txtTelp;
     // End of variables declaration//GEN-END:variables
 
     private void loadData() {
@@ -443,7 +443,7 @@ public class menuPelanggan extends javax.swing.JPanel {
     
      private void resetForm() {
          txtID.setText("");
-         txtMeja.setText("");
+         txtNama.setText("");
          
     }
 
@@ -451,22 +451,26 @@ public class menuPelanggan extends javax.swing.JPanel {
     private void setTableModel() {
         DefaultTableModel model = (DefaultTableModel) tblData.getModel();
         model.addColumn("ID");
-        model.addColumn("No Meja");
+        model.addColumn("Nama pelanggan");
+        model.addColumn("Alamat");
+        model.addColumn("Telepon");
     }
 
     private void getData(DefaultTableModel model) {
         model.setRowCount(0);
 
         try {
-            String sql = "SELECT * FROM meja";
+            String sql = "SELECT * FROM pelanggan";
             try (PreparedStatement st = conn.prepareStatement(sql)) {
                 ResultSet rs = st.executeQuery();
 
                 while (rs.next()) {
-                    String idUser = rs.getString("Id_Meja");
-                    String nomorMeja = rs.getString("Nomor");
+                    String idUser = rs.getString("Id_pelanggan");
+                    String NamaPelanggan = rs.getString("Nama_Pelanggan");
+                    String alamat = rs.getString("Alamat");
+                    String telepon = rs.getString("No_Telp");
 
-                    Object[] rowData = {idUser, nomorMeja};
+                    Object[] rowData = {idUser, NamaPelanggan, alamat, telepon};
                     model.addRow(rowData);
                 }
             }
@@ -475,25 +479,25 @@ public class menuPelanggan extends javax.swing.JPanel {
         }
     }
 
-    private String setIdMeja() {
+    private String setidPelanggan() {
         String Urutan = null;
-        String prefix = "MJ_";
+        String prefix = "PLG_";
 
-        String sql = "SELECT RIGHT(Id_Meja, 3) AS Nomor "
-            + "FROM meja "  // Pastikan ada spasi setelah nama tabel
-            + "WHERE Id_Meja LIKE 'MJ_%' "
-            + "ORDER BY Id_Meja DESC "
+        String sql = "SELECT RIGHT(Id_pelanggan, 3) AS Nomor "
+            + "FROM pelanggan "  // Pastikan ada spasi setelah nama tabel
+            + "WHERE Id_pelanggan LIKE 'MJ_%' "
+            + "ORDER BY Id_pelanggan DESC "
             + "LIMIT 1";
 
         try (PreparedStatement st = conn.prepareStatement(sql)) {
             ResultSet rs = st.executeQuery();
 
-            // Jika ada ID meja sebelumnya
+            // Jika ada ID pelanggan sebelumnya
         if (rs.next()) {
             int nomor = Integer.parseInt(rs.getString("Nomor")) + 1;
             Urutan = prefix + String.format("%03d", nomor);  // Menambahkan prefix dan nomor ID
         } else {
-            // Jika belum ada ID meja, mulai dari 001
+            // Jika belum ada ID pelanggan, mulai dari 001
             Urutan = prefix + "001";
         }
         } catch (Exception e) {
@@ -504,19 +508,23 @@ public class menuPelanggan extends javax.swing.JPanel {
     }
 
     private void insertData() {
-        String idMeja = txtID.getText();
-        String  nomorMeja = txtMeja.getText();
+        String idPelanggan = txtID.getText();
+        String  NamaPelanggan = txtNama.getText();
+        String  Alamat = txtAlamat.getText();
+        String  telepon = txtTelp.getText();
 
 
-        if (idMeja.isEmpty() || nomorMeja.isEmpty()) {
+        if (idPelanggan.isEmpty() || NamaPelanggan.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Semua Kolom Harus Diisi!", "Validasi", JOptionPane.ERROR_MESSAGE);
             return; // penting agar proses tidak lanjut
         }
         try {
-             String sql = "INSERT INTO meja (Id_Meja, Nomor) VALUES (?, ?)";
+             String sql = "INSERT INTO pelanggan (Id_pelanggan, Nama_Pelanggan, Alamat, No_Telp) VALUES (?, ?, ?, ?)";
             try (PreparedStatement st = conn.prepareStatement(sql)){
-                st.setString(1, idMeja);
-                st.setString(2, nomorMeja);
+                st.setString(1, idPelanggan);
+                st.setString(2, NamaPelanggan);
+                st.setString(3, Alamat);
+                st.setString(4, telepon);
                 
                 int rowInserted = st.executeUpdate();
                 if(rowInserted > 0){
@@ -536,27 +544,33 @@ public class menuPelanggan extends javax.swing.JPanel {
         pn_add.setVisible(true);
         
         int row = tblData.getSelectedRow();
-        Judul.setText("Perbaru Data User");
+        Judul.setText("Perbaru Data Pelanggan");
         
         txtID.setEnabled(false);
         
         txtID.setText(tblData.getValueAt(row, 0).toString());
-        txtMeja.setText(tblData.getValueAt(row, 1).toString());
+        txtNama.setText(tblData.getValueAt(row, 1).toString());
+        txtAlamat.setText(tblData.getValueAt(row, 2).toString());
+        txtTelp.setText(tblData.getValueAt(row, 3).toString());
     }
     
     private void updateData(){
-        String idMeja = txtID.getText();
-        String nomorMeja = txtMeja.getText();
+        String idPelanggan = txtID.getText();
+        String NamaPelanggan = txtNama.getText();
+        String alamat = txtAlamat.getText();
+        String telepon = txtTelp.getText();
         
-        if (idMeja.isEmpty() || nomorMeja.isEmpty()) {
+        if (idPelanggan.isEmpty() || NamaPelanggan.isEmpty() || alamat.isEmpty() || telepon.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Semua Kolom Harus Diisi!", "Validasi", JOptionPane.ERROR_MESSAGE);
             return; // penting agar proses tidak lanjut
         }
         try {
-            String sql = "UPDATE meja SET Nomor=? WHERE Id_Meja=?";
+            String sql = "UPDATE pelanggan SET Nama_Pelanggan=?, Alamat=?, No_Telp=? WHERE Id_pelanggan=?";
             try (PreparedStatement st = conn.prepareStatement(sql)){
-                st.setString(1, nomorMeja);
-                st.setString(2, idMeja);
+                st.setString(1, NamaPelanggan);
+                st.setString(2, alamat);
+                st.setString(3, telepon);
+                st.setString(4, idPelanggan);
                 
                 int rowUpdate = st.executeUpdate();
                 if(rowUpdate > 0){
@@ -568,7 +582,7 @@ public class menuPelanggan extends javax.swing.JPanel {
             }
         } catch (SQLException e) {
             java.util.logging.Logger.getLogger(menuPelanggan.class.getName()).log(Level.SEVERE, null, e);
-        }
+        }   
         }
     
     
@@ -579,7 +593,7 @@ public class menuPelanggan extends javax.swing.JPanel {
         if(confirm ==  JOptionPane.YES_OPTION){
             String Id = tblData.getValueAt(selectedRow, 0).toString();
             try {
-                String sql = "DELETE FROM meja Where Id_Meja=?";
+                String sql = "DELETE FROM pelanggan Where Id_pelanggan=?";
                 try(PreparedStatement st = conn.prepareStatement(sql)) {
                     st.setString(1, Id);
                     
@@ -606,16 +620,16 @@ public class menuPelanggan extends javax.swing.JPanel {
         model.setRowCount(0);
         
         try {
-             String sql = "SELECT * FROM meja WHERE Nomor LIKE ?";
+             String sql = "SELECT * FROM pelanggan WHERE Nomor LIKE ?";
             try (PreparedStatement st = conn.prepareStatement(sql)) {
             st.setString(1, "%" + kataKunci + "%");
             ResultSet rs = st.executeQuery();
                 
                 while (rs.next()) {                    
-                    String idMeja = rs.getString("Id_Meja");
-                    String nomorMeja = rs.getString("Nomor");
+                    String idPelanggan = rs.getString("Id_Pelanggan");
+                    String NamaPelanggan = rs.getString("Nama_Pelanggan");
                     
-                    Object[] rowData = {idMeja, nomorMeja};
+                    Object[] rowData = {idPelanggan, NamaPelanggan};
                     model.addRow(rowData);
                 }
             }
