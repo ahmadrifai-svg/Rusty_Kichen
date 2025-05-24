@@ -4,11 +4,13 @@ import java.util.List;
 import model.ModelMenu;
 
 public interface serviceMenu {
-    void tambahData(ModelMenu menu);
-    void updateData(ModelMenu menu);
-    void hapusData(ModelMenu menu);
+    void tambahData(ModelMenu model);
+    void updateData(ModelMenu model);
+    void hapusData(ModelMenu model);
     
     
     List<ModelMenu> tampilData();
     List<ModelMenu> pencarianData(String Id);
+    List<ModelMenu> pencarianDataByBarcode(String Id);
+    
 }

@@ -5,14 +5,10 @@
 package view;
 
 import config.koneksi;
-import com.mysql.cj.protocol.Message;
-import java.awt.Color;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.security.MessageDigest;
@@ -21,10 +17,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
-import javax.swing.KeyStroke;
+import java.math.BigInteger;
+import javax.swing.UIManager;
+import com.fazecast.jSerialComm.SerialPort;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+import javax.swing.SwingUtilities;
 import main.MenuKasir;
 import main.MenuUtama;
 
@@ -52,8 +53,10 @@ public class formlogin extends javax.swing.JFrame {
         t_username = new Palette.JTextfieldRounded();
         t_password = new Palette.Custom_JPasswordFieldRounded();
         btn_login = new Palette.Custom_ButtonRounded();
+        btn_rfid = new Palette.Custom_ButtonRounded();
         eye = new javax.swing.JLabel();
         hideEye = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -77,8 +80,20 @@ public class formlogin extends javax.swing.JFrame {
         btn_login.setForeground(new java.awt.Color(0, 0, 0));
         btn_login.setText("Login\n");
         btn_login.setFillOriginal(new java.awt.Color(255, 255, 255));
-        btn_login.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
-        getContentPane().add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 560, 140, 50));
+        btn_login.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        getContentPane().add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 580, 230, 50));
+
+        btn_rfid.setBackground(new java.awt.Color(255, 255, 255));
+        btn_rfid.setForeground(new java.awt.Color(0, 0, 0));
+        btn_rfid.setText("Login dengan RFID");
+        btn_rfid.setFillOriginal(new java.awt.Color(255, 255, 255));
+        btn_rfid.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btn_rfid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_rfidActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_rfid, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 640, 230, 50));
 
         eye.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Eyes.png"))); // NOI18N
         getContentPane().add(eye, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 490, -1, -1));
@@ -86,7 +101,13 @@ public class formlogin extends javax.swing.JFrame {
         hideEye.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Hide.png"))); // NOI18N
         getContentPane().add(hideEye, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 490, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Login (5).png"))); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Lupa Password?");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 550, -1, 20));
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Login (7).png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
@@ -97,10 +118,17 @@ public class formlogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_t_passwordActionPerformed
 
+    private void btn_rfidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rfidActionPerformed
+    FormRfid form = new FormRfid(); 
+    form.setVisible(true);
+    this.dispose();
+    }//GEN-LAST:event_btn_rfidActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        UIManager.put("Component.arc", 15);
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -173,13 +201,32 @@ public class formlogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Palette.Custom_ButtonRounded btn_login;
+    private Palette.Custom_ButtonRounded btn_rfid;
     private javax.swing.JLabel eye;
     private javax.swing.JLabel hideEye;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private Palette.Custom_JPasswordFieldRounded t_password;
     private Palette.JTextfieldRounded t_username;
     // End of variables declaration//GEN-END:variables
 
+    public String getMd5java(String message){
+        String digest = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] hash = md.digest(message.getBytes("UTF-8"));
+            
+            StringBuilder sb = new StringBuilder(2 * hash.length);
+            for(byte b : hash){
+                sb.append(String.format("%02X", b & 0xff));
+            }
+            digest = sb.toString();
+        } catch (Exception e) {
+            Logger.getLogger(formlogin.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return digest(message);
+    }
+    
     //validasi input
     private boolean validasiInput() {
         boolean valid = false;
@@ -194,42 +241,79 @@ public class formlogin extends javax.swing.JFrame {
     }
 
     //proses chek login
-    private String checkLogin(String Username, String Password) {
-        if (conn != null) {
-            try {
-                String sql = "SELECT * FROM user WHERE Username=? AND password=?";
-                PreparedStatement st = conn.prepareStatement(sql);
-                st.setString(1, Username);
-                st.setString(2, Password);
+    private Map<String, String> checkLogin(String username, String hashedPassword) {
+    Map<String, String> result = null;
 
-                ResultSet rs = st.executeQuery();
-                if (rs.next()) {
-                    return rs.getString("role"); // Mengambil role (admin/user)
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+    String sql = "SELECT ID_User, Username, Role FROM user WHERE Username = ? AND Password = ?";
+    try (PreparedStatement st = conn.prepareStatement(sql)) {
+        st.setString(1, username);
+        st.setString(2, hashedPassword);
+
+        ResultSet rs = st.executeQuery();
+        if (rs.next()) {
+            result = new HashMap<>();
+            result.put("ID_User", rs.getString("ID_User"));
+            result.put("Username", rs.getString("Username"));
+            result.put("Role", rs.getString("Role"));
         }
-        return null;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+
+    return result;
+}
+
 
     private void prosesLogin() {
-        if (validasiInput()) {
-            String Username = t_username.getText();
-            String Password = new String(t_password.getPassword());
-            String Role = checkLogin(Username, Password); // Ambil role
+    if (validasiInput()) {
+        String username = t_username.getText().trim();
+        String password = new String(t_password.getPassword()).trim();
+        String hashedPassword = digest(password); // Enkripsi password
 
-            if (Role != null) {
-                if (Role.equals("Admin")) {
-                    new MenuUtama().setVisible(true); // Tampilkan menu admin
-                } else if (Role.equals("Karyawan")) {
-                    new MenuKasir().setVisible(true); // Tampilkan menu user
-                }
-                dispose(); // Tutup halaman login
-            } else {
-                JOptionPane.showMessageDialog(this, "Username dan Password Salah", "pesan", JOptionPane.INFORMATION_MESSAGE);
+        // Ambil data lengkap user dari database (ID, Username, Role)
+        Map<String, String> loginResult = checkLogin(username, hashedPassword);
+
+        if (loginResult != null) {
+            String userID = loginResult.get("ID_User");
+            String namaUser = loginResult.get("Username");
+            String role = loginResult.get("Role");
+
+            if (role.equals("Admin")) {
+                new MenuUtama(userID, namaUser, role).setVisible(true); // Kirim ke constructor
+            } else if (role.equals("Karyawan")) {
+                new MenuKasir(userID, namaUser, role).setVisible(true); // Jika MenuKasir juga pakai data user
             }
+
+            dispose(); // Tutup form login
+        } else {
+            JOptionPane.showMessageDialog(this, "Username dan Password Salah", "Pesan", JOptionPane.INFORMATION_MESSAGE);
         }
     }
+}
+
+
+    public static String digest(String input) {
+    try {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] messageDigest = md.digest(input.getBytes());
+        
+        // Convert byte array into signum representation
+        BigInteger no = new BigInteger(1, messageDigest);
+        
+        // Convert message digest into hex value
+        String hashText = no.toString(16);
+        
+        // Pad with leading zeros to make it 32 digits
+        while (hashText.length() < 32) {
+            hashText = "0" + hashText;
+        }
+        
+        return hashText;
+    } catch (NoSuchAlgorithmException e) {
+        throw new RuntimeException(e);
+    }
+}
+
+
 
 }
