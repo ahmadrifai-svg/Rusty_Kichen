@@ -26,6 +26,10 @@ public class JTextfieldRounded extends JTextField {
         setUI(textUI);
     }
 
+    public void setText() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     private class TextFieldUI extends MetalTextFieldUI {
 
         private JTextField textfield;

@@ -24,7 +24,7 @@ public class menuDAO implements serviceMenu {
             
             st.setString    (1, model.getNamaMenu());
             st.setLong      (2, model.getHarga());
-            st.setInt       (3, model.getIdKategori());
+            st.setString       (3, model.getIdKategori());
             
             st.executeUpdate();
             st.close();
@@ -43,8 +43,8 @@ public class menuDAO implements serviceMenu {
             
             st.setString    (1, model.getNamaMenu());
             st.setLong      (2, model.getHarga());
-            st.setInt    (3, model.getIdKategori());
-            st.setInt    (3, model.getIdMenu());
+            st.setString    (3, model.getIdKategori());
+            st.setString    (4, model.getIdMenu());
             
             st.executeUpdate();
         } catch (SQLException e) {
@@ -59,7 +59,7 @@ public class menuDAO implements serviceMenu {
         String sql = "DELETE FROM menu WHERE id_menu = ?";
         try {
             st = conn.prepareStatement(sql);
-            st.setInt(1, model.getIdMenu());
+            st.setString (1, model.getIdMenu());
             st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -78,10 +78,11 @@ public List<ModelMenu> tampilData() {
         
         while (rs.next()) {
             ModelMenu menu = new ModelMenu();
-            menu.setIdMenu(rs.getInt("Id_Menu"));
+            menu.setIdMenu(rs.getString("Id_Menu"));
             menu.setNamaMenu(rs.getString("Nama_Menu"));
             menu.setHarga(rs.getLong("Harga"));
-            menu.setIdKategori(rs.getInt("Id_Kategori"));
+            menu.setBarcode(rs.getString("Barcode"));
+            menu.setIdKategori(rs.getString("Id_Kategori"));
             
             list.add(menu);
         }
@@ -108,10 +109,10 @@ public List<ModelMenu> tampilData() {
         
         while (rs.next()) {
             ModelMenu menu = new ModelMenu();
-            menu.setIdMenu(rs.getInt("Id_Menu"));
+            menu.setIdMenu(rs.getString("Id_Menu"));
             menu.setNamaMenu(rs.getString("Nama_Menu"));
             menu.setHarga(rs.getLong("Harga"));
-            menu.setIdKategori(rs.getInt("Id_Kategori"));
+            menu.setIdKategori(rs.getString("Id_Kategori"));
             
             list.add(menu);
         }
@@ -122,5 +123,35 @@ public List<ModelMenu> tampilData() {
     }
     return list;
 }
+
+    @Override
+    public List<ModelMenu> pencarianDataByBarcode(String Id) {
+       PreparedStatement st = null;
+        ResultSet rs = null;
+        List<ModelMenu> list = new ArrayList<>();
+        String sql = "SELECT * FROM menu WHERE Barcode = ?" ;
+        
+        try {
+            st = conn.prepareStatement(sql);
+            st.setString(1, Id);
+            rs = st.executeQuery();
+            
+            if(rs.next()){
+                ModelMenu menu = new ModelMenu();
+                menu.setIdMenu(rs.getString("Id_Menu"));
+                menu.setNamaMenu(rs.getString("Nama_Menu"));
+                menu.setHarga(rs.getLong("Harga"));
+                menu.setIdKategori(rs.getString("Id_Kategori"));
+                menu.setBarcode(rs.getString("Barcode"));
+                
+                list.add(menu);
+            }
+            rs.close();
+            st.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 
 }
