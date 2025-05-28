@@ -4,6 +4,7 @@
  */
 package view;
 
+import DAO.StrukDAO;
 import DAO.TransaksiDAO;
 import DAO.TransaksiDetailDAO;
 import DAO.TransaksiSmtDAO;
@@ -39,6 +40,7 @@ import model.modelTransaksiSmt;
 import model.modelUser;
 import service.serviceMenu;
 import service.servicePelanggan;
+import service.serviceStruk;
 import service.serviceTransaksi;
 import service.serviceTransaksiDetail;
 import service.serviceTransaksiSmt;
@@ -59,6 +61,7 @@ public class menuPemesanan extends javax.swing.JPanel {
     private serviceTransaksiDetail serviceDet = new TransaksiDetailDAO();
     private serviceTransaksiSmt serviceSmt = new TransaksiSmtDAO();
     private serviceMenu serviceMenu = new menuDAO();
+    private serviceStruk serviceStruk = new StrukDAO();
     private servicePelanggan servisPel = new pelangganDAO();
     
     private String idMenu;
@@ -1280,7 +1283,7 @@ public class menuPemesanan extends javax.swing.JPanel {
             service.tambahData(modeltrans);
             serviceDet.tambahData(modelTrandet);
             serviceDet.hapusDataSementara();
-            
+            serviceStruk.printStruk(idTransaksi);
             tblModelTran.insertData(modeltrans);
             showPanel();
             loadData();
