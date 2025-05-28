@@ -27,8 +27,8 @@ public class StrukDAO implements serviceStruk{
     }
 
     @Override
-public void printStruk(String id) {
-    try {
+    public void printStruk(String id) {
+        try {
         String reportPath = "/Struk/Struk.jasper";
         InputStream reportStream = getClass().getResourceAsStream(reportPath);
 
@@ -54,6 +54,6 @@ public void printStruk(String id) {
         JOptionPane.showMessageDialog(null, "Error mencetak struk: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         e.printStackTrace();
     }
-}
+    }
     
 }
