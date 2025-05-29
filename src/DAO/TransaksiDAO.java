@@ -20,29 +20,32 @@ public class TransaksiDAO implements serviceTransaksi {
         conn = koneksi.getConnection();
     }
 
-    @Override
+   @Override
     public void tambahData(modelTransaksi model) {
         PreparedStatement st = null;
         try {
             String sql = "INSERT INTO transaksi(Id_Transaksi, Id_User, Id_Pelanggan, Tanggal, Total_Harga, Bayar, Kembali, Diskon) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             st = conn.prepareStatement(sql);
-            
-            st.setString    (1, model.getidTransaksi());
-            st.setString    (2, model.getModelUser().getIdUser());
-            st.setString    (3, model.getModelPelanggan().getIdPelanggan());
-            java.sql.Date sqlDate = java.sql.Date.valueOf(model.getTanggal());
-            st.setDate(4, sqlDate);
-            st.setDouble    (5, model.getTotalHarga());
-            st.setDouble    (6, model.getBayar());
-            st.setDouble    (7, model.getKembali());
-            st.setDouble    (8, model.getDiskon());
-            
+
+            st.setString(1, model.getidTransaksi());
+            st.setString(2, model.getModelUser().getIdUser());
+            st.setString(3, model.getModelPelanggan().getIdPelanggan());
+
+            // Perbaikan di sini: gunakan Timestamp bukan Date
+            st.setTimestamp(4, java.sql.Timestamp.valueOf(model.getTanggal()));  // Pastikan model.getTanggal() formatnya "yyyy-MM-dd HH:mm:ss"
+
+            st.setDouble(5, model.getTotalHarga());
+            st.setDouble(6, model.getBayar());
+            st.setDouble(7, model.getKembali());
+            st.setDouble(8, model.getDiskon());
+
             st.executeUpdate();
             st.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
+}
+
 
 
     

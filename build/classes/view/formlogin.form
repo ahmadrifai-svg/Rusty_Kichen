@@ -25,7 +25,7 @@
     <Property name="useNullLayout" type="boolean" value="false"/>
   </Layout>
   <SubComponents>
-    <Component class="Palette.JTextfieldRounded" name="t_username">
+    <Component class="Palette.JTextfieldRounded" name="txtUsername">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="null"/>
@@ -35,25 +35,28 @@
           <Font name="Segoe UI" size="24" style="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtUsernameActionPerformed"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="730" y="380" width="-1" height="-1"/>
+          <AbsoluteConstraints x="730" y="362" width="210" height="70"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="Palette.Custom_JPasswordFieldRounded" name="t_password">
+    <Component class="Palette.Custom_JPasswordFieldRounded" name="txtPassword">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="null"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="password&#xa;"/>
+        <Property name="text" type="java.lang.String" value="Password"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="t_passwordActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPasswordActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="730" y="480" width="180" height="40"/>
+          <AbsoluteConstraints x="730" y="470" width="180" height="70"/>
         </Constraint>
       </Constraints>
     </Component>

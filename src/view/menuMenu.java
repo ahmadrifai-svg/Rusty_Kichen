@@ -150,6 +150,11 @@ public class menuMenu extends javax.swing.JPanel {
                 txtPencarianActionPerformed(evt);
             }
         });
+        txtPencarian.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPencarianKeyReleased(evt);
+            }
+        });
 
         btn_batal.setBackground(new java.awt.Color(105, 33, 58));
         btn_batal.setText("Batal");
@@ -414,8 +419,12 @@ public class menuMenu extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void txtPencarianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPencarianActionPerformed
-        searchData();
+      
     }//GEN-LAST:event_txtPencarianActionPerformed
+
+    private void txtPencarianKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPencarianKeyReleased
+         searchData();
+    }//GEN-LAST:event_txtPencarianKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -688,30 +697,44 @@ public class menuMenu extends javax.swing.JPanel {
         showPanel();
     }
 
-    private void searchData(){
-        String kataKunci = txtPencarian.getText();
-        
-        DefaultTableModel model = (DefaultTableModel) tblData.getModel();
-        model.setRowCount(0);
-        
-        try {
-             String sql = "SELECT * FROM meja WHERE Nomor LIKE ?";
-            try (PreparedStatement st = conn.prepareStatement(sql)) {
+   private void searchData() {
+    String kataKunci = txtPencarian.getText();
+
+    DefaultTableModel model = (DefaultTableModel) tblData.getModel();
+    model.setRowCount(0);
+
+    try {
+        // Perbaiki query: JOIN menu dan kategori untuk mendapatkan Nama_Kategori
+        String sql = "SELECT menu.Id_Menu, menu.Nama_Menu, menu.Harga, menu.Barcode, menu.Id_Kategori, kategori.Nama_Kategori " +
+                     "FROM menu JOIN kategori ON menu.Id_Kategori = kategori.Id_Kategori " +
+                     "WHERE menu.Nama_Menu LIKE ? OR CAST(menu.Harga AS CHAR) LIKE ? OR kategori.Nama_Kategori LIKE ?";
+
+        try (PreparedStatement st = conn.prepareStatement(sql)) {
+            // Tambahkan wildcard % untuk LIKE
             st.setString(1, "%" + kataKunci + "%");
+            st.setString(2, "%" + kataKunci + "%");
+            st.setString(3, "%" + kataKunci + "%");
+
             ResultSet rs = st.executeQuery();
-                
-                while (rs.next()) {                    
-                    String idMeja = rs.getString("Id_Meja");
-                    String nomorMeja = rs.getString("Nomor");
-                    
-                    Object[] rowData = {idMeja, nomorMeja};
-                    model.addRow(rowData);
-                }
+
+            while (rs.next()) {
+                String idMenu = rs.getString("Id_Menu");
+                String namaMenu = rs.getString("Nama_Menu");
+                String harga = rs.getString("Harga");
+                String barcode = rs.getString("Barcode");
+                String idKategori = rs.getString("Id_Kategori");
+                String namaKategori = rs.getString("Nama_Kategori");
+
+                Object[] rowData = {idMenu, namaMenu, harga, barcode, idKategori, namaKategori};
+                model.addRow(rowData);
             }
-        } catch (SQLException e) {
-            Logger.getLogger(menuMenu.class.getName()).log(Level.SEVERE, null, e);
         }
+    } catch (SQLException e) {
+        Logger.getLogger(menuMenu.class.getName()).log(Level.SEVERE, null, e);
     }
+}
+
+
 
     
 }

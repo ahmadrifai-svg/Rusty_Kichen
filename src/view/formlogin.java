@@ -25,6 +25,7 @@ import com.fazecast.jSerialComm.SerialPort;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import javax.swing.JPasswordField;
 import javax.swing.SwingUtilities;
 import main.MenuKasir;
 import main.MenuUtama;
@@ -38,7 +39,42 @@ public class formlogin extends javax.swing.JFrame {
         initComponents();
         conn = koneksi.getConnection();
         setActionButton();
+        setupPlaceholder();
 
+    }
+    
+    private void setupPlaceholder() {
+        // Username Placeholder
+        txtUsername.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (txtUsername.getText().equals("Username")) {
+                    txtUsername.setText("");
+                }
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (txtUsername.getText().isEmpty()) {
+                    txtUsername.setText("Username");
+                }
+            }
+        });
+
+        // Password Placeholder
+        txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                String pwd = new String(txtPassword.getPassword());
+                if (pwd.equals("Password")) {
+                    txtPassword.setText("");
+                    txtPassword.setEchoChar('*');
+                }
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                String pwd = new String(txtPassword.getPassword());
+                if (pwd.isEmpty()) {
+                    txtPassword.setText("Password");
+                    txtPassword.setEchoChar((char) 0);
+                }
+            }
+        });
     }
 
     /**
@@ -50,8 +86,8 @@ public class formlogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        t_username = new Palette.JTextfieldRounded();
-        t_password = new Palette.Custom_JPasswordFieldRounded();
+        txtUsername = new Palette.JTextfieldRounded();
+        txtPassword = new Palette.Custom_JPasswordFieldRounded();
         btn_login = new Palette.Custom_ButtonRounded();
         btn_rfid = new Palette.Custom_ButtonRounded();
         eye = new javax.swing.JLabel();
@@ -62,19 +98,24 @@ public class formlogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        t_username.setBorder(null);
-        t_username.setText("Username");
-        t_username.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        getContentPane().add(t_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 380, -1, -1));
-
-        t_password.setBorder(null);
-        t_password.setText("password\n");
-        t_password.addActionListener(new java.awt.event.ActionListener() {
+        txtUsername.setBorder(null);
+        txtUsername.setText("Username");
+        txtUsername.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                t_passwordActionPerformed(evt);
+                txtUsernameActionPerformed(evt);
             }
         });
-        getContentPane().add(t_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 480, 180, 40));
+        getContentPane().add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 362, 210, 70));
+
+        txtPassword.setBorder(null);
+        txtPassword.setText("Password");
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 470, 180, 70));
 
         btn_login.setBackground(new java.awt.Color(255, 255, 255));
         btn_login.setForeground(new java.awt.Color(0, 0, 0));
@@ -114,15 +155,19 @@ public class formlogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void t_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t_passwordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_t_passwordActionPerformed
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+       
+    }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void btn_rfidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rfidActionPerformed
     FormRfid form = new FormRfid(); 
     form.setVisible(true);
     this.dispose();
     }//GEN-LAST:event_btn_rfidActionPerformed
+
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
+      
+    }//GEN-LAST:event_txtUsernameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,7 +212,7 @@ public class formlogin extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 eye.setVisible(false);
                 hideEye.setVisible(true);
-                t_password.setEchoChar((char) 0); // Menampilkan password
+                txtPassword.setEchoChar((char) 0); // Menampilkan password
             }
         });
 
@@ -176,7 +221,7 @@ public class formlogin extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 eye.setVisible(true);
                 hideEye.setVisible(false);
-                t_password.setEchoChar('*'); // Menyembunyikan password
+                txtPassword.setEchoChar('*'); // Menyembunyikan password
             }
         });
         btn_login.addMouseListener(new MouseAdapter() {
@@ -187,7 +232,7 @@ public class formlogin extends javax.swing.JFrame {
 
         });
 
-        t_password.addKeyListener(new KeyAdapter() {
+        txtPassword.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -206,8 +251,8 @@ public class formlogin extends javax.swing.JFrame {
     private javax.swing.JLabel hideEye;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private Palette.Custom_JPasswordFieldRounded t_password;
-    private Palette.JTextfieldRounded t_username;
+    private Palette.Custom_JPasswordFieldRounded txtPassword;
+    private Palette.JTextfieldRounded txtUsername;
     // End of variables declaration//GEN-END:variables
 
     public String getMd5java(String message){
@@ -230,9 +275,9 @@ public class formlogin extends javax.swing.JFrame {
     //validasi input
     private boolean validasiInput() {
         boolean valid = false;
-        if (t_username.getText().trim().isEmpty()) {
+        if (txtUsername.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Username Tidak Boleh Kosong");
-        } else if (t_password.getText().trim().isEmpty()) {
+        } else if (txtPassword.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Password Tidak Boleh Kosong");
         } else {
             valid = true;
@@ -266,8 +311,8 @@ public class formlogin extends javax.swing.JFrame {
 
     private void prosesLogin() {
     if (validasiInput()) {
-        String username = t_username.getText().trim();
-        String password = new String(t_password.getPassword()).trim();
+        String username = txtUsername.getText().trim();
+        String password = new String(txtPassword.getPassword()).trim();
         String hashedPassword = digest(password); // Enkripsi password
 
         // Ambil data lengkap user dari database (ID, Username, Role)
@@ -314,6 +359,5 @@ public class formlogin extends javax.swing.JFrame {
     }
 }
 
-
-
+    
 }
