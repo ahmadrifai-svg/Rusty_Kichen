@@ -146,6 +146,11 @@ public class menuPelanggan extends javax.swing.JPanel {
                 txtPencarianActionPerformed(evt);
             }
         });
+        txtPencarian.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPencarianKeyReleased(evt);
+            }
+        });
 
         btn_batal.setBackground(new java.awt.Color(105, 33, 58));
         btn_batal.setText("Batal");
@@ -395,8 +400,12 @@ public class menuPelanggan extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void txtPencarianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPencarianActionPerformed
-        searchData();
+        
     }//GEN-LAST:event_txtPencarianActionPerformed
+
+    private void txtPencarianKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPencarianKeyReleased
+       searchData();
+    }//GEN-LAST:event_txtPencarianKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -613,28 +622,37 @@ public class menuPelanggan extends javax.swing.JPanel {
         showPanel();
     }
 
-    private void searchData(){
-        String kataKunci = txtPencarian.getText();
-        
-        DefaultTableModel model = (DefaultTableModel) tblData.getModel();
-        model.setRowCount(0);
-        
-        try {
-             String sql = "SELECT * FROM pelanggan WHERE Nomor LIKE ?";
-            try (PreparedStatement st = conn.prepareStatement(sql)) {
-            st.setString(1, "%" + kataKunci + "%");
+    private void searchData() {
+    String kataKunci = txtPencarian.getText();
+
+    DefaultTableModel model = (DefaultTableModel) tblData.getModel();
+    model.setRowCount(0);
+
+    try {
+        // Perbaiki query: tambahkan Alamat dan Telepon sebagai filter
+        String sql = "SELECT * FROM pelanggan WHERE Nama_Pelanggan LIKE ? OR Alamat LIKE ? OR No_Telp LIKE ?";
+
+        try (PreparedStatement st = conn.prepareStatement(sql)) {
+            String likeKeyword = "%" + kataKunci + "%";
+            st.setString(1, likeKeyword);
+            st.setString(2, likeKeyword);
+            st.setString(3, likeKeyword);
+
             ResultSet rs = st.executeQuery();
-                
-                while (rs.next()) {                    
-                    String idPelanggan = rs.getString("Id_Pelanggan");
-                    String NamaPelanggan = rs.getString("Nama_Pelanggan");
-                    
-                    Object[] rowData = {idPelanggan, NamaPelanggan};
-                    model.addRow(rowData);
-                }
+
+            while (rs.next()) {
+                String idPelanggan = rs.getString("Id_Pelanggan");
+                String namaPelanggan = rs.getString("Nama_Pelanggan");
+                String alamat = rs.getString("Alamat");
+                String telepon = rs.getString("No_Telp"); // Perbaiki kolom dari "Telepom" ke "Telepon"
+
+                Object[] rowData = {idPelanggan, namaPelanggan, alamat, telepon};
+                model.addRow(rowData);
             }
-        } catch (SQLException e) {
-            Logger.getLogger(menuPelanggan.class.getName()).log(Level.SEVERE, null, e);
         }
+    } catch (SQLException e) {
+        Logger.getLogger(menuPelanggan.class.getName()).log(Level.SEVERE, null, e);
     }
+}
+
 }

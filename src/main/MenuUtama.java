@@ -26,6 +26,7 @@ import view.*;
  * @author MyBook Hype AMD
  */
 public class MenuUtama extends javax.swing.JFrame {
+
     private String userID;
     private String username;
     private String role;
@@ -35,11 +36,11 @@ public class MenuUtama extends javax.swing.JFrame {
         this.userID = userID;
         this.username = username;
         this.role = role;
-        this.userLogin = userID; 
+        this.userLogin = userID;
         initComponents();
         updateUserGreeting();
     }
-    
+
     private void updateUserGreeting() {
         if (lbUsername != null) {
             lbUsername.setText("Hallo, " + username); // Ganti teks dengan username
@@ -47,8 +48,6 @@ public class MenuUtama extends javax.swing.JFrame {
             System.out.println("lblUserGreeting belum diinisialisasi!");
         }
     }
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -222,6 +221,14 @@ public class MenuUtama extends javax.swing.JFrame {
         pn_btnMenu.setRoundBottomleft(30);
         pn_btnMenu.setRoundTopLeft(30);
         pn_btnMenu.setRoundTopRight(30);
+        pn_btnMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pn_btnMenuMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pn_btnMenuMouseExited(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/RestaurantMenu.png"))); // NOI18N
@@ -236,12 +243,6 @@ public class MenuUtama extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_menuMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_menuMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btn_menuMouseExited(evt);
-            }
         });
 
         javax.swing.GroupLayout pn_btnMenuLayout = new javax.swing.GroupLayout(pn_btnMenu);
@@ -252,8 +253,8 @@ public class MenuUtama extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 58, Short.MAX_VALUE))
+                .addComponent(btn_menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pn_btnMenuLayout.setVerticalGroup(
             pn_btnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -526,12 +527,6 @@ public class MenuUtama extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_lpPemasukanMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_lpPemasukanMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btn_lpPemasukanMouseExited(evt);
-            }
         });
 
         javax.swing.GroupLayout pn_btnLpPemasukkanLayout = new javax.swing.GroupLayout(pn_btnLpPemasukkan);
@@ -542,16 +537,19 @@ public class MenuUtama extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btn_lpPemasukan, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 58, Short.MAX_VALUE))
+                .addComponent(btn_lpPemasukan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pn_btnLpPemasukkanLayout.setVerticalGroup(
             pn_btnLpPemasukkanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_btnLpPemasukkanLayout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addGroup(pn_btnLpPemasukkanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_lpPemasukan))
+            .addGroup(pn_btnLpPemasukkanLayout.createSequentialGroup()
+                .addGroup(pn_btnLpPemasukkanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_btnLpPemasukkanLayout.createSequentialGroup()
+                        .addGap(4, 6, Short.MAX_VALUE)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pn_btnLpPemasukkanLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btn_lpPemasukan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -769,7 +767,7 @@ public class MenuUtama extends javax.swing.JFrame {
             .addGroup(pn_kiriLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(panelcustom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         getContentPane().add(pn_kiri, java.awt.BorderLayout.LINE_START);
@@ -787,16 +785,16 @@ public class MenuUtama extends javax.swing.JFrame {
         pn_dasarLayout.setHorizontalGroup(
             pn_dasarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_dasarLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(21, 21, 21)
                 .addComponent(pn_utama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(20, 20, 20))
+                .addGap(19, 19, 19))
         );
         pn_dasarLayout.setVerticalGroup(
             pn_dasarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_dasarLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(27, 27, 27)
                 .addComponent(pn_utama, javax.swing.GroupLayout.DEFAULT_SIZE, 876, Short.MAX_VALUE)
-                .addGap(28, 28, 28))
+                .addGap(21, 21, 21))
         );
 
         pn_kanan.add(pn_dasar, java.awt.BorderLayout.CENTER);
@@ -809,57 +807,59 @@ public class MenuUtama extends javax.swing.JFrame {
 
     private void btn_dashboardMouseEntered(MouseEvent evt) {//GEN-FIRST:event_btn_dashboardMouseEntered
 //        pn_btnDashboard.setBackground(new Color (105,33,58));
-        
+
     }//GEN-LAST:event_btn_dashboardMouseEntered
 
     private void btn_dashboardMouseExited(MouseEvent evt) {//GEN-FIRST:event_btn_dashboardMouseExited
 //        pn_btnDashboard.setBackground(new Color (242,242,242));
-        
+
     }//GEN-LAST:event_btn_dashboardMouseExited
 
     private void setActiveButton(JPanel activeButton) {
-    // Reset semua tombol ke warna default
-    pn_btnDashboard.setBackground(new Color(242, 242, 242)); 
-    pn_btnMenu.setBackground(new Color(242, 242, 242));
+        // Reset semua tombol ke warna default
+        pn_btnDashboard.setBackground(new Color(242, 242, 242));
+        pn_btnMenu.setBackground(new Color(242, 242, 242));
 
-    // Set warna tombol yang aktif
-    activeButton.setBackground(new Color(105, 33, 58));;
-}
-    
-    
-    private void matiintombol(){
-        pn_btnDashboard.setBackground(new Color(242,242,242));;
-        btn_dashboard.setForeground(Color.BLACK);
-        //brnmenu
-        pn_btnMenu.setBackground(new Color(242,242,242));;
-        btn_menu.setForeground(Color.BLACK);
-        //btnStokBahan
-        pn_btnStok.setBackground(new Color(242,242,242));;
-        btn_stok.setForeground(Color.BLACK);
-        //btnkategori
-        pn_btnKategori.setBackground(new Color(242,242,242));;
-        btn_kategori.setForeground(Color.BLACK);
-        //btnMeja
-        pn_btnMeja.setBackground(new Color(242,242,242));;
-        btn_meja.setForeground(Color.BLACK);
-        //btnPelanggan
-        pn_btnPelanggan.setBackground(new Color(242,242,242));;
-        btn_Pelanggan.setForeground(Color.BLACK);
-        //btnuser
-        pn_btnUser.setBackground(new Color(242,242,242));;
-        btn_user.setForeground(Color.BLACK);
-        //btnTransaksi
-        pn_btnPemesanan.setBackground(new Color(242,242,242));;
-        btn_pemesanan.setForeground(Color.BLACK);
+        // Set warna tombol yang aktif
+        activeButton.setBackground(new Color(105, 33, 58));;
     }
 
-    
+    private void matiintombol() {
+        pn_btnDashboard.setBackground(new Color(242, 242, 242));;
+        btn_dashboard.setForeground(Color.BLACK);
+        //brnmenu
+        pn_btnMenu.setBackground(new Color(242, 242, 242));;
+        btn_menu.setForeground(Color.BLACK);
+        //btnStokBahan
+        pn_btnStok.setBackground(new Color(242, 242, 242));;
+        btn_stok.setForeground(Color.BLACK);
+        //btnkategori
+        pn_btnKategori.setBackground(new Color(242, 242, 242));;
+        btn_kategori.setForeground(Color.BLACK);
+        //btnMeja
+        pn_btnMeja.setBackground(new Color(242, 242, 242));;
+        btn_meja.setForeground(Color.BLACK);
+        //btnPelanggan
+        pn_btnPelanggan.setBackground(new Color(242, 242, 242));;
+        btn_Pelanggan.setForeground(Color.BLACK);
+        //btnuser
+        pn_btnUser.setBackground(new Color(242, 242, 242));;
+        btn_user.setForeground(Color.BLACK);
+        //btnTransaksi
+        pn_btnPemesanan.setBackground(new Color(242, 242, 242));;
+        btn_pemesanan.setForeground(Color.BLACK);
+        //LaporanTransaksi
+        pn_btnLpPemasukkan.setBackground(new Color(242, 242, 242));;
+        btn_lpPemasukan.setForeground(Color.BLACK);
+    }
+
+
     private void btn_dashboardMouseClicked(MouseEvent evt) {//GEN-FIRST:event_btn_dashboardMouseClicked
         pn_utama.removeAll();
         pn_utama.repaint();
         pn_utama.revalidate();
         matiintombol();
-        pn_btnDashboard.setBackground(new Color (105, 33, 58));
+        pn_btnDashboard.setBackground(new Color(105, 33, 58));
         btn_dashboard.setForeground(Color.white);
         pn_utama.add(new menuDashboard());
 
@@ -870,26 +870,18 @@ public class MenuUtama extends javax.swing.JFrame {
         pn_utama.repaint();
         pn_utama.revalidate();
         matiintombol();
-        pn_btnMenu.setBackground(new Color (105, 33, 58));
+        pn_btnMenu.setBackground(new Color(105, 33, 58));
         btn_menu.setForeground(Color.white);
         pn_utama.add(new menuMenu());
 
     }//GEN-LAST:event_btn_menuMouseClicked
-
-    private void btn_menuMouseEntered(MouseEvent evt) {//GEN-FIRST:event_btn_menuMouseEntered
-//         pn_btnMenu.setBackground(new Color (105,33,58));
-    }//GEN-LAST:event_btn_menuMouseEntered
-
-    private void btn_menuMouseExited(MouseEvent evt) {//GEN-FIRST:event_btn_menuMouseExited
-//         pn_btnMenu.setBackground(new Color (242,242,242));
-    }//GEN-LAST:event_btn_menuMouseExited
 
     private void btn_kategoriMouseClicked(MouseEvent evt) {//GEN-FIRST:event_btn_kategoriMouseClicked
         pn_utama.removeAll();
         pn_utama.repaint();
         pn_utama.revalidate();
         matiintombol();
-        pn_btnKategori.setBackground(new Color (105, 33, 58));
+        pn_btnKategori.setBackground(new Color(105, 33, 58));
         btn_kategori.setForeground(Color.white);
         pn_utama.add(new menuKategori());
     }//GEN-LAST:event_btn_kategoriMouseClicked
@@ -907,7 +899,7 @@ public class MenuUtama extends javax.swing.JFrame {
         pn_utama.repaint();
         pn_utama.revalidate();
         matiintombol();
-        pn_btnUser.setBackground(new Color (105, 33, 58));
+        pn_btnUser.setBackground(new Color(105, 33, 58));
         btn_user.setForeground(Color.white);
         pn_utama.add(new menuUser());
     }//GEN-LAST:event_btn_userMouseClicked
@@ -954,16 +946,14 @@ public class MenuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_pengeluaranMouseExited
 
     private void btn_lpPemasukanMouseClicked(MouseEvent evt) {//GEN-FIRST:event_btn_lpPemasukanMouseClicked
-        // TODO add your handling code here:
+        pn_utama.removeAll();
+        pn_utama.repaint();
+        pn_utama.revalidate();
+        matiintombol();
+        pn_btnLpPemasukkan.setBackground(new Color(105, 33, 58));
+        btn_lpPemasukan.setForeground(Color.white);
+        pn_utama.add(new formLaporan());
     }//GEN-LAST:event_btn_lpPemasukanMouseClicked
-
-    private void btn_lpPemasukanMouseEntered(MouseEvent evt) {//GEN-FIRST:event_btn_lpPemasukanMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_lpPemasukanMouseEntered
-
-    private void btn_lpPemasukanMouseExited(MouseEvent evt) {//GEN-FIRST:event_btn_lpPemasukanMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_lpPemasukanMouseExited
 
     private void btn_lpPengeluaranMouseClicked(MouseEvent evt) {//GEN-FIRST:event_btn_lpPengeluaranMouseClicked
         // TODO add your handling code here:
@@ -978,7 +968,7 @@ public class MenuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_lpPengeluaranMouseExited
 
     private void formMousePressed(MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-      
+
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseDragged(MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
@@ -990,7 +980,7 @@ public class MenuUtama extends javax.swing.JFrame {
         pn_utama.repaint();
         pn_utama.revalidate();
         matiintombol();
-        pn_btnMeja.setBackground(new Color (105, 33, 58));
+        pn_btnMeja.setBackground(new Color(105, 33, 58));
         btn_meja.setForeground(Color.white);
         pn_utama.add(new menuMeja());
     }//GEN-LAST:event_btn_mejaMouseClicked
@@ -1008,7 +998,7 @@ public class MenuUtama extends javax.swing.JFrame {
         pn_utama.repaint();
         pn_utama.revalidate();
         matiintombol();
-        pn_btnStok.setBackground(new Color (105, 33, 58));
+        pn_btnStok.setBackground(new Color(105, 33, 58));
         btn_stok.setForeground(Color.white);
         pn_utama.add(new menuStok());
     }//GEN-LAST:event_btn_stokMouseClicked
@@ -1026,7 +1016,7 @@ public class MenuUtama extends javax.swing.JFrame {
         pn_utama.repaint();
         pn_utama.revalidate();
         matiintombol();
-        pn_btnPelanggan.setBackground(new Color (105, 33, 58));
+        pn_btnPelanggan.setBackground(new Color(105, 33, 58));
         btn_Pelanggan.setForeground(Color.white);
         pn_utama.add(new menuPelanggan());
     }//GEN-LAST:event_btn_PelangganMouseClicked
@@ -1039,34 +1029,40 @@ public class MenuUtama extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_PelangganMouseExited
 
+    private void pn_btnMenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_btnMenuMouseEntered
+    }//GEN-LAST:event_pn_btnMenuMouseEntered
+
+    private void pn_btnMenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_btnMenuMouseExited
+    }//GEN-LAST:event_pn_btnMenuMouseExited
+
     /**
      * @param args the command line arguments
      */
-        public static void main(String args[]) {
-    /* Set the Nimbus look and feel */
-    try {
-        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-            if ("Nimbus".equals(info.getName())) {
-                javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                break;
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
             }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MenuUtama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-        java.util.logging.Logger.getLogger(MenuUtama.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                // Gunakan data dummy
+                String dummyID = "1";
+                String dummyUsername = "admin";
+                String dummyRole = "Admin";
+
+                new MenuUtama(dummyID, dummyUsername, dummyRole).setVisible(true);
+            }
+        });
     }
-
-    /* Create and display the form */
-    java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-            // Gunakan data dummy
-            String dummyID = "1";
-            String dummyUsername = "admin";
-            String dummyRole = "Admin";
-
-            new MenuUtama(dummyID, dummyUsername, dummyRole).setVisible(true);
-        }
-    });
-}
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1116,4 +1112,5 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JPanel pn_kiri;
     private javax.swing.JPanel pn_utama;
     // End of variables declaration//GEN-END:variables
+
 }

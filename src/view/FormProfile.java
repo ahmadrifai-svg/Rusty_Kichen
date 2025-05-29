@@ -170,15 +170,15 @@ public class FormProfile extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_pemesananMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_pemesananMouseClicked
-        pn_utama.removeAll();
-        pn_utama.repaint();
-        pn_utama.revalidate();
-        matiintombol();
-        pn_btnPemesanan.setBackground(new Color(105, 33, 58));
-        btn_pemesanan.setForeground(Color.white);
-        pn_utama.add(new menuPemesanan(userLogin));  // ✅ userLogin sekarang valid
-        pn_utama.repaint();
-        pn_utama.revalidate();
+//        pn_utama.removeAll();
+//        pn_utama.repaint();
+//        pn_utama.revalidate();
+//        matiintombol();
+//        pn_btnPemesanan.setBackground(new Color(105, 33, 58));
+//        btn_pemesanan.setForeground(Color.white);
+//        pn_utama.add(new menuPemesanan(userLogin));  // ✅ userLogin sekarang valid
+//        pn_utama.repaint();
+//        pn_utama.revalidate();
     }//GEN-LAST:event_btn_pemesananMouseClicked
 
     private void btn_pemesananMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_pemesananMouseEntered

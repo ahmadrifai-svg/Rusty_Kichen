@@ -144,6 +144,11 @@ public class menuKategori extends javax.swing.JPanel {
                 txtPencarianActionPerformed(evt);
             }
         });
+        txtPencarian.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPencarianKeyReleased(evt);
+            }
+        });
 
         btn_batal.setBackground(new java.awt.Color(105, 33, 58));
         btn_batal.setText("Batal");
@@ -381,8 +386,12 @@ public class menuKategori extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void txtPencarianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPencarianActionPerformed
-        searchData();
+       
     }//GEN-LAST:event_txtPencarianActionPerformed
+
+    private void txtPencarianKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPencarianKeyReleased
+        searchData();
+    }//GEN-LAST:event_txtPencarianKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

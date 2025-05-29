@@ -115,21 +115,27 @@ public class menuPemesanan extends javax.swing.JPanel {
             try {
                 Calendar calendar = Calendar.getInstance();
                 SimpleDateFormat formatHari = new SimpleDateFormat("EEEE", new Locale("in", "ID"));
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Ubah ke format yang sesuai MySQL
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
 
                 String hari = formatHari.format(calendar.getTime());
-                String dateTime = dateFormat.format(calendar.getTime()); // Gunakan calendar.getTime()
+                String date = dateFormat.format(calendar.getTime());
+                String time = timeFormat.format(calendar.getTime());
 
-                // Pastikan label sudah diinisialisasi
                 if (lbHari != null) {
                     lbHari.setText(hari + ",");
                 } else {
                     System.out.println("lbHari belum diinisialisasi!");
                 }
                 if (lbTanggal != null) {
-                    lbTanggal.setText(dateTime);
+                    lbTanggal.setText(date); // Hanya tanggal
                 } else {
                     System.out.println("lbTanggal belum diinisialisasi!");
+                }
+                if (lbJam != null) {
+                    lbJam.setText(time); // Hanya jam
+                } else {
+                    System.out.println("lbJam belum diinisialisasi!");
                 }
             } catch (Exception ex) {
                 System.out.println("Error mengatur tanggal: " + ex.getMessage());
@@ -137,7 +143,7 @@ public class menuPemesanan extends javax.swing.JPanel {
             }
         }
     });
-    timer.start(); // Pastikan timer berjalan
+    timer.start();
 }
 
     /**
@@ -202,6 +208,7 @@ public class menuPemesanan extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         txtPersen = new Palette.JTextfieldRounded();
         jLabel14 = new javax.swing.JLabel();
+        lbJam = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.CardLayout());
@@ -656,26 +663,20 @@ public class menuPemesanan extends javax.swing.JPanel {
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("%");
 
+        lbJam.setForeground(new java.awt.Color(255, 255, 255));
+        lbJam.setText("Jam");
+
         javax.swing.GroupLayout pn_addLayout = new javax.swing.GroupLayout(pn_add);
         pn_add.setLayout(pn_addLayout);
         pn_addLayout.setHorizontalGroup(
             pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_addLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pn_addLayout.createSequentialGroup()
+                .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pn_addLayout.createSequentialGroup()
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_addLayout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Judul)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbHari)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbTanggal)
-                        .addGap(51, 51, 51))
-                    .addGroup(pn_addLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pn_addLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pn_addLayout.createSequentialGroup()
@@ -719,7 +720,18 @@ public class menuPemesanan extends javax.swing.JPanel {
                                 .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtBayar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtKembali, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(pn_addLayout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Judul)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbHari)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbTanggal)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbJam)
+                        .addGap(70, 70, 70))))
         );
         pn_addLayout.setVerticalGroup(
             pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -729,7 +741,8 @@ public class menuPemesanan extends javax.swing.JPanel {
                     .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Judul)
                         .addComponent(lbHari)
-                        .addComponent(lbTanggal))
+                        .addComponent(lbTanggal)
+                        .addComponent(lbJam))
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -870,6 +883,7 @@ public class menuPemesanan extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel lbHari;
+    private javax.swing.JLabel lbJam;
     private javax.swing.JLabel lbTanggal;
     private javax.swing.JLabel lbTotalHarga;
     private javax.swing.JPanel pn_add;
@@ -1248,52 +1262,99 @@ public class menuPemesanan extends javax.swing.JPanel {
 }
 
 
-    private void simpanData() {
-        if  (validasiSimpan() == true){
-            String idTransaksi = txtNoTransaksi.getText();
-            String tanggal = lbTanggal.getText();
-            double total = Double.parseDouble(txtTotal.getText());
-            double diskon = Double.parseDouble(txtDiskon.getText());
-            double bayar = Double.parseDouble(txtBayar.getText());
-            double kembali = Double.parseDouble(txtKembali.getText());
-            
-            modelTransaksi modeltrans = new modelTransaksi();
-            ModelMenu modelMN = new ModelMenu();
-            modelPelanggan modelPel = new modelPelanggan();
-            modelUser modelUS = new modelUser();
-            modelTransaksiDetail modelTrandet = new modelTransaksiDetail();
-            
-            //tambah Transaksi
-            modeltrans.setidTransaksi(idTransaksi);
-            modeltrans.setTanggal(tanggal);
-            modeltrans.setTotalHarga(total);
-            modeltrans.setBayar(bayar);
-            modeltrans.setDiskon(diskon);
-            modeltrans.setKembali(kembali);
-            modelPel.setIdPelanggan(idPelanggan);
-            modelUS.setIdUser(idUser);
-            
-            modeltrans.setModelPelanggan(modelPel);
-            modeltrans.setModelUser(modelUS);
-            
-            //tambah detail penjualan
-            modelTrandet.setModelTransaksi(modeltrans);
-            modelTrandet.setModelMenu(modelMN);
-            
-            service.tambahData(modeltrans);
-            serviceDet.tambahData(modelTrandet);
-            serviceDet.hapusDataSementara();
-            serviceStruk.printStruk(idTransaksi);
-            tblModelTran.insertData(modeltrans);
-            showPanel();
-            loadData();
-            loadDataSementara();
-            resetMenu();
-            resetPembayaran();
-            
-        }
-    }
+//    private void simpanData() {
+//    if (validasiSimpan() == true) {
+//        String idTransaksi = txtNoTransaksi.getText();
+//        String tanggal = lbTanggal.getText();
+//        String jam = lbJam.getText().trim();
+//        double total = Double.parseDouble(txtTotal.getText());
+//        double diskon = Double.parseDouble(txtDiskon.getText());
+//        double bayar = Double.parseDouble(txtBayar.getText());
+//        double kembali = Double.parseDouble(txtKembali.getText());
+//        
+//        modelTransaksi modeltrans = new modelTransaksi();
+//        ModelMenu modelMN = new ModelMenu();
+//        modelPelanggan modelPel = new modelPelanggan();
+//        modelUser modelUS = new modelUser();
+//        modelTransaksiDetail modelTrandet = new modelTransaksiDetail();
+//        
+//        //tambah Transaksi
+//        modeltrans.setidTransaksi(idTransaksi);
+//        modeltrans.setTanggal(tanggal);
+//        modeltrans.setTotalHarga(total);
+//        modeltrans.setBayar(bayar);
+//        modeltrans.setDiskon(diskon);
+//        modeltrans.setKembali(kembali);
+//        modelPel.setIdPelanggan(idPelanggan);
+//        modelUS.setIdUser(idUser);
+//        
+//        modeltrans.setModelPelanggan(modelPel);
+//        modeltrans.setModelUser(modelUS);
+//        
+//        //tambah detail penjualan
+//        modelTrandet.setModelTransaksi(modeltrans);
+//        modelTrandet.setModelMenu(modelMN);
+//        
+//        service.tambahData(modeltrans);
+//        serviceDet.tambahData(modelTrandet);
+//        serviceDet.hapusDataSementara();
+//        serviceStruk.printStruk(idTransaksi);
+//        tblModelTran.insertData(modeltrans);
+//        showPanel();
+//        loadData();
+//        loadDataSementara();
+//        resetMenu();
+//        resetPembayaran();
+//    }
+//}
 
+private void simpanData() {
+    if (validasiSimpan() == true) {
+        String idTransaksi = txtNoTransaksi.getText();
+        String tanggal = lbTanggal.getText();  // yyyy-MM-dd
+        String jam = lbJam.getText().trim();   // HH:mm:ss
+        String fullTanggal = tanggal + " " + jam;  // Gabungkan jadi yyyy-MM-dd HH:mm:ss
+
+        double total = Double.parseDouble(txtTotal.getText());
+        double diskon = Double.parseDouble(txtDiskon.getText());
+        double bayar = Double.parseDouble(txtBayar.getText());
+        double kembali = Double.parseDouble(txtKembali.getText());
+        
+        modelTransaksi modeltrans = new modelTransaksi();
+        ModelMenu modelMN = new ModelMenu();
+        modelPelanggan modelPel = new modelPelanggan();
+        modelUser modelUS = new modelUser();
+        modelTransaksiDetail modelTrandet = new modelTransaksiDetail();
+        
+        // Tambah Transaksi
+        modeltrans.setidTransaksi(idTransaksi);
+        modeltrans.setTanggal(fullTanggal);  // Simpan tanggal+jam
+        modeltrans.setTotalHarga(total);
+        modeltrans.setBayar(bayar);
+        modeltrans.setDiskon(diskon);
+        modeltrans.setKembali(kembali);
+        modelPel.setIdPelanggan(idPelanggan);
+        modelUS.setIdUser(idUser);
+        
+        modeltrans.setModelPelanggan(modelPel);
+        modeltrans.setModelUser(modelUS);
+        
+        // Tambah detail penjualan
+        modelTrandet.setModelTransaksi(modeltrans);
+        modelTrandet.setModelMenu(modelMN);
+        
+        service.tambahData(modeltrans);
+        serviceDet.tambahData(modelTrandet);
+        serviceDet.hapusDataSementara();
+        serviceStruk.printStruk(idTransaksi);
+        tblModelTran.insertData(modeltrans);
+        showPanel();
+        loadData();
+        loadDataSementara();
+        resetMenu();
+        resetPembayaran();
+    }
+}
 
     
     
