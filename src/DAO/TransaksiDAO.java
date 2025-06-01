@@ -11,6 +11,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import model.modelPelanggan;
 import model.modelUser;
+import model.ModelMeja;
 
 
 public class TransaksiDAO implements serviceTransaksi {
@@ -24,20 +25,21 @@ public class TransaksiDAO implements serviceTransaksi {
     public void tambahData(modelTransaksi model) {
         PreparedStatement st = null;
         try {
-            String sql = "INSERT INTO transaksi(Id_Transaksi, Id_User, Id_Pelanggan, Tanggal, Total_Harga, Bayar, Kembali, Diskon) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO transaksi(Id_Transaksi, Id_User, Id_Pelanggan, Id_Meja, Tanggal, Total_Harga, Bayar, Kembali, Diskon) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             st = conn.prepareStatement(sql);
 
-            st.setString(1, model.getidTransaksi());
+            st.setString(1, model.getIdTransaksi());
             st.setString(2, model.getModelUser().getIdUser());
             st.setString(3, model.getModelPelanggan().getIdPelanggan());
+            st.setString(4, model.getModelMeja().getIdMeja());
 
             // Perbaikan di sini: gunakan Timestamp bukan Date
-            st.setTimestamp(4, java.sql.Timestamp.valueOf(model.getTanggal()));  // Pastikan model.getTanggal() formatnya "yyyy-MM-dd HH:mm:ss"
+            st.setTimestamp(5, java.sql.Timestamp.valueOf(model.getTanggal()));  // Pastikan model.getTanggal() formatnya "yyyy-MM-dd HH:mm:ss"
 
-            st.setDouble(5, model.getTotalHarga());
-            st.setDouble(6, model.getBayar());
-            st.setDouble(7, model.getKembali());
-            st.setDouble(8, model.getDiskon());
+            st.setDouble(6, model.getTotalHarga());
+            st.setDouble(7, model.getBayar());
+            st.setDouble(8, model.getKembali());
+            st.setDouble(9, model.getDiskon());
 
             st.executeUpdate();
             st.close();
@@ -55,11 +57,12 @@ public List<modelTransaksi> tampilData() {
     PreparedStatement st = null;
     ResultSet rs = null;
     List list = new ArrayList();
-     String sql = "SELECT TR.Id_Transaksi, US.Id_User, US.Username, PG.Id_Pelanggan, PG.Nama_Pelanggan, " +
+     String sql = "SELECT TR.Id_Transaksi, US.Id_User, US.Username, PG.Id_Pelanggan, PG.Nama_Pelanggan, MJ.Id_Meja, MJ.Nomor, " +
              "TR.Tanggal, TR.Total_Harga, TR.Bayar, TR.Kembali, TR.Diskon " +
              "FROM transaksi TR " +
              "INNER JOIN user US ON US.Id_User = TR.Id_User " +
-             "INNER JOIN pelanggan PG ON PG.Id_Pelanggan = TR.Id_Pelanggan";
+             "INNER JOIN pelanggan PG ON PG.Id_Pelanggan = TR.Id_Pelanggan "
+             + "INNER JOIN meja MJ ON MJ.Id_Meja = TR.Id_Meja";
 
     try {
         st = conn.prepareStatement(sql);
@@ -69,12 +72,15 @@ public List<modelTransaksi> tampilData() {
             modelTransaksi TR = new modelTransaksi();
             modelUser      US = new modelUser();
             modelPelanggan PG = new modelPelanggan();
+            ModelMeja MJ = new ModelMeja();
             
-            TR.setidTransaksi           (rs.getString("Id_Transaksi"));
+            TR.setIdTransaksi(rs.getString("Id_Transaksi"));
             US.setIdUser                (rs.getString("Id_User"));
             US.setUsername              (rs.getString("Username"));
             PG.setIdPelanggan           (rs.getString("Id_Pelanggan"));
             PG.setNamaPelanggan         (rs.getString("Nama_Pelanggan"));
+            MJ.setIdMeja                  (rs.getString("Id_Meja"));
+            MJ.setNomor                 (rs.getString("Nomor"));
             TR.setTanggal               (rs.getString("Tanggal"));
             TR.setTotalHarga            (rs.getDouble("Total_Harga"));
             TR.setBayar                 (rs.getDouble("Bayar"));
@@ -83,6 +89,7 @@ public List<modelTransaksi> tampilData() {
             
             TR.setModelUser(US);
             TR.setModelPelanggan(PG);
+            TR.setModelMeja(MJ);
             
             
             list.add(TR);
@@ -101,17 +108,18 @@ public List<modelTransaksi> pencarianData(String Id) {
     ResultSet rs = null;
     List<modelTransaksi> list = new ArrayList<>();
 
-    String sql = "SELECT TR.Id_Transaksi, US.Id_User, US.Username, PG.Id_Pelanggan, PG.Nama_Pelanggan, " +
+    String sql = "SELECT TR.Id_Transaksi, US.Id_User, US.Username, PG.Id_Pelanggan, PG.Nama_Pelanggan, MJ.Id_Meja, MJ.Nomor, " +
                  "TR.Tanggal, TR.Total_Harga, TR.Bayar, TR.Kembali, TR.Diskon " +
                  "FROM transaksi TR " +
                  "INNER JOIN user US ON US.Id_User = TR.Id_User " +
-                 "INNER JOIN pelanggan PG ON PG.Id_Pelanggan = TR.Id_Pelanggan " +
+                 "INNER JOIN pelanggan PG ON PG.Id_Pelanggan = TR.Id_Pelanggan " + // Tambahkan spasi di sini
+                 "INNER JOIN meja MJ ON MJ.Id_Meja = TR.Id_Meja " +
                  "WHERE TR.Id_Transaksi LIKE ? " +
                  "OR US.Id_User LIKE ? " +
                  "OR US.Username LIKE ? " +
-                 "OR PG.Id_Pelanggan LIKE ? " +
                  "OR PG.Nama_Pelanggan LIKE ? " +
-                 "OR TR.Tanggal LIKE ?";
+                 "OR MJ.Nomor LIKE ? " +
+                 "OR DATE_FORMAT(TR.Tanggal, '%Y-%m-%d') LIKE ?"; // Tambahkan DATE_FORMAT untuk Tanggal
 
     try {
         st = conn.prepareStatement(sql);
@@ -127,13 +135,16 @@ public List<modelTransaksi> pencarianData(String Id) {
             modelTransaksi TR = new modelTransaksi();
             modelUser US = new modelUser();
             modelPelanggan PG = new modelPelanggan();
-
-            TR.setidTransaksi(rs.getString("Id_Transaksi"));
+            ModelMeja MJ = new ModelMeja();
+            
+            TR.setIdTransaksi(rs.getString("Id_Transaksi"));
             US.setIdUser(rs.getString("Id_User"));
             US.setUsername(rs.getString("Username"));
             PG.setIdPelanggan(rs.getString("Id_Pelanggan"));
             PG.setNamaPelanggan(rs.getString("Nama_Pelanggan"));
-            TR.setTanggal(rs.getString("Tanggal"));
+            MJ.setIdMeja(rs.getString("Id_Meja"));
+            MJ.setNomor(rs.getString("Nomor"));
+            TR.setTanggal(rs.getString("Tanggal")); // Pastikan tipe data sesuai
             TR.setTotalHarga(rs.getDouble("Total_Harga"));
             TR.setBayar(rs.getDouble("Bayar"));
             TR.setKembali(rs.getDouble("Kembali"));
@@ -141,6 +152,7 @@ public List<modelTransaksi> pencarianData(String Id) {
 
             TR.setModelUser(US);
             TR.setModelPelanggan(PG);
+            TR.setModelMeja(MJ);
 
             list.add(TR);
         }

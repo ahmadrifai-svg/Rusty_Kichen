@@ -8,6 +8,7 @@ import DAO.StrukDAO;
 import DAO.TransaksiDAO;
 import DAO.TransaksiDetailDAO;
 import DAO.TransaksiSmtDAO;
+import DAO.mejaDAO;
 import DAO.menuDAO;
 import DAO.pelangganDAO;
 import config.koneksi;
@@ -32,12 +33,14 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
+import model.ModelMeja;
 import model.ModelMenu;
 import model.modelPelanggan;
 import model.modelTransaksi;
 import model.modelTransaksiDetail;
 import model.modelTransaksiSmt;
 import model.modelUser;
+import service.serviceMeja;
 import service.serviceMenu;
 import service.servicePelanggan;
 import service.serviceStruk;
@@ -63,9 +66,11 @@ public class menuPemesanan extends javax.swing.JPanel {
     private serviceMenu serviceMenu = new menuDAO();
     private serviceStruk serviceStruk = new StrukDAO();
     private servicePelanggan servisPel = new pelangganDAO();
+    private serviceMeja servisMeja = new mejaDAO();
     
     private String idMenu;
     private String idPelanggan;
+    private String idMeja;
     private String idUser;
     
     private final Map<String, String> hasMap;
@@ -209,6 +214,8 @@ public class menuPemesanan extends javax.swing.JPanel {
         txtPersen = new Palette.JTextfieldRounded();
         jLabel14 = new javax.swing.JLabel();
         lbJam = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        cbxMeja = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.CardLayout());
@@ -274,6 +281,11 @@ public class menuPemesanan extends javax.swing.JPanel {
         txtPencarian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPencarianActionPerformed(evt);
+            }
+        });
+        txtPencarian.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPencarianKeyReleased(evt);
             }
         });
 
@@ -393,7 +405,7 @@ public class menuPemesanan extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtNoTransaksi, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                .addComponent(txtNoTransaksi, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -418,7 +430,7 @@ public class menuPemesanan extends javax.swing.JPanel {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtUser, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                .addComponent(txtUser, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -466,7 +478,7 @@ public class menuPemesanan extends javax.swing.JPanel {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cbxPelanggan, 0, 236, Short.MAX_VALUE)
+                .addComponent(cbxPelanggan, 0, 214, Short.MAX_VALUE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
@@ -666,6 +678,29 @@ public class menuPemesanan extends javax.swing.JPanel {
         lbJam.setForeground(new java.awt.Color(255, 255, 255));
         lbJam.setText("Jam");
 
+        jPanel9.setBackground(new java.awt.Color(105, 33, 58));
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Meja\n", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel9.setForeground(new java.awt.Color(52, 152, 219));
+
+        cbxMeja.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nomor Meja", " " }));
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbxMeja, 0, 214, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbxMeja, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout pn_addLayout = new javax.swing.GroupLayout(pn_add);
         pn_add.setLayout(pn_addLayout);
         pn_addLayout.setHorizontalGroup(
@@ -683,17 +718,19 @@ public class menuPemesanan extends javax.swing.JPanel {
                                 .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1272, Short.MAX_VALUE)
                                     .addGroup(pn_addLayout.createSequentialGroup()
-                                        .addGroup(pn_addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(pn_addLayout.createSequentialGroup()
-                                                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
+                                        .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(pn_addLayout.createSequentialGroup()
+                                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGap(25, 25, 25))
                             .addGroup(pn_addLayout.createSequentialGroup()
@@ -755,7 +792,8 @@ public class menuPemesanan extends javax.swing.JPanel {
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -789,7 +827,7 @@ public class menuPemesanan extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_detailActionPerformed
 
     private void txtPencarianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPencarianActionPerformed
-        searchData();
+        
     }//GEN-LAST:event_txtPencarianActionPerformed
 
     private void tblDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMouseClicked
@@ -848,6 +886,10 @@ public class menuPemesanan extends javax.swing.JPanel {
         perbaruiDataSementara();
     }//GEN-LAST:event_txtJumlahActionPerformed
 
+    private void txtPencarianKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPencarianKeyReleased
+        searchData();
+    }//GEN-LAST:event_txtPencarianKeyReleased
+
 //form tambah Penjualan 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Judul;
@@ -859,6 +901,7 @@ public class menuPemesanan extends javax.swing.JPanel {
     private Palette.Custom_ButtonRounded btnTambah;
     private Palette.Custom_ButtonRounded btn_batal;
     private Palette.Custom_ButtonRounded btn_detail;
+    private javax.swing.JComboBox<String> cbxMeja;
     private javax.swing.JComboBox<String> cbxPelanggan;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -878,6 +921,7 @@ public class menuPemesanan extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
@@ -910,6 +954,7 @@ public class menuPemesanan extends javax.swing.JPanel {
     private void loadData() {
        txtNoTransaksi.setText(service.noTransaksi());
        getPelanggan();
+       getMeja();
        btn_detail.setEnabled(false);
        List<modelTransaksi> list = service.tampilData();
        tblModelTran.setData(list);
@@ -1016,59 +1061,98 @@ public class menuPemesanan extends javax.swing.JPanel {
         });
         
     }
+    
+    private void getMeja() {
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        model.addElement("Pilih Meja");
+        
+        List<ModelMeja> list = servisMeja.ambilMeja();
+        for(ModelMeja modelMeja : list){
+            model.addElement(modelMeja.getNomor());
+            hasMap.put(modelMeja.getNomor(), modelMeja.getIdMeja());
+        }
+        cbxMeja.setModel(model);
+        cbxMeja.addActionListener(e -> {
+            String nomorMeja = cbxMeja.getSelectedItem().toString();
+            if(!"pilih Meja ".equals(nomorMeja)){
+                idMeja = hasMap.get(nomorMeja);
+            }
+        });
+        
+    }
 
     private void pencarianMenu() {
-        List<ModelMenu> list = serviceMenu.pencarianDataByBarcode(txtBarcode.getText());
+    List<ModelMenu> list = serviceMenu.pencarianDataByBarcode(txtBarcode.getText());
+    
+    if (!list.isEmpty()) {
+        ModelMenu menu = list.get(0);
         
-        if(!list.isEmpty()) {
-            ModelMenu menu = list.get(0);
-            
-            //cek apakah menu sudah ada dalam data sementara
-            boolean produkSudahAda = false;
-            for (int i = 0; i < tblModelSmt.getRowCount(); i++) {
-                if (tblModelSmt.getData(i).getModelMenu().getBarcode().equals(menu.getBarcode())){
-                    produkSudahAda = true;
-                    break;
-                }
-            }
-            if (!produkSudahAda){
-                String barcode = menu.getBarcode();
-                String namaMenu = menu.getNamaMenu();
-                double harga = menu.getHarga();
-                int jumlah = 1;
-                double Subtotal = harga * jumlah;
-                
-                modelTransaksiSmt smt = new modelTransaksiSmt();
-                ModelMenu         MN  = new ModelMenu();
-                model.modelTransaksiDetail det = new modelTransaksiDetail();
-                
-                MN.setIdMenu(menu.getIdMenu());
-                MN.setBarcode(barcode);
-                MN.setNamaMenu(namaMenu);
-                MN.setHarga((long) harga);
-                
-                det.setJumlah(jumlah);
-                det.setSubtotal(Subtotal);
-                
-                smt.setModelMenu(MN);
-                smt.setModelTranDet(det);
-                
-                serviceSmt.tambahData(smt);
-                serviceDet.sumTotal(det);
-                
-                txtSubtotal.setText(String.valueOf(det.getSubtotal()));
-                String total = txtSubtotal.getText();
-                txtTotal.setText(total);
-                lbTotalHarga.setText("RP. " + total);
-                
-                loadDataSementara();
-                
-            }else {
-                JOptionPane.showMessageDialog(null, "Produk Sudah Ditambahkan !");
-                resetMenu();
+        // Cek apakah menu sudah ada dalam data sementara
+        int existingRow = -1;
+        for (int i = 0; i < tblModelSmt.getRowCount(); i++) {
+            if (tblModelSmt.getData(i).getModelMenu().getBarcode().equals(menu.getBarcode())) {
+                existingRow = i;
+                break;
             }
         }
+        
+        if (existingRow == -1) {
+            // Produk belum ada, tambahkan baru
+            String barcode = menu.getBarcode();
+            String namaMenu = menu.getNamaMenu();
+            double harga = menu.getHarga();
+            int jumlah = 1;
+            double subtotal = harga * jumlah;
+            
+            modelTransaksiSmt smt = new modelTransaksiSmt();
+            ModelMenu MN = new ModelMenu();
+            modelTransaksiDetail det = new modelTransaksiDetail();
+            
+            MN.setIdMenu(menu.getIdMenu());
+            MN.setBarcode(barcode);
+            MN.setNamaMenu(namaMenu);
+            MN.setHarga((long) harga);
+            
+            det.setJumlah(jumlah);
+            det.setSubtotal(subtotal);
+            
+            smt.setModelMenu(MN);
+            smt.setModelTranDet(det);
+            
+            serviceSmt.tambahData(smt);
+            serviceDet.sumTotal(det);
+            
+            txtSubtotal.setText(String.valueOf(det.getSubtotal()));
+            String total = txtSubtotal.getText();
+            txtTotal.setText(total);
+            lbTotalHarga.setText("RP. " + total);
+            
+            loadDataSementara();
+        } else {
+            // Produk sudah ada, perbarui jumlah dan subtotal
+            modelTransaksiSmt existingSmt = tblModelSmt.getData(existingRow);
+            modelTransaksiDetail existingDet = existingSmt.getModelTranDet();
+            
+            int newJumlah = existingDet.getJumlah() + 1;
+            double newSubtotal = menu.getHarga() * newJumlah;
+            
+            existingDet.setJumlah(newJumlah);
+            existingDet.setSubtotal(newSubtotal);
+            
+            // Perbarui data di service atau model
+            serviceSmt.perbaruiData(existingSmt); // Asumsi ada metode updateData
+            serviceDet.sumTotal(existingDet); // Perbarui total
+            
+            // Tampilkan total terbaru
+            txtSubtotal.setText(String.valueOf(newSubtotal));
+            String total = txtSubtotal.getText();
+            txtTotal.setText(total);
+            lbTotalHarga.setText("RP. " + total);
+            
+            loadDataSementara(); // Perbarui tabel
+        }
     }
+}
 
     private void pencarianMenuFormDialog() {
     boolean closable = true;
@@ -1090,17 +1174,17 @@ public class menuPemesanan extends javax.swing.JPanel {
         double subTotal = harga * jumlah;
 
         // Cek apakah produk sudah ada di tabel sementara
-        boolean produkSudahAda = false;
+        int existingRow = -1;
         for (int i = 0; i < tblModelSmt.getRowCount(); i++) {
             String barcodeTabel = tblModelSmt.getData(i).getModelMenu().getBarcode().trim();
             if (barcodeTabel.equalsIgnoreCase(barcode)) { // aman terhadap spasi & case
-                produkSudahAda = true;
+                existingRow = i;
                 break;
             }
         }
 
-        if (!produkSudahAda) {
-            // Buat objek baru
+        if (existingRow == -1) {
+            // Produk belum ada, tambahkan baru
             modelTransaksiSmt smt = new modelTransaksiSmt();
             ModelMenu MN = new ModelMenu();
             modelTransaksiDetail det = new modelTransaksiDetail();
@@ -1129,7 +1213,27 @@ public class menuPemesanan extends javax.swing.JPanel {
             loadDataSementara(); // penting!
             resetMenu();
         } else {
-            JOptionPane.showMessageDialog(null, "Produk Sudah Ditambahkan!");
+            // Produk sudah ada, perbarui jumlah dan subtotal
+            modelTransaksiSmt existingSmt = tblModelSmt.getData(existingRow);
+            modelTransaksiDetail existingDet = existingSmt.getModelTranDet();
+            
+            int newJumlah = existingDet.getJumlah() + 1;
+            double newSubTotal = harga * newJumlah;
+
+            existingDet.setJumlah(newJumlah);
+            existingDet.setSubtotal(newSubTotal);
+
+            // Perbarui data di service atau model
+            serviceSmt.perbaruiData(existingSmt); // Asumsi ada metode updateData
+            serviceDet.sumTotal(existingDet); // Perbarui total
+
+            // Tampilkan total terbaru
+            txtSubtotal.setText(String.valueOf(newSubTotal));
+            String total = txtSubtotal.getText();
+            txtTotal.setText(total);
+            lbTotalHarga.setText("RP. " + total);
+
+            loadDataSementara(); // Perbarui tabel
             resetMenu();
         }
     } else {
@@ -1208,6 +1312,9 @@ public class menuPemesanan extends javax.swing.JPanel {
                 tblModelSmt.deleteData(row);
                 loadDataSementara();
                 resetMenu();
+                lbTotalHarga.setText("0");
+                txtSubtotal.setText("");
+                txtTotal.setText("");
             }
         }else {
             JOptionPane.showMessageDialog(null, "Pilih dahulu data yang ingin dihapus");
@@ -1261,53 +1368,6 @@ public class menuPemesanan extends javax.swing.JPanel {
     return true;
 }
 
-
-//    private void simpanData() {
-//    if (validasiSimpan() == true) {
-//        String idTransaksi = txtNoTransaksi.getText();
-//        String tanggal = lbTanggal.getText();
-//        String jam = lbJam.getText().trim();
-//        double total = Double.parseDouble(txtTotal.getText());
-//        double diskon = Double.parseDouble(txtDiskon.getText());
-//        double bayar = Double.parseDouble(txtBayar.getText());
-//        double kembali = Double.parseDouble(txtKembali.getText());
-//        
-//        modelTransaksi modeltrans = new modelTransaksi();
-//        ModelMenu modelMN = new ModelMenu();
-//        modelPelanggan modelPel = new modelPelanggan();
-//        modelUser modelUS = new modelUser();
-//        modelTransaksiDetail modelTrandet = new modelTransaksiDetail();
-//        
-//        //tambah Transaksi
-//        modeltrans.setidTransaksi(idTransaksi);
-//        modeltrans.setTanggal(tanggal);
-//        modeltrans.setTotalHarga(total);
-//        modeltrans.setBayar(bayar);
-//        modeltrans.setDiskon(diskon);
-//        modeltrans.setKembali(kembali);
-//        modelPel.setIdPelanggan(idPelanggan);
-//        modelUS.setIdUser(idUser);
-//        
-//        modeltrans.setModelPelanggan(modelPel);
-//        modeltrans.setModelUser(modelUS);
-//        
-//        //tambah detail penjualan
-//        modelTrandet.setModelTransaksi(modeltrans);
-//        modelTrandet.setModelMenu(modelMN);
-//        
-//        service.tambahData(modeltrans);
-//        serviceDet.tambahData(modelTrandet);
-//        serviceDet.hapusDataSementara();
-//        serviceStruk.printStruk(idTransaksi);
-//        tblModelTran.insertData(modeltrans);
-//        showPanel();
-//        loadData();
-//        loadDataSementara();
-//        resetMenu();
-//        resetPembayaran();
-//    }
-//}
-
 private void simpanData() {
     if (validasiSimpan() == true) {
         String idTransaksi = txtNoTransaksi.getText();
@@ -1323,20 +1383,23 @@ private void simpanData() {
         modelTransaksi modeltrans = new modelTransaksi();
         ModelMenu modelMN = new ModelMenu();
         modelPelanggan modelPel = new modelPelanggan();
+        ModelMeja modelMeja = new ModelMeja();
         modelUser modelUS = new modelUser();
         modelTransaksiDetail modelTrandet = new modelTransaksiDetail();
         
         // Tambah Transaksi
-        modeltrans.setidTransaksi(idTransaksi);
+        modeltrans.setIdTransaksi(idTransaksi);
         modeltrans.setTanggal(fullTanggal);  // Simpan tanggal+jam
         modeltrans.setTotalHarga(total);
         modeltrans.setBayar(bayar);
         modeltrans.setDiskon(diskon);
         modeltrans.setKembali(kembali);
         modelPel.setIdPelanggan(idPelanggan);
+        modelMeja.setIdMeja(idMeja);
         modelUS.setIdUser(idUser);
         
         modeltrans.setModelPelanggan(modelPel);
+        modeltrans.setModelMeja(modelMeja);
         modeltrans.setModelUser(modelUS);
         
         // Tambah detail penjualan

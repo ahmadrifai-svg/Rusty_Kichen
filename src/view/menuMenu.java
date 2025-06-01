@@ -648,7 +648,7 @@ public class menuMenu extends javax.swing.JPanel {
             return; // penting agar proses tidak lanjut
         }
         try {
-            String sql = "UPDATE menu SET Nama_Menu=?, Harga=?, Id_Kategori=? WHERE Id_Menu=?";
+            String sql = "UPDATE menu SET Nama_Menu=?, Harga=?, Barcode=?, Id_Kategori=? WHERE Id_Menu=?";
             try (PreparedStatement st = conn.prepareStatement(sql)){
                 st.setString(1, namaMenu);
                 st.setString(2, harga);

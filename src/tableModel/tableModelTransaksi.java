@@ -41,7 +41,7 @@ public class tableModelTransaksi extends AbstractTableModel {
         JOptionPane.showMessageDialog(null, "Data Berhasil DiHapus ");
     }
             
-    private String[] columnNames = {"No","Id Transaksi", "Nama User" ,"Id Pelanggan", "Nama Pelanggan","Tanggal", "Harga","Bayar", "Kembali", "Diskon"};
+    private String[] columnNames = {"No","Id Transaksi", "Nama User" ,  "Nama Pelanggan", "Meja", "Tanggal", "Harga","Bayar", "Kembali", "Diskon"};
     
 
     @Override
@@ -61,10 +61,10 @@ public class tableModelTransaksi extends AbstractTableModel {
             return "   " + (rowIndex + 1);
         }else {
             switch (columnIndex) {
-                case 1: return model.getidTransaksi(); // Menggunakan getIdmodel() jika ini sesuai dengan modelTransaksi
+                case 1: return model.getIdTransaksi(); // Menggunakan getIdmodel() jika ini sesuai dengan modelTransaksi
                 case 2: return model.getModelUser().getUsername();
-                case 3: return model.getModelPelanggan().getIdPelanggan();
-                case 4: return model.getModelPelanggan().getNamaPelanggan();
+                case 3: return model.getModelPelanggan().getNamaPelanggan();
+                case 4: return model.getModelMeja().getNomor();
                 case 5: return model.getTanggal();  
                 case 6: return model.getTotalHarga();
                 case 7: return model.getBayar();
