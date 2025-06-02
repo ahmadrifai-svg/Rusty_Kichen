@@ -82,7 +82,7 @@ public class tableModelTransaksiDetail extends AbstractTableModel {
                 case 0: 
                     return rowIndex + 1; // Nomor urut tanpa spasi berlebih
                 case 1: 
-                    return model.getModelTransaksi() != null ? model.getModelTransaksi().getidTransaksi(): "-";
+                    return model.getModelTransaksi() != null ? model.getModelTransaksi().getIdTransaksi(): "-";
                 case 2: 
                     return model.getModelMenu() != null ? model.getModelMenu().getIdMenu() : "-";
                 case 3: 

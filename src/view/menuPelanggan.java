@@ -494,7 +494,7 @@ public class menuPelanggan extends javax.swing.JPanel {
 
         String sql = "SELECT RIGHT(Id_pelanggan, 3) AS Nomor "
             + "FROM pelanggan "  // Pastikan ada spasi setelah nama tabel
-            + "WHERE Id_pelanggan LIKE 'MJ_%' "
+            + "WHERE Id_pelanggan LIKE 'PLG_%' "
             + "ORDER BY Id_pelanggan DESC "
             + "LIMIT 1";
 

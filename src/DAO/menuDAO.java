@@ -112,6 +112,7 @@ public List<ModelMenu> tampilData() {
             menu.setIdMenu(rs.getString("Id_Menu"));
             menu.setNamaMenu(rs.getString("Nama_Menu"));
             menu.setHarga(rs.getLong("Harga"));
+            menu.setBarcode(rs.getString("Barcode"));
             menu.setIdKategori(rs.getString("Id_Kategori"));
             
             list.add(menu);

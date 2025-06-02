@@ -14,8 +14,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -31,12 +31,13 @@ public class formLaporan extends javax.swing.JPanel {
     private SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
     private Date tanggalMulai;
     private Date tanggalAkhir;
+        
 
     public formLaporan() {
         initComponents();
 
         conn = koneksi.getConnection();
-        setTableModel();
+         setTableModel();
         loadData();
         actionButton();
     }
@@ -63,8 +64,8 @@ public class formLaporan extends javax.swing.JPanel {
         tblData = new Palette.JTable_Custom();
         txtPencarian = new Palette.JTextfieldRounded();
         btnPrint = new Palette.Custom_ButtonRounded();
-        txtTanggalMulai = new Palette.JTextfieldRounded();
         txtTanggalAkhir = new Palette.JTextfieldRounded();
+        txtTanggalMulai = new Palette.JTextfieldRounded();
 
         dateChooser1.setTextRefernce(txtTanggalMulai);
 
@@ -83,14 +84,19 @@ public class formLaporan extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Kategori");
+        jLabel2.setText("Laporan Penjualan");
 
         btnBatal.setBackground(new java.awt.Color(105, 33, 58));
-        btnBatal.setText("batal");
+        btnBatal.setText("Batal");
         btnBatal.setFillOriginal(new java.awt.Color(105, 33, 58));
         btnBatal.setFillOver(new java.awt.Color(105, 33, 58));
         btnBatal.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         btnBatal.setPreferredSize(new java.awt.Dimension(120, 19));
+        btnBatal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBatalActionPerformed(evt);
+            }
+        });
 
         btnTampilkan.setBackground(new java.awt.Color(102, 153, 255));
         btnTampilkan.setText("Tampilkan");
@@ -138,23 +144,26 @@ public class formLaporan extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblData);
 
         txtPencarian.setForeground(new java.awt.Color(255, 255, 255));
+        txtPencarian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPencarianActionPerformed(evt);
+            }
+        });
+        txtPencarian.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPencarianKeyReleased(evt);
+            }
+        });
 
         btnPrint.setBackground(new java.awt.Color(105, 33, 58));
-        btnPrint.setText("Batal");
+        btnPrint.setText("Print");
         btnPrint.setFillOriginal(new java.awt.Color(105, 33, 58));
         btnPrint.setFillOver(new java.awt.Color(105, 33, 58));
         btnPrint.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         btnPrint.setPreferredSize(new java.awt.Dimension(120, 19));
-
-        txtTanggalMulai.setForeground(new java.awt.Color(255, 255, 255));
-        txtTanggalMulai.addActionListener(new java.awt.event.ActionListener() {
+        btnPrint.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTanggalMulaiActionPerformed(evt);
-            }
-        });
-        txtTanggalMulai.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtTanggalMulaiKeyReleased(evt);
+                btnPrintActionPerformed(evt);
             }
         });
 
@@ -167,6 +176,18 @@ public class formLaporan extends javax.swing.JPanel {
         txtTanggalAkhir.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTanggalAkhirKeyReleased(evt);
+            }
+        });
+
+        txtTanggalMulai.setForeground(new java.awt.Color(255, 255, 255));
+        txtTanggalMulai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTanggalMulaiActionPerformed(evt);
+            }
+        });
+        txtTanggalMulai.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTanggalMulaiKeyReleased(evt);
             }
         });
 
@@ -189,18 +210,18 @@ public class formLaporan extends javax.swing.JPanel {
                         .addGroup(pn_viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1)
                             .addGroup(pn_viewLayout.createSequentialGroup()
-                                .addComponent(txtTanggalMulai, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtTanggalAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtTanggalMulai, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTanggalAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnTampilkan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnBatal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(txtPencarian, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
         pn_viewLayout.setVerticalGroup(
             pn_viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,33 +253,52 @@ public class formLaporan extends javax.swing.JPanel {
         add(pn_main, "card2");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtTanggalMulaiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTanggalMulaiKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTanggalMulaiKeyReleased
+    private void btnTampilkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTampilkanActionPerformed
+        
+    }//GEN-LAST:event_btnTampilkanActionPerformed
 
-    private void txtTanggalMulaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTanggalMulaiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTanggalMulaiActionPerformed
+    private void tblDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMouseClicked
+//       if(btnTampilkan.getText().equals("Tambah")){
+//           btnTampilkan.setText("Perbarui");
+//           btnBatal.setVisible(true);
+//           btnPrint.setVisible(true);
+//       }
+    }//GEN-LAST:event_tblDataMouseClicked
 
-    private void txtTanggalAkhirKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTanggalAkhirKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTanggalAkhirKeyReleased
+    private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
+        loadData();
+    }//GEN-LAST:event_btnPrintActionPerformed
+
+    private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
+        showPanel();
+        loadData();
+    }//GEN-LAST:event_btnBatalActionPerformed
+
+    private void txtPencarianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPencarianActionPerformed
+       
+    }//GEN-LAST:event_txtPencarianActionPerformed
+
+    private void txtPencarianKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPencarianKeyReleased
+     String keyword = txtPencarian.getText().trim(); // Ambil kata kunci dari field pencarian
+    DefaultTableModel model = (DefaultTableModel) tblData.getModel(); // Ganti "table" dengan nama JTable kamu
+    searchData(model, keyword);
+    }//GEN-LAST:event_txtPencarianKeyReleased
 
     private void txtTanggalAkhirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTanggalAkhirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTanggalAkhirActionPerformed
 
-    private void tblDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMouseClicked
-        //       if(btnTambah.getText().equals("Tambah")){
-            //           btnTambah.setText("Perbarui");
-            //           btn_delete.setVisible(true);
-            //           btn_batal.setVisible(true);
-            //       }
-    }//GEN-LAST:event_tblDataMouseClicked
+    private void txtTanggalAkhirKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTanggalAkhirKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTanggalAkhirKeyReleased
 
-    private void btnTampilkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTampilkanActionPerformed
-      
-    }//GEN-LAST:event_btnTampilkanActionPerformed
+    private void txtTanggalMulaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTanggalMulaiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTanggalMulaiActionPerformed
+
+    private void txtTanggalMulaiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTanggalMulaiKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTanggalMulaiKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -279,8 +319,7 @@ public class formLaporan extends javax.swing.JPanel {
     private Palette.JTextfieldRounded txtTanggalMulai;
     // End of variables declaration//GEN-END:variables
 
-    //action Button
-    private void actionButton() {
+     private void actionButton() {
     btnTampilkan.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -304,12 +343,12 @@ public class formLaporan extends javax.swing.JPanel {
         }
     });
 
-    txtPencarian.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            searchData();
-        }
-    });
+//    txtPencarian.addActionListener(new ActionListener() {
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            searchData();
+//        }
+//    });
 }
     
     private void loadData() {
@@ -326,7 +365,7 @@ public class formLaporan extends javax.swing.JPanel {
     
     private void resetForm() {
     txtTanggalMulai.setText("");
-    txtTanggalAkhir.setText("");
+    txtTanggalMulai.setText("");
     txtPencarian.setText("");
     setTableModel(); // Kosongkan tabel
 }
@@ -336,9 +375,9 @@ public class formLaporan extends javax.swing.JPanel {
     DefaultTableModel model = new DefaultTableModel();
     model.setColumnIdentifiers(new String[]{
         "Id_Transaksi", 
-        "Nama_Menu", 
+        "Nama_Menu",
+        "Jumlah",
         "Username", 
-        "Id_Pelanggan", 
         "Nama_Pelanggan", 
         "Tanggal", 
         "Total_Harga", 
@@ -349,7 +388,7 @@ public class formLaporan extends javax.swing.JPanel {
     tblData.setModel(model);
 }
 
-
+    
    private void getData(DefaultTableModel model) {
     model.setRowCount(0); // Hapus data lama
 
@@ -382,8 +421,9 @@ public class formLaporan extends javax.swing.JPanel {
 
         String sql = "SELECT TR.Id_Transaksi, " +
                      "GROUP_CONCAT(M.Nama_Menu SEPARATOR ', ') AS Nama_Menu, " +
+                     "SUM(det.Jumlah) AS Total_Jumlah, " + // Agregasi Jumlah dengan SUM
                      "US.Username, " +
-                     "PG.Id_Pelanggan, PG.Nama_Pelanggan, " +
+                     "PG.Nama_Pelanggan, " +
                      "TR.Tanggal, TR.Total_Harga, TR.Bayar, TR.Kembali, TR.Diskon " +
                      "FROM transaksi TR " +
                      "INNER JOIN user US ON US.Id_User = TR.Id_User " +
@@ -391,7 +431,7 @@ public class formLaporan extends javax.swing.JPanel {
                      "LEFT JOIN detail_transaksi det ON det.Id_Transaksi = TR.Id_Transaksi " +
                      "LEFT JOIN menu M ON M.Id_Menu = det.Id_Menu " +
                      "WHERE TR.Tanggal BETWEEN ? AND ? " +
-                     "GROUP BY TR.Id_Transaksi " +
+                     "GROUP BY TR.Id_Transaksi, US.Username, PG.Nama_Pelanggan, TR.Tanggal, TR.Total_Harga, TR.Bayar, TR.Kembali, TR.Diskon " +
                      "ORDER BY TR.Tanggal ASC";
 
         if (conn == null) {
@@ -410,8 +450,8 @@ public class formLaporan extends javax.swing.JPanel {
                 Object[] row = {
                     rs.getString("Id_Transaksi"),
                     rs.getString("Nama_Menu") != null ? rs.getString("Nama_Menu") : "-",
+                    rs.getInt("Total_Jumlah"), // Ambil nilai agregat Total_Jumlah
                     rs.getString("Username"),
-                    rs.getString("Id_Pelanggan"),
                     rs.getString("Nama_Pelanggan"),
                     displayFormat.format(rs.getTimestamp("Tanggal")),
                     rs.getDouble("Total_Harga"),
@@ -439,35 +479,98 @@ public class formLaporan extends javax.swing.JPanel {
     }
 }
 
+private void searchData(DefaultTableModel model, String keyword) {
+    model.setRowCount(0); // Hapus data lama
 
+    String tanggalMulaiStr = txtTanggalMulai.getText().trim();
+    String tanggalAkhirStr = txtTanggalAkhir.getText().trim();
 
-
-
-
-    
-    private void searchData(){
-        String kataKunci = txtPencarian.getText();
-        
-        DefaultTableModel model = (DefaultTableModel) tblData.getModel();
-        model.setRowCount(0);
-        
-        try {
-             String sql = "SELECT * FROM kategori WHERE Nama_Kategori LIKE ?";
-            try (PreparedStatement st = conn.prepareStatement(sql)) {
-            st.setString(1, "%" + kataKunci + "%");
-            ResultSet rs = st.executeQuery();
-                
-                while (rs.next()) {                    
-                    String idKategori = rs.getString("Id_Kategori");
-                    String namaKategori = rs.getString("Nama_Kategori");
-                    String subKategori = rs.getString("Jenis");
-                    
-                    Object[] rowData = {idKategori, namaKategori, subKategori};
-                    model.addRow(rowData);
-                }
-            }
-        } catch (SQLException e) {
-            Logger.getLogger(formLaporan.class.getName()).log(Level.SEVERE, null, e);
-        }
+    if (tanggalMulaiStr.isEmpty() || tanggalAkhirStr.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Silakan pilih rentang tanggal terlebih dahulu.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+        return;
     }
+
+    try {
+        // Ubah format untuk sesuai dengan input: dd-MM-yyyy
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        dateFormat.setLenient(false);
+        this.tanggalMulai = dateFormat.parse(tanggalMulaiStr);
+        this.tanggalAkhir = dateFormat.parse(tanggalAkhirStr);
+
+        // Format ulang ke yyyy-MM-dd untuk digunakan dalam query
+        SimpleDateFormat sqlFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String tanggalMulaiSql = sqlFormat.format(this.tanggalMulai);
+        String tanggalAkhirSql = sqlFormat.format(this.tanggalAkhir);
+
+        // Tambahkan waktu untuk rentang hari penuh
+        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String startDateTime = tanggalMulaiSql + " 00:00:00";
+        String endDateTime = tanggalAkhirSql + " 23:59:59";
+        Date startDate = dateTimeFormat.parse(startDateTime);
+        Date endDate = dateTimeFormat.parse(endDateTime);
+
+        // Query dengan pencarian menggunakan LIKE
+        String sql = "SELECT TR.Id_Transaksi, " +
+                     "GROUP_CONCAT(M.Nama_Menu SEPARATOR ', ') AS Nama_Menu, " +
+                     "SUM(det.Jumlah) AS Total_Jumlah, " + // Agregasi Jumlah dengan SUM
+                     "US.Username, " +
+                     "PG.Nama_Pelanggan, " +
+                     "TR.Tanggal, TR.Total_Harga, TR.Bayar, TR.Kembali, TR.Diskon " +
+                     "FROM transaksi TR " +
+                     "INNER JOIN user US ON US.Id_User = TR.Id_User " +
+                     "INNER JOIN pelanggan PG ON PG.Id_Pelanggan = TR.Id_Pelanggan " +
+                     "LEFT JOIN detail_transaksi det ON det.Id_Transaksi = TR.Id_Transaksi " +
+                     "LEFT JOIN menu M ON M.Id_Menu = det.Id_Menu " +
+                     "WHERE TR.Tanggal BETWEEN ? AND ? " +
+                     "AND (M.Nama_Menu LIKE ? OR US.Username LIKE ? OR PG.Nama_Pelanggan LIKE ? OR DATE_FORMAT(TR.Tanggal, '%Y-%m-%d') LIKE ?) " +
+                     "GROUP BY TR.Id_Transaksi, US.Username, PG.Nama_Pelanggan, TR.Tanggal, TR.Total_Harga, TR.Bayar, TR.Kembali, TR.Diskon " +
+                     "ORDER BY TR.Tanggal ASC";
+
+        if (conn == null) {
+            throw new SQLException("Koneksi database tidak tersedia.");
+        }
+
+        try (PreparedStatement st = conn.prepareStatement(sql)) {
+            // Set parameter untuk rentang tanggal
+            st.setTimestamp(1, new Timestamp(startDate.getTime()));
+            st.setTimestamp(2, new Timestamp(endDate.getTime()));
+            // Set parameter untuk pencarian (LIKE)
+            String searchPattern = "%" + keyword.trim() + "%";
+            st.setString(3, searchPattern); // Untuk Nama_Menu
+            st.setString(4, searchPattern); // Untuk Username
+            st.setString(5, searchPattern); // Untuk Nama_Pelanggan
+            st.setString(6, searchPattern); // Untuk Tanggal (setelah konversi ke string)
+
+            ResultSet rs = st.executeQuery();
+            boolean dataDitemukan = false;
+
+            SimpleDateFormat displayFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            while (rs.next()) {
+                Object[] row = {
+                    rs.getString("Id_Transaksi"),
+                    rs.getString("Nama_Menu") != null ? rs.getString("Nama_Menu") : "-",
+                    rs.getInt("Total_Jumlah"), // Ambil nilai agregat Total_Jumlah
+                    rs.getString("Username"),
+                    rs.getString("Nama_Pelanggan"),
+                    displayFormat.format(rs.getTimestamp("Tanggal")),
+                    rs.getDouble("Total_Harga"),
+                    rs.getDouble("Bayar"),
+                    rs.getDouble("Kembali"),
+                    rs.getDouble("Diskon")
+                };
+                model.addRow(row);
+                dataDitemukan = true;
+            }
+        }
+    } catch (java.text.ParseException e) {
+        JOptionPane.showMessageDialog(this, "Format tanggal tidak valid. Gunakan format dd-MM-yyyy (contoh: 29-05-2025).", "Error", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Gagal memuat data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Terjadi kesalahan: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
+    }
+}
 }

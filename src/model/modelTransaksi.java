@@ -2,11 +2,22 @@ package model;
 
 public class modelTransaksi{
 
-    public String getidTransaksi() {
+    private String idTransaksi;
+    private modelUser modelUser;
+    private ModelMenu modelMenu;
+    private modelPelanggan modelPelanggan;
+    private ModelMeja modelMeja;
+    private String tanggal;
+    private Double totalHarga;
+    private Double bayar;
+    private Double diskon;
+    private Double kembali;
+
+    public String getIdTransaksi() {
         return idTransaksi;
     }
 
-    public void setidTransaksi(String idTransaksi) {
+    public void setIdTransaksi(String idTransaksi) {
         this.idTransaksi = idTransaksi;
     }
 
@@ -32,6 +43,14 @@ public class modelTransaksi{
 
     public void setModelPelanggan(modelPelanggan modelPelanggan) {
         this.modelPelanggan = modelPelanggan;
+    }
+
+    public ModelMeja getModelMeja() {
+        return modelMeja;
+    }
+
+    public void setModelMeja(ModelMeja modelMeja) {
+        this.modelMeja = modelMeja;
     }
 
     public String getTanggal() {
@@ -73,14 +92,5 @@ public class modelTransaksi{
     public void setKembali(Double kembali) {
         this.kembali = kembali;
     }
-    private String idTransaksi;
-    private modelUser modelUser;
-    private ModelMenu modelMenu;
-    private modelPelanggan modelPelanggan;
-    private String tanggal;
-    private Double totalHarga;
-    private Double bayar;
-    private Double diskon;
-    private Double kembali;
     
 }

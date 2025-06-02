@@ -258,7 +258,16 @@ WHERE TR.Id_Transaksi = $P{Id_Transaksi}]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="6"/>
 				</textElement>
-				<text><![CDATA[Dusun Rejoagung, Sumberagung, Kec. Pesanggaran]]></text>
+				<text><![CDATA[Jangan lupa ajak teman dan keluarga Anda lain waktu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="85" width="144" height="10" uuid="37ed84a2-fccf-42f6-a149-b7b8f77add0f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Kami tunggu kedatangan Anda
+
+]]></text>
 			</staticText>
 		</band>
 	</summary>

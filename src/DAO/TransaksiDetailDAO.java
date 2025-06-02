@@ -26,7 +26,7 @@ public class TransaksiDetailDAO implements serviceTransaksiDetail {
         PreparedStatement st = null;
         try {
             String sql = "INSERT INTO detail_transaksi(Id_Transaksi, Id_Menu, Jumlah, Subtotal)"
-                    + " SELECT '"+model.getModelTransaksi().getidTransaksi()+"',"
+                    + " SELECT '"+model.getModelTransaksi().getIdTransaksi()+"',"
                     + "Id_Menu, Jumlah, Subtotal from transaksi_smt";
             
             st = conn.prepareStatement(sql);
@@ -96,7 +96,7 @@ public List<modelTransaksiDetail> tampilData(String id) {
             modelTransaksi          TR = new modelTransaksi();
             ModelMenu               MN = new ModelMenu();
             
-            TR.setidTransaksi           (rs.getString("Id_Transaksi"));
+            TR.setIdTransaksi           (rs.getString("Id_Transaksi"));
             MN.setIdMenu                (rs.getString("Id_Menu"));
             MN.setNamaMenu              (rs.getString("Nama_Menu"));
             det.setJumlah               (rs.getInt("Jumlah"));
@@ -117,48 +117,58 @@ public List<modelTransaksiDetail> tampilData(String id) {
 
 
    @Override
-    public List<modelTransaksiDetail> pencarianData(String Id, String kataKunci) {
-        PreparedStatement st = null;
-        ResultSet rs = null;
-        List list = new ArrayList();
-        String sql = "SELECT TR.Id_Transaksi, MN.Id_Menu, MN.Nama_Menu, det.Jumlah, det.Subtotal"
-             + "FROM detail_Transaksi det"
-             + "INNER JOIN transaksi TR ON TR.Id_Transaksi = det.Id_Transaksi"
-             + "INNER JOIN menu MN ON MN.Id_Menu = det.Id_Menu"
-             + "WHERE TR.Id_Transaksi='"+Id+"' "
-             + "AND TR.Id_Transaksi LIKE '%"+kataKunci+"%'"
-             + " OR MN.Id_Menu LIKE '%"+kataKunci+"%'"
-                + "OR MN.Nama_Menu LIKE '%"+kataKunci+"%'";
-        
+public List<modelTransaksiDetail> pencarianData(String Id, String kataKunci) {
+    PreparedStatement st = null;
+    ResultSet rs = null;
+    List<modelTransaksiDetail> list = new ArrayList<>();
+    
+    String sql = "SELECT TR.Id_Transaksi, MN.Id_Menu, MN.Nama_Menu, det.Jumlah, det.Subtotal "
+               + "FROM detail_Transaksi det "
+               + "INNER JOIN transaksi TR ON TR.Id_Transaksi = det.Id_Transaksi "
+               + "INNER JOIN menu MN ON MN.Id_Menu = det.Id_Menu "
+               + "WHERE TR.Id_Transaksi = ? "
+               + "AND (TR.Id_Transaksi LIKE ? OR MN.Id_Menu LIKE ? OR MN.Nama_Menu LIKE ?)";
+    
     try {
-       
         st = conn.prepareStatement(sql);
+        
+        st.setString(1, Id);
+        String keywordPattern = "%" + kataKunci + "%";
+        st.setString(2, keywordPattern);
+        st.setString(3, keywordPattern);
+        st.setString(4, keywordPattern);
+        
         rs = st.executeQuery();
         
         while (rs.next()) {
-            modelTransaksiDetail    det = new modelTransaksiDetail();
-            modelTransaksi          TR = new modelTransaksi();
-            ModelMenu               MN = new ModelMenu();
+            modelTransaksiDetail det = new modelTransaksiDetail();
+            modelTransaksi TR = new modelTransaksi();
+            ModelMenu MN = new ModelMenu();
             
-            TR.setidTransaksi           (rs.getString("Id_Transaksi"));
-            MN.setIdMenu                (rs.getString("Id_Menu"));
-            MN.setNamaMenu              (rs.getString("Nama_Menu"));
-            det.setJumlah               (rs.getInt("Jumlah"));
-            det.setSubtotal                (rs.getLong("Subtotal"));
+            TR.setIdTransaksi(rs.getString("Id_Transaksi"));
+            MN.setIdMenu(rs.getString("Id_Menu"));
+            MN.setNamaMenu(rs.getString("Nama_Menu"));
+            det.setJumlah(rs.getInt("Jumlah"));
+            det.setSubtotal(rs.getLong("Subtotal"));
             
             det.setModelTransaksi(TR);
             det.setModelMenu(MN);
             
-            
             list.add(det);
         }
-        rs.close();
-        st.close();
     } catch (SQLException e) {
         e.printStackTrace();
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (st != null) st.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     return list;
 }
+
 
     
 }

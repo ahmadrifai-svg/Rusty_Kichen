@@ -26,6 +26,7 @@ import view.*;
  * @author MyBook Hype AMD
  */
 public class MenuKasir extends javax.swing.JFrame {
+
     private String userID;
     private String username;
     private String role;
@@ -35,11 +36,12 @@ public class MenuKasir extends javax.swing.JFrame {
         this.userID = userID;
         this.username = username;
         this.role = role;
-        this.userLogin = userID; 
+        this.userLogin = userID;
         initComponents();
         updateUserGreeting();
+        showDashboard();
     }
-    
+
     private void updateUserGreeting() {
         if (lbUsername != null) {
             lbUsername.setText("Hallo, " + username); // Ganti teks dengan username
@@ -47,8 +49,15 @@ public class MenuKasir extends javax.swing.JFrame {
             System.out.println("lblUserGreeting belum diinisialisasi!");
         }
     }
-
-
+    private void showDashboard() {
+        menuDashboard dashboard = new menuDashboard();
+        
+        pn_utama.removeAll(); // Hapus panel lama
+        pn_utama.setLayout(new java.awt.BorderLayout());
+        pn_utama.add(dashboard, java.awt.BorderLayout.CENTER);
+        pn_utama.revalidate();
+        pn_utama.repaint(); 
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,16 +81,10 @@ public class MenuKasir extends javax.swing.JFrame {
         pn_btnPemesanan = new Palette.Panelcustom();
         jLabel10 = new javax.swing.JLabel();
         btn_pemesanan = new javax.swing.JLabel();
-        pn_btnPengeluaran = new Palette.Panelcustom();
-        jLabel11 = new javax.swing.JLabel();
-        btn_pengeluaran = new javax.swing.JLabel();
         Laporan = new javax.swing.JLabel();
         pn_btnLpPemasukkan = new Palette.Panelcustom();
         jLabel12 = new javax.swing.JLabel();
         btn_lpPemasukan = new javax.swing.JLabel();
-        pn_btnLpPengeluaran = new Palette.Panelcustom();
-        jLabel13 = new javax.swing.JLabel();
-        btn_lpPengeluaran = new javax.swing.JLabel();
         pn_kanan = new javax.swing.JPanel();
         pn_dasar = new javax.swing.JPanel();
         pn_utama = new javax.swing.JPanel();
@@ -245,53 +248,6 @@ public class MenuKasir extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pn_btnPengeluaran.setRoundBottomRight(30);
-        pn_btnPengeluaran.setRoundBottomleft(30);
-        pn_btnPengeluaran.setRoundTopLeft(30);
-        pn_btnPengeluaran.setRoundTopRight(30);
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/home-removebg-preview 1 (1).png"))); // NOI18N
-        jLabel11.setText("\n");
-        jLabel11.setMaximumSize(new java.awt.Dimension(26, 30));
-        jLabel11.setMinimumSize(new java.awt.Dimension(26, 30));
-        jLabel11.setPreferredSize(new java.awt.Dimension(26, 30));
-
-        btn_pengeluaran.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        btn_pengeluaran.setText("Pengeluaran");
-        btn_pengeluaran.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_pengeluaranMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_pengeluaranMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btn_pengeluaranMouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pn_btnPengeluaranLayout = new javax.swing.GroupLayout(pn_btnPengeluaran);
-        pn_btnPengeluaran.setLayout(pn_btnPengeluaranLayout);
-        pn_btnPengeluaranLayout.setHorizontalGroup(
-            pn_btnPengeluaranLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_btnPengeluaranLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btn_pengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 58, Short.MAX_VALUE))
-        );
-        pn_btnPengeluaranLayout.setVerticalGroup(
-            pn_btnPengeluaranLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_btnPengeluaranLayout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addGroup(pn_btnPengeluaranLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_pengeluaran))
-                .addContainerGap())
-        );
-
         Laporan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Laporan.setForeground(new java.awt.Color(153, 153, 153));
         Laporan.setText("LAPORAN");
@@ -314,12 +270,6 @@ public class MenuKasir extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_lpPemasukanMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_lpPemasukanMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btn_lpPemasukanMouseExited(evt);
-            }
         });
 
         javax.swing.GroupLayout pn_btnLpPemasukkanLayout = new javax.swing.GroupLayout(pn_btnLpPemasukkan);
@@ -330,63 +280,19 @@ public class MenuKasir extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btn_lpPemasukan, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 58, Short.MAX_VALUE))
+                .addComponent(btn_lpPemasukan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pn_btnLpPemasukkanLayout.setVerticalGroup(
             pn_btnLpPemasukkanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_btnLpPemasukkanLayout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addGroup(pn_btnLpPemasukkanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_lpPemasukan))
-                .addContainerGap())
-        );
-
-        pn_btnLpPengeluaran.setRoundBottomRight(30);
-        pn_btnLpPengeluaran.setRoundBottomleft(30);
-        pn_btnLpPengeluaran.setRoundTopLeft(30);
-        pn_btnLpPengeluaran.setRoundTopRight(30);
-
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/home-removebg-preview 1 (1).png"))); // NOI18N
-        jLabel13.setText("\n");
-        jLabel13.setMaximumSize(new java.awt.Dimension(26, 30));
-        jLabel13.setMinimumSize(new java.awt.Dimension(26, 30));
-        jLabel13.setPreferredSize(new java.awt.Dimension(26, 30));
-
-        btn_lpPengeluaran.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        btn_lpPengeluaran.setText("Laporan Pengeluaran");
-        btn_lpPengeluaran.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_lpPengeluaranMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_lpPengeluaranMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btn_lpPengeluaranMouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pn_btnLpPengeluaranLayout = new javax.swing.GroupLayout(pn_btnLpPengeluaran);
-        pn_btnLpPengeluaran.setLayout(pn_btnLpPengeluaranLayout);
-        pn_btnLpPengeluaranLayout.setHorizontalGroup(
-            pn_btnLpPengeluaranLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_btnLpPengeluaranLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btn_lpPengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 58, Short.MAX_VALUE))
-        );
-        pn_btnLpPengeluaranLayout.setVerticalGroup(
-            pn_btnLpPengeluaranLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_btnLpPengeluaranLayout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addGroup(pn_btnLpPengeluaranLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_lpPengeluaran))
+            .addGroup(pn_btnLpPemasukkanLayout.createSequentialGroup()
+                .addGroup(pn_btnLpPemasukkanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_btnLpPemasukkanLayout.createSequentialGroup()
+                        .addGap(4, 6, Short.MAX_VALUE)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pn_btnLpPemasukkanLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btn_lpPemasukan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -397,10 +303,8 @@ public class MenuKasir extends javax.swing.JFrame {
             .addGroup(panelcustom1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(panelcustom1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pn_btnLpPengeluaran, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Laporan)
                     .addComponent(pn_btnLpPemasukkan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pn_btnPengeluaran, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Transaksi)
                     .addComponent(pn_btnPemesanan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pn_btnDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -411,19 +315,15 @@ public class MenuKasir extends javax.swing.JFrame {
             .addGroup(panelcustom1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(pn_btnDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(Transaksi)
                 .addGap(18, 18, 18)
                 .addComponent(pn_btnPemesanan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pn_btnPengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Laporan)
                 .addGap(18, 18, 18)
                 .addComponent(pn_btnLpPemasukkan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pn_btnLpPengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(477, Short.MAX_VALUE))
+                .addContainerGap(518, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pn_kiriLayout = new javax.swing.GroupLayout(pn_kiri);
@@ -440,7 +340,7 @@ public class MenuKasir extends javax.swing.JFrame {
             .addGroup(pn_kiriLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(panelcustom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
 
         getContentPane().add(pn_kiri, java.awt.BorderLayout.LINE_START);
@@ -458,16 +358,16 @@ public class MenuKasir extends javax.swing.JFrame {
         pn_dasarLayout.setHorizontalGroup(
             pn_dasarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_dasarLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(21, 21, 21)
                 .addComponent(pn_utama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(20, 20, 20))
+                .addGap(19, 19, 19))
         );
         pn_dasarLayout.setVerticalGroup(
             pn_dasarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_dasarLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(27, 27, 27)
                 .addComponent(pn_utama, javax.swing.GroupLayout.DEFAULT_SIZE, 876, Short.MAX_VALUE)
-                .addGap(28, 28, 28))
+                .addGap(21, 21, 21))
         );
 
         pn_kanan.add(pn_dasar, java.awt.BorderLayout.CENTER);
@@ -480,40 +380,40 @@ public class MenuKasir extends javax.swing.JFrame {
 
     private void btn_dashboardMouseEntered(MouseEvent evt) {//GEN-FIRST:event_btn_dashboardMouseEntered
 //        pn_btnDashboard.setBackground(new Color (105,33,58));
-        
+
     }//GEN-LAST:event_btn_dashboardMouseEntered
 
     private void btn_dashboardMouseExited(MouseEvent evt) {//GEN-FIRST:event_btn_dashboardMouseExited
 //        pn_btnDashboard.setBackground(new Color (242,242,242));
-        
+
     }//GEN-LAST:event_btn_dashboardMouseExited
 
     private void setActiveButton(JPanel activeButton) {
-    // Reset semua tombol ke warna default
-    pn_btnDashboard.setBackground(new Color(242, 242, 242)); 
-    
+        // Reset semua tombol ke warna default
+        pn_btnDashboard.setBackground(new Color(242, 242, 242));
 
-    // Set warna tombol yang aktif
-    activeButton.setBackground(new Color(105, 33, 58));;
-}
-    
-    
-    private void matiintombol(){
-        pn_btnDashboard.setBackground(new Color(242,242,242));;
-        btn_dashboard.setForeground(Color.BLACK);
-        //brnmenu
-        
-        pn_btnPemesanan.setBackground(new Color(242,242,242));;
-        btn_pemesanan.setForeground(Color.BLACK);
+        // Set warna tombol yang aktif
+        activeButton.setBackground(new Color(105, 33, 58));;
     }
 
-    
+    private void matiintombol() {
+        pn_btnDashboard.setBackground(new Color(242, 242, 242));;
+        btn_dashboard.setForeground(Color.BLACK);
+        //btnPemesanan
+        pn_btnPemesanan.setBackground(new Color(242, 242, 242));;
+        btn_pemesanan.setForeground(Color.BLACK);
+        //LaporanTransaksi
+        pn_btnLpPemasukkan.setBackground(new Color(242, 242, 242));;
+        btn_lpPemasukan.setForeground(Color.BLACK);
+    }
+
+
     private void btn_dashboardMouseClicked(MouseEvent evt) {//GEN-FIRST:event_btn_dashboardMouseClicked
         pn_utama.removeAll();
         pn_utama.repaint();
         pn_utama.revalidate();
         matiintombol();
-        pn_btnDashboard.setBackground(new Color (105, 33, 58));
+        pn_btnDashboard.setBackground(new Color(105, 33, 58));
         btn_dashboard.setForeground(Color.white);
         pn_utama.add(new menuDashboard());
 
@@ -540,44 +440,18 @@ public class MenuKasir extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_pemesananMouseExited
 
-    private void btn_pengeluaranMouseClicked(MouseEvent evt) {//GEN-FIRST:event_btn_pengeluaranMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_pengeluaranMouseClicked
-
-    private void btn_pengeluaranMouseEntered(MouseEvent evt) {//GEN-FIRST:event_btn_pengeluaranMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_pengeluaranMouseEntered
-
-    private void btn_pengeluaranMouseExited(MouseEvent evt) {//GEN-FIRST:event_btn_pengeluaranMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_pengeluaranMouseExited
-
     private void btn_lpPemasukanMouseClicked(MouseEvent evt) {//GEN-FIRST:event_btn_lpPemasukanMouseClicked
-        // TODO add your handling code here:
+        pn_utama.removeAll();
+        pn_utama.repaint();
+        pn_utama.revalidate();
+        matiintombol();
+        pn_btnLpPemasukkan.setBackground(new Color(105, 33, 58));
+        btn_lpPemasukan.setForeground(Color.white);
+        pn_utama.add(new formLaporan());
     }//GEN-LAST:event_btn_lpPemasukanMouseClicked
 
-    private void btn_lpPemasukanMouseEntered(MouseEvent evt) {//GEN-FIRST:event_btn_lpPemasukanMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_lpPemasukanMouseEntered
-
-    private void btn_lpPemasukanMouseExited(MouseEvent evt) {//GEN-FIRST:event_btn_lpPemasukanMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_lpPemasukanMouseExited
-
-    private void btn_lpPengeluaranMouseClicked(MouseEvent evt) {//GEN-FIRST:event_btn_lpPengeluaranMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_lpPengeluaranMouseClicked
-
-    private void btn_lpPengeluaranMouseEntered(MouseEvent evt) {//GEN-FIRST:event_btn_lpPengeluaranMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_lpPengeluaranMouseEntered
-
-    private void btn_lpPengeluaranMouseExited(MouseEvent evt) {//GEN-FIRST:event_btn_lpPengeluaranMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_lpPengeluaranMouseExited
-
     private void formMousePressed(MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-      
+
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseDragged(MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
@@ -587,31 +461,31 @@ public class MenuKasir extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-        public static void main(String args[]) {
-    /* Set the Nimbus look and feel */
-    try {
-        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-            if ("Nimbus".equals(info.getName())) {
-                javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                break;
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
             }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MenuKasir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-        java.util.logging.Logger.getLogger(MenuKasir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                // Gunakan data dummy
+                String dummyID = "1";
+                String dummyUsername = "admin";
+                String dummyRole = "Admin";
+
+                new MenuKasir(dummyID, dummyUsername, dummyRole).setVisible(true);
+            }
+        });
     }
-
-    /* Create and display the form */
-    java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-            // Gunakan data dummy
-            String dummyID = "1";
-            String dummyUsername = "admin";
-            String dummyRole = "Admin";
-
-            new MenuKasir(dummyID, dummyUsername, dummyRole).setVisible(true);
-        }
-    });
-}
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -619,14 +493,10 @@ public class MenuKasir extends javax.swing.JFrame {
     private javax.swing.JLabel Transaksi;
     private javax.swing.JLabel btn_dashboard;
     private javax.swing.JLabel btn_lpPemasukan;
-    private javax.swing.JLabel btn_lpPengeluaran;
     private javax.swing.JLabel btn_pemesanan;
-    private javax.swing.JLabel btn_pengeluaran;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lbUsername;
@@ -634,12 +504,11 @@ public class MenuKasir extends javax.swing.JFrame {
     private javax.swing.JPanel pn_atas;
     private Palette.Panelcustom pn_btnDashboard;
     private Palette.Panelcustom pn_btnLpPemasukkan;
-    private Palette.Panelcustom pn_btnLpPengeluaran;
     private Palette.Panelcustom pn_btnPemesanan;
-    private Palette.Panelcustom pn_btnPengeluaran;
     private javax.swing.JPanel pn_dasar;
     private javax.swing.JPanel pn_kanan;
     private javax.swing.JPanel pn_kiri;
     private javax.swing.JPanel pn_utama;
     // End of variables declaration//GEN-END:variables
+
 }
